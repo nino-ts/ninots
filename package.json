@@ -6,11 +6,11 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./main.ts"
+    ".": "./index.ts"
   },
   "scripts": {
-    "dev": "bun --watch main.ts",
-    "start": "bun main.ts",
+    "dev": "bun --watch index.ts",
+    "start": "bun index.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
