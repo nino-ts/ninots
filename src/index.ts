@@ -13,8 +13,8 @@
 // import * as dotenv from 'dotenv';
 // dotenv.config();
 
-import { NinotsServer } from './core/server';
-import { FileSystemRouter } from './core/routing';
+import { loadConfig } from './shared/config';
+import { Server } from './infrastructure/http/server';
 
 /**
  * Default port if not specified in environment variables.
@@ -44,24 +44,12 @@ const environment = process.env.NODE_ENV || 'development';
  */
 async function bootstrap() {
   try {
-    console.log(`[Ninots] Initializing server in ${environment} mode...`);
-
-    // 1. Initialize the router (scans src/app)
-    const router = new FileSystemRouter();
-    await router.initialize(); // Assuming an async initialization to scan files
-    console.log('[Ninots] Router initialized.');
-
-    // 2. Create the server instance
-    const server = new NinotsServer(router);
-    console.log('[Ninots] Server instance created.');
-
-    // 3. Start listening
-    server.listen(port);
-    // Server's listen method should handle the console log for listening
-
+    const config = loadConfig();
+    const server = new Server(config);
+    await server.start();
   } catch (error) {
-    console.error('[Ninots] Failed to bootstrap application:', error);
-    process.exit(1); // Exit if bootstrap fails
+    console.error('Failed to start application:', error);
+    process.exit(1);
   }
 }
 

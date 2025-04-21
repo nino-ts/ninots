@@ -1,7 +1,7 @@
 {
   "name": "ninots",
   "version": "0.1.0",
-  "description": "Um framework web experimental construído com Bun.js e TypeScript.",
+  "description": "Framework backend modular e escalável construído com Bun.js e TypeScript, focado em alta performance e manutenibilidade.",
   "author": "João Vitor de Jesus Oliveira <contato@joaovjo.com.br>",
   "license": "MIT",
   "type": "module",
@@ -24,14 +24,21 @@
     "bunjs",
     "typescript",
     "framework",
-    "microframework",
-    "web"
+    "backend",
+    "modular",
+    "scalable",
+    "high-performance",
+    "server",
+    "api",
+    "rest",
+    "http"
   ],
   "dependencies": {
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/bun": "^1.2.8",
+    "bun-types": "^1.2.10",
     "typedoc": "^0.28.2",
     "typescript": "^5.8.2"
   }

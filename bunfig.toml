@@ -1,0 +1,18 @@
+# bunfig.toml gerado para o projeto ninots
+
+[project]
+name = "ninots"
+description = "Um framework web experimental construído com Bun.js e TypeScript."
+version = "0.1.0"
+
+[entrypoints]
+main = "src/index.ts"
+
+[transpiler]
+loader = "ts"
+
+[test]
+root = "src"
+
+[define]
+# Adicione variáveis globais aqui, se necessário

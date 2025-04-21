@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
         // Environment setup & latest features
-        "lib": ["ESNext"],
-        "target": "ESNext",
-        "module": "ESNext",
+        "lib": [
+            "ESNext"
+        ],
+        "target": "esnext",
+        "module": "esnext",
         "moduleDetection": "force",
-        "allowJs": false,
         // Bundler mode
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
@@ -16,15 +17,59 @@
         "skipLibCheck": true,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedIndexedAccess": true,
-        // Some stricter flags (disabled by default)
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
+        // Some stricter flags
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "noPropertyAccessFromIndexSignature": false,
-        "outDir": "./dist",
-        "rootDir": "./",
+        // Output configuration
+        "outDir": "dist",
+        "rootDir": "src",
         "baseUrl": "./src",
+        // Path aliases
         "paths": {
-            "@/*": ["./src/*"],
-        }
-    }
+            "@/*": ["./*"],
+            "@app/*": ["app/*"],
+            "@core/*": ["core/*"],
+            "@domain/*": ["domain/*"],
+            "@infrastructure/*": ["infrastructure/*"],
+            "@interfaces/*": ["interfaces/*"],
+            "@shared/*": ["shared/*"],
+            "@application/*": ["application/*"]
+        },
+        // Types
+        "types": ["bun-types"],
+        // Module interop
+        "esModuleInterop": true,
+        // Decorators
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        // Additional features
+        "resolveJsonModule": true,
+        "declaration": true,
+        // Strict checks
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noImplicitReturns": true,
+        // File names
+        "forceConsistentCasingInFileNames": true,
+        // TypeScript 5.x features
+        "allowArbitraryExtensions": true,
+        "customConditions": ["development"],
+        "allowUnusedLabels": false,
+        "allowUnreachableCode": false,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }
