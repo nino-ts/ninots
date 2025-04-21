@@ -18,22 +18,13 @@ import { Server } from './infrastructure/http/server';
 
 /**
  * Default port if not specified in environment variables.
+ * Used by config loader to set server port.
  * @constant {number}
  */
 const DEFAULT_PORT = 3000;
 
-/**
- * Retrieves the server port from environment variables or uses the default.
- * @constant {number}
- */
-const port = parseInt(process.env.PORT || `${DEFAULT_PORT}`, 10);
-
-/**
- * Application environment (development, production, etc.).
- * Defaults to 'development'.
- * @constant {string}
- */
-const environment = process.env.NODE_ENV || 'development';
+// Note: Environment configuration is now handled through the config loader
+// that's used in the bootstrap function below.
 
 /**
  * Initializes and starts the Ninots server instance.

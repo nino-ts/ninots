@@ -14,12 +14,6 @@ import path from 'node:path';
 // They receive the Bun Request and should return a Bun Response or Promise<Response>
 type RouteHandler = (request: Request) => Response | Promise<Response>;
 
-// Define a structure to store route information
-interface RouteInfo {
-  method: string; // GET, POST, PUT, DELETE, etc.
-  handler: RouteHandler;
-}
-
 /**
  * Implements a file-system based router.
  *
@@ -75,20 +69,31 @@ export class FileSystemRouter {
         const routePart = this.getRoutePart(entry.name);
 
         if (entry.isDirectory()) {
-          // Recursively scan subdirectories
+          // Recursivamente escaneie subdiretórios
           await this.scanDirectory(fullPath, path.join(baseRoute, routePart));
         } else if (entry.isFile() && (entry.name.endsWith('.ts') || entry.name.endsWith('.js'))) {
-          // Process route files (e.g., index.ts, users.ts, [id].ts)
-          const routePath = path.join(baseRoute, routePart === 'index' ? '' : routePart);
-          await this.registerRouteFile(fullPath, routePath || '/'); // Ensure root is '/'
+          // Verifica se é um arquivo route.ts ou route.js
+          if (entry.name === 'route.ts' || entry.name === 'route.js') {
+            // Para arquivos route.ts, use o baseRoute diretamente
+            await this.registerRouteFile(fullPath, baseRoute || '/');
+          } else if (entry.name === 'index.ts' || entry.name === 'index.js') {
+            // Para arquivos index.ts, use o baseRoute como está
+            const routePath = baseRoute || '/';
+            await this.registerRouteFile(fullPath, routePath);
+          } else if (!entry.name.endsWith('.d.ts')) {
+            // Para outros arquivos (exceto arquivos de definição .d.ts),
+            // registre apenas se não for um arquivo de definição
+            const routePath = path.join(baseRoute, routePart);
+            await this.registerRouteFile(fullPath, routePath);
+          }
         }
       }
     } catch (error: any) {
       // Handle cases where the directory might not exist initially
       if (error.code === 'ENOENT' && dirPath === this.routesDir) {
-        console.warn(`[Router] Routes directory ${this.routesDir} not found. No routes loaded.`);
+        console.warn(`[Router] ⚠️ Diretório de rotas ${this.routesDir} não encontrado. Nenhuma rota carregada.`);
       } else {
-        console.error(`[Router] Error scanning directory ${dirPath}:`, error);
+        console.error(`[Router] ❌ Erro ao escanear diretório ${dirPath}:`, error);
       }
     }
   }
@@ -101,8 +106,15 @@ export class FileSystemRouter {
    * @private
    */
   private getRoutePart(filename: string): string {
-    const nameWithoutExt = filename.replace(/\.(ts|js)$/, '');
-    // Basic handling for dynamic segments like [id] -> :id (can be expanded)
+    // Remove a extensão do arquivo (.ts ou .js)
+    const nameWithoutExt = filename.replace(/\.(ts|js|d\.ts)$/, '');
+    
+    // Ignore arquivos chamados "route" que são tratados especialmente
+    if (nameWithoutExt === 'route') {
+      return '';
+    }
+    
+    // Converte segmentos dinâmicos [id] para :id para compatibilidade com express-like routing
     return nameWithoutExt.replace(/\[([^\]]+)\]/g, ':$1');
   }
 
@@ -116,6 +128,8 @@ export class FileSystemRouter {
    */
   private async registerRouteFile(filePath: string, routePath: string): Promise<void> {
     try {
+      console.log(`[Router] 🔄 Registrando arquivo de rota: ${filePath}`);
+      
       // Use dynamic import to load the module
       const module = await import(filePath);
       let routeHandlers = this.routes.get(routePath);
@@ -125,23 +139,122 @@ export class FileSystemRouter {
       }
 
       // Look for exported functions named after HTTP methods (uppercase)
+      const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'];
+      const registeredMethods: string[] = [];
+      
       for (const exportName in module) {
         const potentialHandler = module[exportName];
         const upperExportName = exportName.toUpperCase();
 
         if (typeof potentialHandler === 'function' &&
-            ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'].includes(upperExportName))
+            httpMethods.includes(upperExportName))
         {
           if (routeHandlers.has(upperExportName)) {
-             console.warn(`[Router] Duplicate handler for ${upperExportName} ${routePath} in ${filePath}. Overwriting.`);
+             console.warn(`[Router] ⚠️ Handler duplicado para ${upperExportName} ${routePath} em ${filePath}. Sobrescrevendo.`);
           }
           routeHandlers.set(upperExportName, potentialHandler as RouteHandler);
-          // console.log(`[Router] Registered ${upperExportName} ${routePath}`);
+          registeredMethods.push(upperExportName);
         }
       }
+      
+      if (registeredMethods.length > 0) {
+        console.log(`[Router] ✅ Registrado ${registeredMethods.length} método(s) para rota ${routePath}: ${registeredMethods.join(', ')}`);
+      } else {
+        console.warn(`[Router] ⚠️ Arquivo de rota ${filePath} não exporta nenhum método HTTP.`);
+      }
     } catch (error) {
-      console.error(`[Router] Failed to import or register route file ${filePath}:`, error);
+      console.error(`[Router] ❌ Falha ao importar ou registrar arquivo de rota ${filePath}:`, error);
+      if (error instanceof Error) {
+        console.error(error.stack);
+      }
     }
+  }
+
+  /**
+   * Encontra um handler correspondente para um caminho específico, incluindo
+   * suporte para parâmetros dinâmicos.
+   * 
+   * @param pathname Caminho da URL a ser correspondido
+   * @param method Método HTTP
+   * @returns Handler correspondente e parâmetros extraídos, ou null se não encontrado
+   */
+  private findMatchingRoute(pathname: string, method: string): 
+      { handler: RouteHandler, params: Record<string, string> } | null {
+    
+    // 1. Tentar correspondência exata primeiro (mais rápido)
+    const exactHandlers = this.routes.get(pathname);
+    if (exactHandlers && exactHandlers.has(method)) {
+      return { 
+        handler: exactHandlers.get(method)!,
+        params: {}
+      };
+    }
+    
+    // 2. Verificar rotas com parâmetros dinâmicos
+    for (const [routePath, handlers] of this.routes.entries()) {
+      // Pular se não tiver o método que precisamos
+      if (!handlers.has(method)) continue;
+      
+      // Verificar se a rota tem parâmetros dinâmicos (:id)
+      if (routePath.includes(':')) {
+        const params: Record<string, string> = {};
+        const isMatch = this.matchDynamicRoute(routePath, pathname, params);
+        
+        if (isMatch) {
+          return {
+            handler: handlers.get(method)!,
+            params
+          };
+        }
+      }
+    }
+    
+    // Nenhuma correspondência encontrada
+    return null;
+  }
+  
+  /**
+   * Verifica se um caminho corresponde a uma rota dinâmica e extrai os parâmetros.
+   * 
+   * @param routePath Caminho da rota (ex: 'users/:id')
+   * @param pathname Caminho da URL (ex: 'users/123')
+   * @param params Objeto para armazenar os parâmetros extraídos
+   * @returns true se houver correspondência, false caso contrário
+   */
+  private matchDynamicRoute(
+    routePath: string,
+    pathname: string,
+    params: Record<string, string>
+  ): boolean {
+    // Divida os caminhos em segmentos
+    const routeSegments = routePath.split('/');
+    const pathSegments = pathname.split('/');
+    
+    // Se o número de segmentos for diferente, não há correspondência
+    if (routeSegments.length !== pathSegments.length) {
+      return false;
+    }
+    
+    // Verifique cada segmento
+    for (let i = 0; i < routeSegments.length; i++) {
+      const routeSegment = routeSegments[i] || '';
+      const pathSegment = pathSegments[i] || '';
+      
+      // Se o segmento da rota começar com ':', é um parâmetro
+      if (routeSegment.startsWith(':')) {
+        const paramName = routeSegment.substring(1);
+        params[paramName] = pathSegment;
+        continue;
+      }
+      
+      // Caso contrário, os segmentos devem corresponder exatamente
+      if (routeSegment !== pathSegment) {
+        return false;
+      }
+    }
+    
+    // Todos os segmentos correspondem
+    return true;
   }
 
   /**
@@ -153,52 +266,122 @@ export class FileSystemRouter {
    * @async
    */
   public async handleRequest(request: Request): Promise<Response> {
+    const startTime = Date.now();
     const url = new URL(request.url);
     const pathname = url.pathname;
     const method = request.method.toUpperCase();
-    console.log(`[Router] Handling request: ${method} ${pathname}`); // Added log
+    
+    console.log(`[Router] 🔍 Recebida requisição: ${method} ${pathname}`);
+    
+    // Logar query params se existirem
+    const queryParams = Object.fromEntries(url.searchParams.entries());
+    if (Object.keys(queryParams).length > 0) {
+      console.log(`[Router] 📝 Query params:`, queryParams);
+    }
 
-    // TODO: Implement more sophisticated route matching (e.g., with parameters :id)
-    // For now, simple exact match
-    const routeHandlers = this.routes.get(pathname);
+    // Pré-processar o pathname removendo a barra inicial
+    // Um pathname de "/hello" precisa se tornar "hello" para correspondência
+    const normalizedPath = pathname.replace(/^\//, '');
 
-    if (routeHandlers) {
-      const handler = routeHandlers.get(method);
-      if (handler) {
-        try {
-          // Execute the handler
-          const response = await handler(request);
-          // Ensure it's a Response object
-          return response instanceof Response ? response : new Response(String(response));
-        } catch (error) {
-          console.error(`[Router] Error executing handler for ${method} ${pathname}:`, error);
-          return new Response('Internal Server Error', { status: 500 });
+    // Encontrar handler correspondente usando o novo método
+    const match = this.findMatchingRoute(normalizedPath, method);
+
+    if (match) {
+      const { handler, params } = match;
+      console.log(`[Router] ✅ Rota encontrada para: ${pathname}`);
+      
+      if (Object.keys(params).length > 0) {
+        console.log(`[Router] 📝 Parâmetros extraídos:`, params);
+      }
+      
+      try {
+        // Criar um objeto de contexto para passar informações adicionais
+        const context = {
+          params,
+          query: queryParams
+        };
+        
+        // Executar o handler com o request e contexto
+        console.log(`[Router] ⚙️ Executando handler para ${method} ${pathname}...`);
+        
+        // Passe o contexto como propriedade do request para manter compatibilidade
+        // @ts-ignore - Adicionando propriedade personalizada ao Request
+        request.routeContext = context;
+        
+        const response = await handler(request);
+        
+        // Ensure it's a Response object
+        const finalResponse = response instanceof Response 
+          ? response 
+          : new Response(String(response));
+        
+        const duration = Date.now() - startTime;
+        console.log(`[Router] ✨ Resposta gerada para ${method} ${pathname} (${finalResponse.status}) em ${duration}ms`);
+        
+        return finalResponse;
+      } catch (error) {
+        const duration = Date.now() - startTime;
+        console.error(`[Router] ❌ Erro ao executar handler para ${method} ${pathname} após ${duration}ms:`, error);
+        if (error instanceof Error) {
+          console.error(`[Router] Stack trace:`, error.stack);
         }
-      } else {
-        // Method Not Allowed
-        return new Response('Method Not Allowed', { status: 405 });
+        return new Response('Internal Server Error', { status: 500 });
       }
     } else {
+      console.log(`[Router] ❓ Nenhuma rota encontrada para: ${pathname}`);
+      
+      // Listar rotas disponíveis para debug
+      console.log(`[Router] 📋 Rotas disponíveis:`, Array.from(this.routes.keys())
+        .map(route => route ? `/${route}` : '/'));
+      
       // Not Found
-      console.log(`[Router] No route found for: ${method} ${pathname}`); // Added log
       return new Response('Not Found', { status: 404 });
     }
   }
 
-   /**
+  /**
    * Prints the discovered routes to the console (for debugging).
    * @private
    */
   private printRoutes(): void {
-    console.log('[Router] Discovered Routes:');
+    console.log('[Router] 📋 Rotas descobertas:');
     if (this.routes.size === 0) {
-      console.log('  No routes found.');
+      console.log('  ⚠️ Nenhuma rota encontrada.');
       return;
     }
-    this.routes.forEach((handlers, path) => {
-      handlers.forEach((_, method) => {
-        console.log(`  ${method} ${path}`);
-      });
+    
+    // Organizar rotas por caminho para melhor legibilidade
+    const sortedRoutes = Array.from(this.routes.entries())
+      .sort(([a], [b]) => a.localeCompare(b));
+      
+    // Agrupar rotas por caminho base para melhor organização
+    const routeGroups: Record<string, string[]> = {};
+    
+    sortedRoutes.forEach(([path, handlers]) => {
+      const methods = Array.from(handlers.keys()).join(', ');
+      const displayPath = path === '' ? '/' : `/${path}`;
+      console.log(`  🔹 ${displayPath} [${methods}]`);
+      
+      // Para debug: mostrar correspondência completa de URLs
+      const baseGroup = path.split('/')[0] || '/';
+      if (!routeGroups[baseGroup]) {
+        routeGroups[baseGroup] = [];
+      }
+      routeGroups[baseGroup].push(`${displayPath} [${methods}]`);
     });
+    
+    // Exibir agrupamentos para melhor visualização
+    console.log('[Router] 📊 Rotas agrupadas por caminho base:');
+    Object.entries(routeGroups).forEach(([group, routes]) => {
+      console.log(`  📁 ${group === '/' ? 'Root' : group}:`);
+      routes.forEach(route => console.log(`    → ${route}`));
+    });
+    
+    // Mostrar contagem total
+    const totalEndpoints = sortedRoutes.reduce(
+      (total, [_, handlers]) => total + handlers.size, 0
+    );
+    console.log(`[Router] ✅ Total: ${this.routes.size} rotas, ${totalEndpoints} endpoints`);
   }
 }
+

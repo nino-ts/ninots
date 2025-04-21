@@ -80,9 +80,11 @@ export interface HttpResponse<T = unknown> {
         code: string;
         details?: unknown;
     };
-    meta: {
-        timestamp: number;
-        path: string;
+    metadata: {
+        timestamp: string;
+        path?: string;
+        method?: HttpMethod;
+        duration?: number;
         [key: string]: unknown;
     };
 }
@@ -91,8 +93,10 @@ export interface HttpResponse<T = unknown> {
  * Tipo para meta-informações comuns
  */
 export type HttpMetadata = {
-    timestamp: number;
-    path: string;
+    timestamp: string | number;
+    path?: string;
+    method?: HttpMethod;
+    duration?: number;
     [key: string]: unknown;
 };
 

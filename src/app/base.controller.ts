@@ -13,7 +13,7 @@ export abstract class BaseController {
     protected createResponse<T>(data: T, status: HttpStatus | number = 200): Response {
         const responseData: HttpResponse<T> = {
             data,
-            meta: this.createMetadata()
+            metadata: this.createMetadata()
         };
 
         return new Response(JSON.stringify(responseData), {
@@ -44,7 +44,7 @@ export abstract class BaseController {
         
         const errorResponse: HttpResponse<never> = {
             error,
-            meta: this.createMetadata()
+            metadata: this.createMetadata()
         };
 
         return new Response(JSON.stringify(errorResponse), {

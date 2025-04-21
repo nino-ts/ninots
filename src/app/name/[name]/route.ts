@@ -1,4 +1,4 @@
-import { HttpResponse } from "@shared/types/http";
+import type { HttpResponse } from "@shared/types/http";
 
 /**
  * Rota de exemplo com parâmetro dinâmico
@@ -7,6 +7,9 @@ import { HttpResponse } from "@shared/types/http";
 export function GET(request: Request): Response {
     const url = new URL(request.url);
     const name = decodeURIComponent(url.pathname.split('/').pop() || '');
+    
+    console.log(`[Route: /name/${name}] 👤 Rota com parâmetro dinâmico acessada`);
+    console.log(`[Route: /name/${name}] 📝 Parâmetro recebido: name = ${name}`);
 
     const responseData: HttpResponse<{ greeting: string }> = {
         data: {
@@ -14,9 +17,13 @@ export function GET(request: Request): Response {
         },
         metadata: {
             timestamp: new Date().toISOString(),
+            path: url.pathname,
+            method: request.method as any,
             parameter: name
         }
     };
+
+    console.log(`[Route: /name/${name}] ✅ Enviando resposta de saudação`);
 
     return new Response(JSON.stringify(responseData), {
         status: 200,
