@@ -1,3 +1,7 @@
+**Ninots Framework v0.1.0**
+
+***
+
 # Ninots Framework
 
 Framework TypeScript para Bun inspirado no Laravel
