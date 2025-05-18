@@ -11,7 +11,7 @@
         "moduleDetection": "force",
         /* Configurações de Output */
         "outDir": "dist",
-        "rootDir": "src",
+        "rootDir": "./",
         "baseUrl": "./src",
         "declaration": true,
         "noEmit": true,
@@ -63,7 +63,8 @@
         "esModuleInterop": true
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "src/main.ts"
 , "index.ts"    ],
     "exclude": [
         "node_modules",

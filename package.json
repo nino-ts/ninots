@@ -6,12 +6,12 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch ",
-    "start": "bun ",
+    "dev": "bun --watch src/main.ts",
+    "start": "bun src/main.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
     "docs": "typedoc",
-    "cli": "bun run "
+    "cli": "bun run src/core/interfaces/cli/index.ts"
   },
   "files": [
     "dist",
@@ -32,7 +32,8 @@
     "http"
   ],
   "dependencies": {
-    "zod": "^3.24.2"
+    "zod": "^3.24.2",
+    "ninorm": "link:ninorm"
   },
   "devDependencies": {
     "@types/bun": "^1.2.8",

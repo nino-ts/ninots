@@ -2,11 +2,12 @@ Princípios usados pelo ninots:
     MVC
     SOLID
     DRY
-    KISS
     TDD
+    DDD
+    KISS
     Clean Code
     Clean Architecture
-    Atomic Design
+    Atômico
     Imutável
 
 Bases:
@@ -26,7 +27,6 @@ Recursos:
     Autenticação JWT
     Autenticação OAuth2
     Autenticação Token
-    Model Context Protocol Server para o ninots
     Rate Limiter
     Cache
     Middleware
@@ -34,6 +34,7 @@ Recursos:
     Testes de integração
     Testes de performance
     Testes de segurança
+    
 
 Design Patterns:
     Singleton
@@ -56,7 +57,7 @@ Design Patterns:
     State
 
 ORM:
-    Ninorm - E:/codigo-aberto/ninorm
+    ninorm - E:/codigo-aberto/ninorm
 
 Sem compatibilidade nativa com:
     Node.js
@@ -66,3 +67,14 @@ Utiliza ao máximo os recursos nativos do Bun
 
 Documentação automática:
     TypeDoc
+    OpenAPI/Swagger
+    Redoc
+    GraphQL
+    GraphQL Playground
+
+Arquivo inicial:
+    index.ts - Responsável por inicializar o ninots
+
+Arquivo principal:
+    main.ts - Responsável por carregar os módulos do ninots
+
