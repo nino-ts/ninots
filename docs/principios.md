@@ -78,3 +78,6 @@ Arquivo inicial:
 Arquivo principal:
     main.ts - Responsável por carregar os módulos do ninots
 
+Extras:
+    Recursos, funções, conceitos, ideias e etc, que existem no Laravel, Nest.js e Next.js que achar conveniente adicione eles ao ninots
+    O ninots é o framework que faz parte do ecossistema ninots que tem por objetivo oferecer recursos semelhantes aos existentes nos ecossistemas dos frameworks mencionados acima, mas com uma abordagem diferente, porém facilitando o uso, aprendizado e manutenção do código.

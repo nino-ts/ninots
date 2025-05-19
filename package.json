@@ -11,7 +11,8 @@
     "test": "bun test",
     "typecheck": "tsc --noEmit",
     "docs": "typedoc",
-    "cli": "bun run src/core/interfaces/cli/index.ts"
+    "cli": "bun run src/core/interfaces/cli/index.ts",
+    "ninots": "bun run src/core/interfaces/cli/index.ts"
   },
   "files": [
     "dist",
