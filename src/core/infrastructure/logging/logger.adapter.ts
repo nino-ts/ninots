@@ -1,122 +1,60 @@
 /**
- * Implementação do padrão Adapter para sistemas de logging
+ * Adapter para sistemas de logging legados
+ *
+ * DEPRECATED: Use o novo sistema de logging em logger.ts, console-logger.ts e logger-factory.ts
  */
+
+import type { LoggerInterface, LogContext } from "./logger";
 
 /**
- * Interface padrão para logging no Ninots
+ * Interface legada para manter compatibilidade com código existente
  */
 export interface Logger {
-    /**
-     * Registra uma mensagem de debug
-     * @param message Mensagem a ser registrada
-     * @param context Contexto opcional
-     */
     debug(message: string, context?: Record<string, any>): void;
-
-    /**
-     * Registra uma mensagem de informação
-     * @param message Mensagem a ser registrada
-     * @param context Contexto opcional
-     */
     info(message: string, context?: Record<string, any>): void;
-
-    /**
-     * Registra uma mensagem de aviso
-     * @param message Mensagem a ser registrada
-     * @param context Contexto opcional
-     */
     warn(message: string, context?: Record<string, any>): void;
-
-    /**
-     * Registra uma mensagem de erro
-     * @param message Mensagem a ser registrada
-     * @param context Contexto opcional
-     */
     error(message: string, context?: Record<string, any>): void;
 }
 
 /**
- * Implementação básica do Logger que usa console
+ * Adapter que usa o novo sistema de logging para implementar a interface antiga
  */
-export class ConsoleLogger implements Logger {
+export class LegacyLoggerAdapter implements Logger {
+    constructor(private newLogger: LoggerInterface) {}
+
     debug(message: string, context?: Record<string, any>): void {
-        console.debug(`[DEBUG] ${message}`, context || "");
+        this.newLogger.debug(message, context as LogContext);
     }
 
     info(message: string, context?: Record<string, any>): void {
-        console.info(`[INFO] ${message}`, context || "");
+        this.newLogger.info(message, context as LogContext);
     }
 
     warn(message: string, context?: Record<string, any>): void {
-        console.warn(`[WARN] ${message}`, context || "");
+        this.newLogger.warn(message, context as LogContext);
     }
 
     error(message: string, context?: Record<string, any>): void {
-        console.error(`[ERROR] ${message}`, context || "");
+        this.newLogger.error(message, context as LogContext);
     }
 }
 
 /**
- * Interface simulando um serviço de log externo
- */
-interface ExternalLogService {
-    log(level: string, message: string, metadata?: object): void;
-}
-
-/**
- * Simulação de um serviço externo de logs
- */
-class ExternalLoggingService implements ExternalLogService {
-    log(level: string, message: string, metadata?: object): void {
-        console.log(`External log [${level}]: ${message}`, metadata);
-    }
-}
-
-/**
- * Adapter para usar sistemas de log externos com a interface do Ninots
- */
-export class LoggingAdapter implements Logger {
-    /**
-     * Construtor do adaptador
-     * @param externalLogger Serviço externo de logging
-     */
-    constructor(private externalLogger: ExternalLogService) {}
-
-    debug(message: string, context?: Record<string, any>): void {
-        this.externalLogger.log("debug", message, context);
-    }
-
-    info(message: string, context?: Record<string, any>): void {
-        this.externalLogger.log("info", message, context);
-    }
-
-    warn(message: string, context?: Record<string, any>): void {
-        this.externalLogger.log("warn", message, context);
-    }
-
-    error(message: string, context?: Record<string, any>): void {
-        this.externalLogger.log("error", message, context);
-    }
-}
-
-/**
- * Factory para criar instâncias de logger
+ * Factory legada para criar instâncias de logger
+ *
+ * DEPRECATED: Use o novo LoggerFactory de logger-factory.ts
  */
 export class LoggerFactory {
     /**
      * Cria um logger do tipo especificado
-     * @param type Tipo de logger
+     * @param _type Tipo de logger (ignorado, mantido por compatibilidade)
      * @returns Uma instância de Logger
      */
-    static create(type: "console" | "external"): Logger {
-        switch (type) {
-            case "console":
-                return new ConsoleLogger();
-            case "external":
-                // Aqui seria uma instância real de um serviço externo
-                return new LoggingAdapter(new ExternalLoggingService());
-            default:
-                return new ConsoleLogger();
-        }
+    static create(_type: "console" | "external"): Logger {
+        // Importa o novo LoggerFactory dinamicamente para evitar dependência circular
+        const { LoggerFactory: NewLoggerFactory } = require("./logger-factory");
+        const newLogger = NewLoggerFactory.create();
+
+        return new LegacyLoggerAdapter(newLogger);
     }
 }

@@ -2,6 +2,9 @@
  * Ponto de entrada principal do Ninots
  */
 
+// Importa reflect-metadata para suporte a decorators
+import "reflect-metadata";
+
 import { Bootstrapper } from "./bootstrap/app";
 
 /**

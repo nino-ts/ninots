@@ -4,12 +4,16 @@
 
 import { DatabaseAdapter, initDatabase } from "./database";
 import { container } from "../container";
-import { Router, createRouter } from "../core/interfaces/http/routes";
+import type { Router } from "../core/interfaces/http/routes";
+import { createRouter } from "../core/interfaces/http/routes";
 import { HttpServer } from "../core/interfaces/http/server";
-import { UserRepository } from "../core/domain/repositories/user.repository";
+import type { UserRepository } from "../core/domain/repositories/user.repository";
 import { UserRepositoryImpl } from "../core/infrastructure/database/orm/repositories/user.repository.impl";
 import { UserService } from "../core/application/services/user.service";
-import { LoggerFactory } from "../core/infrastructure/logging/logger.adapter";
+import { LoggerFactory } from "../core/infrastructure/logging/logger-factory";
+import { MigrationManager } from "./migrations";
+import loggingConfig from "../config/logging";
+import path from "node:path";
 
 /**
  * Classe responsável pela inicialização da aplicação
@@ -33,7 +37,26 @@ export class Bootstrapper {
     /**
      * Logger da aplicação
      */
-    private logger = LoggerFactory.create("console");
+    private logger;
+
+    /**
+     * Gerenciador de migrações
+     */
+    private migrationManager?: MigrationManager;
+
+    /**
+     * Construtor da classe Bootstrapper
+     */
+    constructor() {
+        // Configura o sistema de logging
+        LoggerFactory.configure({
+            console: loggingConfig.console,
+            file: loggingConfig.file,
+        });
+
+        // Cria o logger para este módulo
+        this.logger = LoggerFactory.create("bootstrap");
+    }
 
     /**
      * Inicializa a aplicação
@@ -50,13 +73,67 @@ export class Bootstrapper {
             throw error;
         }
     }
-
     /**
      * Inicializa a conexão com o banco de dados
      */
     private async initializeDatabase(): Promise<void> {
         this.logger.info("Inicializando banco de dados...");
+
+        // Inicializa a conexão com o banco de dados
         this.dbAdapter = await initDatabase();
+
+        // Inicializa o gerenciador de migrações
+        if (this.dbAdapter) {
+            const migrationsDir = path.join(
+                process.cwd(),
+                "src/core/infrastructure/migrations"
+            );
+            this.migrationManager = new MigrationManager(
+                this.dbAdapter.getDriver(),
+                migrationsDir
+            );
+
+            await this.migrationManager.initialize();
+
+            // Importar apenas se houver configuração de DB
+            const { MigrationGenerator } = await import(
+                "./migration-generator"
+            );
+            const migrationGenerator = new MigrationGenerator(
+                this.dbAdapter.getDriver(),
+                migrationsDir,
+                this.migrationManager
+            );
+
+            // Verificar configuração de migrações automáticas
+            const dbConfig = (await import("../config/database")).default;
+            const autoMigrate = dbConfig.migrations?.autoMigrate === true;
+
+            if (autoMigrate) {
+                // Gerar e aplicar migrações automaticamente
+                this.logger.info(
+                    "Auto-migração habilitada, verificando mudanças no schema"
+                );
+
+                try {
+                    const applied = await migrationGenerator.autoMigrate();
+
+                    if (applied) {
+                        this.logger.info("Auto-migração aplicada com sucesso");
+                    } else {
+                        this.logger.info("Nenhuma mudança no schema detectada");
+                    }
+                } catch (error) {
+                    this.logger.error("Erro na auto-migração", { error });
+                }
+            } else if (this.migrationManager.hasPendingMigrations()) {
+                // Apenas aplica migrações pendentes se não estiver em modo auto
+                this.logger.info("Existem migrações pendentes. Aplicando...");
+                await this.migrationManager.migrateUp();
+                this.logger.info("Migrações aplicadas com sucesso");
+            }
+        }
+
         this.logger.info("Banco de dados inicializado com sucesso");
     }
     /**

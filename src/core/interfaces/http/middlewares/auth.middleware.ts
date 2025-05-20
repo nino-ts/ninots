@@ -16,6 +16,12 @@ export interface HttpRequest {
     headers: Record<string, string>;
     /** Usuário autenticado (se houver) */
     user?: any;
+    /** URL completo da requisição */
+    url?: string;
+    /** Método HTTP */
+    method: string;
+    /** Requisição original do Bun */
+    raw?: Request;
 }
 
 /**
@@ -28,6 +34,12 @@ export interface HttpResponse {
     body: any;
     /** Cabeçalhos da resposta */
     headers?: Record<string, string>;
+    /** Caminho do arquivo para enviar como resposta */
+    file?: string;
+    /** Stream para enviar como resposta */
+    stream?: ReadableStream;
+    /** Resposta do Bun diretamente */
+    response?: Response;
 }
 
 /**

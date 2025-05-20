@@ -33,11 +33,15 @@
     "http"
   ],
   "dependencies": {
-    "zod": "^3.24.2",
-    "ninorm": "link:ninorm"
+    "commander": "^12.0.0",
+    "ninorm": "link:ninorm",
+    "reflect-metadata": "^0.2.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/bun": "^1.2.8",
+    "@types/uuid": "^10.0.0",
     "bun-types": "^1.2.10",
     "typedoc": "^0.28.2",
     "typedoc-plugin-markdown": "^4.6.3",

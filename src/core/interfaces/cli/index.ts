@@ -6,6 +6,7 @@
 import { Command } from "commander";
 import { join } from "path";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { runMigrationCommand } from "./commands/migrations";
 
 // Criar a instância do programa
 const program = new Command();

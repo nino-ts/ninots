@@ -2,7 +2,7 @@
  * Configuração de banco de dados para o Ninots
  */
 
-import { DriverInterface } from "ninorm/src/Core/Contracts/DriverInterface";
+import type { DriverInterface } from "ninorm/src/Core/Contracts/DriverInterface";
 import { SQLiteDriver } from "ninorm/src/Infrastructure/Database/Driver/SQLite/SQLiteDriver";
 
 /**
@@ -30,5 +30,26 @@ export default {
         sqlite: {
             driver: createSQLiteDriver("./database.sqlite"),
         },
+    },
+
+    /**
+     * Configurações para migrações
+     */
+    migrations: {
+        /**
+         * Habilita a geração e aplicação automática de migrações
+         * baseadas em mudanças nos modelos
+         */
+        autoMigrate: false,
+
+        /**
+         * Diretório onde as migrações são armazenadas
+         */
+        directory: "src/core/infrastructure/migrations",
+
+        /**
+         * Se deve aplicar migrações automaticamente na inicialização
+         */
+        autoRun: true,
     },
 };
