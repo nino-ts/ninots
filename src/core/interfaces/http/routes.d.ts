@@ -2,7 +2,7 @@
  * Tipos e interfaces para o sistema de roteamento baseado em decoradores
  */
 
-import { Type } from "../../shared/types";
+import { Type } from "@shared/types";
 import { MiddlewareFunc } from "../http/routes";
 
 /**

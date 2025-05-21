@@ -4,12 +4,14 @@
  * Este módulo fornece decoradores que simplificam a definição de controladores
  * e rotas para a aplicação HTTP, seguindo um padrão similar a frameworks como
  * NestJS mas com implementação mais leve e otimizada para Bun.
+ *
+ * @module decorators/controller
+ * @author João Vitor de Jesus Oliveira
  */
 
-import "reflect-metadata";
-import { container } from "../container";
-import { Type } from "../shared/types";
-import { RouteDefinition } from "../core/interfaces/http/routes";
+import { container } from "@container/index";
+import type { Type } from "@shared/types";
+import { RouteDefinition } from "@core/interfaces/http/routes";
 
 // Chaves de metadados
 const CONTROLLER_PREFIX_KEY = "ninots:controller:prefix";

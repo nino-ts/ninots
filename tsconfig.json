@@ -19,6 +19,24 @@
         "paths": {
             "@/*": [
                 "./*"
+            ],
+            "@core/*": [
+                "./core/*"
+            ],
+            "@decorators/*": [
+                "./decorators/*"
+            ],
+            "@shared/*": [
+                "./shared/*"
+            ],
+            "@container/*": [
+                "./container/*"
+            ],
+            "@config/*": [
+                "./config/*"
+            ],
+            "@bootstrap/*": [
+                "./bootstrap/*"
             ]
         },
         /* Tipagem Avançada */
@@ -64,8 +82,9 @@
     },
     "include": [
         "src/**/*.ts",
-        "src/main.ts"
-, "index.ts"    ],
+        "src/main.ts",
+        "index.ts"
+    ],
     "exclude": [
         "node_modules",
         "dist"
