@@ -1,36 +1,19 @@
 {
-  "name": "ninots",
-  "version": "0.1.0",
-  "description": "Um framework web experimental construído com Bun.js e TypeScript.",
-  "author": "João Vitor de Jesus Oliveira <contato@joaovjo.com.br>",
-  "license": "MIT",
-  "type": "module",
-  "exports": {
-    ".": "./index.ts"
-  },
-  "scripts": {
-    "dev": "bun --watch index.ts",
-    "start": "bun index.ts",
-    "test": "bun test",
-    "typecheck": "tsc --noEmit"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "keywords": [
-    "bun",
-    "bunjs",
-    "typescript",
-    "framework",
-    "microframework",
-    "web"
-  ],
-  "dependencies": {
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@types/bun": "^1.2.8",
-    "typescript": "^5.8.2"
-  }
+    "name": "ninots",
+    "module": "index.ts",
+    "type": "module",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "dependencies": {
+        "core": "workspace:*",
+        "cli": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    }
 }
