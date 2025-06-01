@@ -1,0 +1,39 @@
+# Configuração oficial do Bun para o projeto Ninots
+# Documentação: https://bun.sh/docs/runtime/bunfig
+
+[project]
+name = "ninots"
+description = "Framework web modular e escalável com Bun.js e TypeScript"
+version = "0.1.0"
+
+[dev]
+# Define variáveis de ambiente para desenvolvimento
+port = 3000
+
+[entrypoints]
+main = "index.ts"
+
+[transpiler]
+loader = "ts"
+source_map = "inline"
+
+[test]
+root = "src"
+timeout = 30
+
+[define]
+# Variáveis globais de ambiente
+NODE_ENV = "development"
+
+[install]
+# Configurações de cache e instalação
+cache_dir = "./.cache/bun"
+prefer_latest = true
+
+[log]
+# Configurações de logging
+level = "info"
+
+[debug]
+# Configurações de depuração
+show_compression = true

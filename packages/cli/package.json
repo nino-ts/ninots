@@ -1,0 +1,19 @@
+{
+    "name": "cli",
+    "module": "index.ts",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "start": "bun run src/index.ts",
+        "dev": "bun run -b --watch src/index.ts",
+        "lint": "bun run eslint .",
+        "build": "bun build src/index.ts --outdir=dist --minify",
+        "test": "bun test"
+    },
+    "devDependencies": {
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    }
+}
