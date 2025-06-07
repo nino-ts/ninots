@@ -22,3 +22,26 @@
  * - console.log/error para output
  * - process.exit() para códigos de saída
  */
+
+// Implementação básica para demonstração
+console.log('🚀 Ninots CLI v0.1.0');
+console.log('Framework backend TypeScript otimizado para Bun.js');
+
+// Helper function to retrieve the command argument
+function getCommandArgument(): string | null {
+    if (typeof Bun !== 'undefined' && Bun.argv.length > 2) {
+        return Bun.argv[2];
+    } else if (process.argv.length > 2) {
+        return process.argv[2];
+    }
+    return null;
+}
+
+// Verifica se há argumentos
+const command = getCommandArgument();
+if (command) {
+    console.log(`Comando solicitado: ${command}`);
+} else {
+    console.log('Use: ninots <command> [options]');
+    console.log('Comandos disponíveis: init, create, build, dev, serve, test, help');
+}

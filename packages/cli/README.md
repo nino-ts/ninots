@@ -163,7 +163,13 @@ Este CLI é construído usando apenas recursos nativos do Bun:
 ### Scripts Disponíveis
 
 ```bash
-# Executar CLI em desenvolvimento
+# Executar CLI usando o alias na raiz (recomendado)
+bun run index.ts
+
+# Executar CLI diretamente do código fonte
+bun run src/index.ts
+
+# Executar CLI em desenvolvimento com watch mode
 bun run dev
 
 # Build do CLI
@@ -175,6 +181,22 @@ bun run test
 # Linting
 bun run lint
 ```
+
+### Formas de Execução
+
+O CLI pode ser executado de duas formas:
+
+1. **Via alias na raiz** (compatível com a documentação):
+   ```bash
+   bun run index.ts [comando] [opções]
+   ```
+
+2. **Diretamente do código fonte** (para desenvolvimento):
+   ```bash
+   bun run src/index.ts [comando] [opções]
+   ```
+
+O arquivo `index.ts` na raiz serve como um proxy para `src/index.ts`, mantendo compatibilidade com os exemplos da documentação.
 
 ## Contribuindo
 

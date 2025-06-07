@@ -4,7 +4,8 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "start": "bun run src/index.ts",
+        "start": "bun run index.ts",
+        "start:dev": "bun run src/index.ts",
         "dev": "bun run -b --watch src/index.ts",
         "lint": "bun run eslint .",
         "build": "bun build src/index.ts --outdir=dist --minify",
