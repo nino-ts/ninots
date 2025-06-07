@@ -1,0 +1,13 @@
+{
+    "name": "ninots-cli-tests",
+    "private": true,
+    "scripts": {
+        "test": "bun test",
+        "test:watch": "bun test --watch",
+        "test:coverage": "bun test --coverage"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "bun-types": "latest"
+    }
+}
