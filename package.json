@@ -1,0 +1,19 @@
+{
+    "name": "ninots-app",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "bun run --hot src/nino.ts serve",
+        "start": "bun run src/nino.ts serve --prod",
+        "build": "bun build --compile --bytecode src/nino.ts --outfile ninots",
+        "nino": "bun run src/nino.ts"
+    },
+    "dependencies": {
+        "@ninots/framework": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "typescript": "^5.8.0"
+    }
+}

@@ -1,0 +1,12 @@
+node_modules
+storage/logs/*.log
+storage/database.sqlite
+storage/framework/cache/**
+storage/sessions/**
+.env
+.env.local
+.env.*.local
+dist
+*.jsc
+.DS_Store
+Thumbs.db
