@@ -1,8 +1,6 @@
 import type { Serve } from 'bun';
 import { Application } from '@ninots/foundation';
-import { createContainer } from '@ninots/container';
-import { loadRoutes } from '@ninots/routing';
-import { loadWebSocketHandlers } from '@ninots/websocket';
+import { Container } from '@ninots/container';
 import { registerProviders } from './providers';
 
 /**
@@ -11,8 +9,8 @@ import { registerProviders } from './providers';
  * @returns The configured Application instance
  */
 export async function bootstrap(): Promise<Application> {
-    const container = createContainer();
-    const app = new Application(container);
+    const container = new Container();
+    const app = new Application({}, container);
 
     // Register service providers
     await registerProviders(app);
@@ -30,20 +28,16 @@ export async function bootstrap(): Promise<Application> {
  * @returns Bun.serve configuration object
  */
 export function createServeOptions(app: Application): Serve.Options<undefined> {
-    return {
-        port: app.config.get('app.port', 3000),
-        hostname: app.config.get('app.hostname', '0.0.0.0'),
+    const config = app.getConfig();
 
-        // HTTP routes from file-based routing
-        routes: loadRoutes(app),
+    return {
+        port: config.port,
+        hostname: config.hostname,
 
         // Fallback fetch handler
         async fetch(req: Request): Promise<Response> {
             return new Response('Not Found', { status: 404 });
         },
-
-        // WebSocket handlers
-        websocket: loadWebSocketHandlers(app),
 
         // Error handler
         error(error: Error): Response {
