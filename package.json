@@ -13,6 +13,7 @@
         "@ninots/framework": "^0.2.0"
     },
     "devDependencies": {
+        "@biomejs/biome": "2.4.13",
         "@types/bun": "^1.3.13",
         "typescript": "^6.0.3"
     }
