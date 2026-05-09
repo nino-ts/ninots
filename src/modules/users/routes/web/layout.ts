@@ -1,4 +1,4 @@
-import type { LayoutConfig } from '@ninots/routing';
+import type { LayoutConfig } from "@ninots/routing";
 
 /**
  * Web layout configuration.
@@ -6,5 +6,5 @@ import type { LayoutConfig } from '@ninots/routing';
  */
 export const layout: LayoutConfig = {
     middleware: [],
-    prefix: 'users/',
+    prefix: "users/",
 };

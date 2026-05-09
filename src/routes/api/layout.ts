@@ -1,5 +1,5 @@
-import type { LayoutConfig } from '@ninots/routing';
-import { cors } from '@/shared/Http/Middleware/CorsMiddleware';
+import type { LayoutConfig } from "@ninots/routing";
+import { cors } from "@/shared/Http/Middleware/CorsMiddleware";
 
 /**
  * API layout configuration.
@@ -7,5 +7,5 @@ import { cors } from '@/shared/Http/Middleware/CorsMiddleware';
  */
 export const layout: LayoutConfig = {
     middleware: [cors],
-    prefix: '/api',
+    prefix: "/api",
 };

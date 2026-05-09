@@ -1,4 +1,4 @@
-import type { Request, NextFunction, Response } from '@ninots/http';
+import type { NextFunction, Request, Response } from "@ninots/http";
 
 /**
  * User ownership middleware.
@@ -6,10 +6,10 @@ import type { Request, NextFunction, Response } from '@ninots/http';
  * Ensures users can only access their own resources.
  */
 export function UserOwnershipMiddleware(
-    request: Request,
+    _request: Request,
     next: NextFunction,
-    response: Response
-): Response | void {
+    _response: Response,
+): Response | undefined {
     // TODO: Implement ownership check
     // const userId = request.param('id');
     // const authenticatedUserId = request.user?.id;

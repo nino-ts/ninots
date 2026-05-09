@@ -1,5 +1,5 @@
-import type { LayoutConfig } from '@ninots/routing';
-import { authWS } from '@/shared/Http/Middleware/AuthWSMiddleware';
+import type { LayoutConfig } from "@ninots/routing";
+import { authWS } from "@/shared/Http/Middleware/AuthWSMiddleware";
 
 /**
  * WebSocket layout configuration.
@@ -7,5 +7,5 @@ import { authWS } from '@/shared/Http/Middleware/AuthWSMiddleware';
  */
 export const layout: LayoutConfig = {
     middleware: [authWS],
-    prefix: '/ws',
+    prefix: "/ws",
 };

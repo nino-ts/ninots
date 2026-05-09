@@ -1,8 +1,8 @@
-import type { NextRequest } from '@ninots/http';
-import { NextResponse } from '@ninots/http';
-import { UserService } from '@/modules/users/services/UserService';
-import { Validate } from '@ninots/validation';
-import { CreateUserRequest } from '@/modules/users/requests/CreateUserRequest';
+import type { NextRequest } from "@ninots/http";
+import { NextResponse } from "@ninots/http";
+import { Validate } from "@ninots/validation";
+import { CreateUserRequest } from "@/modules/users/requests/CreateUserRequest";
+import { UserService } from "@/modules/users/services/UserService";
 
 /**
  * Create a new user.

@@ -1,4 +1,4 @@
-import { Response } from '@ninots/http';
+import { Response } from "@ninots/http";
 
 /**
  * Base controller.

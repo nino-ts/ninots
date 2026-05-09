@@ -1,4 +1,4 @@
-import type { Migration } from '@ninots/orm';
+import type { Migration } from "@ninots/orm";
 
 /**
  * Create users table migration.

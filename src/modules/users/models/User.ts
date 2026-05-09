@@ -1,11 +1,11 @@
-import { Model, Table, Column } from '@ninots/orm';
+import { Column, Model, Table } from "@ninots/orm";
 
 /**
  * User model.
  *
  * Represents a user in the system.
  */
-@Table('users')
+@Table("users")
 export class User extends Model {
     @Column({ primary: true, autoIncrement: true })
     public id: number;
@@ -22,13 +22,6 @@ export class User extends Model {
     @Column({ nullable: true })
     public avatar: string;
 
-    @Column({ type: 'json', nullable: true })
+    @Column({ type: "json", nullable: true })
     public metadata: Record<string, unknown>;
-
-    /**
-     * Create a new user instance.
-     */
-    constructor() {
-        super();
-    }
 }

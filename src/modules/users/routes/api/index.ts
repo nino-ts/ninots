@@ -1,4 +1,4 @@
-import { userRoutes } from './users';
+import { userRoutes } from "./users";
 
 /**
  * User module API routes export.

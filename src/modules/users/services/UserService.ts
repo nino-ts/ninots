@@ -1,5 +1,5 @@
-import { Inject } from '@ninots/container';
-import { User } from '@/modules/users/models/User';
+import { Inject } from "@ninots/container";
+import type { User } from "@/modules/users/models/User";
 
 /**
  * User service.
@@ -52,7 +52,7 @@ export class UserService {
     public async update(id: number, data: Record<string, unknown>): Promise<User> {
         const user = await this.find(id);
         if (!user) {
-            throw new Error('User not found');
+            throw new Error("User not found");
         }
         user.fill(data);
         await user.save();

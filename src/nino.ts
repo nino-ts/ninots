@@ -1,10 +1,10 @@
-import { Kernel, Command } from '@ninots/console';
-import { bootstrap, createServeOptions } from '@/bootstrap/app';
+import { Command, Kernel } from "@ninots/console";
+import { bootstrap, createServeOptions } from "@/bootstrap/app";
 
 /**
  * Create the CLI kernel.
  */
-const kernel = new Kernel('Nino', '1.0.0');
+const kernel = new Kernel("Nino", "1.0.0");
 
 // Register commands
 kernel.add(new ServeCommand());
@@ -17,15 +17,15 @@ kernel.add(new CacheClearCommand());
  * Starts the HTTP server.
  */
 class ServeCommand extends Command {
-    protected signature = 'serve {--port=3000} {--hot}';
-    protected description = 'Start the development server';
+    protected signature = "serve {--port=3000} {--hot}";
+    protected description = "Start the development server";
 
     /**
      * Handle the command.
      */
     public async handle(): Promise<void> {
         const app = await bootstrap();
-        const port = this.option('port');
+        const port = this.option("port");
 
         this.info(`Starting Ninots server on port ${port}`);
 
@@ -43,14 +43,14 @@ class ServeCommand extends Command {
  * Lists all registered routes.
  */
 class RoutesCommand extends Command {
-    protected signature = 'routes:list';
-    protected description = 'List all registered routes';
+    protected signature = "routes:list";
+    protected description = "List all registered routes";
 
     /**
      * Handle the command.
      */
     public async handle(): Promise<void> {
-        this.info('Routes:');
+        this.info("Routes:");
         // TODO: Implement route listing
     }
 }
@@ -61,15 +61,15 @@ class RoutesCommand extends Command {
  * Clears the application cache.
  */
 class CacheClearCommand extends Command {
-    protected signature = 'cache:clear';
-    protected description = 'Clear the application cache';
+    protected signature = "cache:clear";
+    protected description = "Clear the application cache";
 
     /**
      * Handle the command.
      */
     public async handle(): Promise<void> {
         // TODO: Implement cache clearing
-        this.info('Cache cleared successfully');
+        this.info("Cache cleared successfully");
     }
 }
 

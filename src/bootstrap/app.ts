@@ -1,7 +1,7 @@
-import type { Serve } from 'bun';
-import { Application } from '@ninots/foundation';
-import { Container } from '@ninots/container';
-import { registerProviders } from './providers';
+import { Container } from "@ninots/container";
+import { Application } from "@ninots/foundation";
+import type { Serve } from "bun";
+import { registerProviders } from "./providers";
 
 /**
  * Bootstrap the application.
@@ -35,14 +35,13 @@ export function createServeOptions(app: Application): Serve.Options<undefined> {
         hostname: config.hostname,
 
         // Fallback fetch handler
-        async fetch(req: Request): Promise<Response> {
-            return new Response('Not Found', { status: 404 });
+        async fetch(_req: Request): Promise<Response> {
+            return new Response("Not Found", { status: 404 });
         },
 
         // Error handler
-        error(error: Error): Response {
-            console.error(error);
-            return new Response('Internal Server Error', { status: 500 });
+        error(_error: Error): Response {
+            return new Response("Internal Server Error", { status: 500 });
         },
 
         // Idle timeout (default 10s)
