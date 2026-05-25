@@ -1,14 +1,14 @@
-import type { Request, NextFunction, Response } from '@ninots/http';
-
 /**
  * CORS middleware.
  *
  * Adds Cross-Origin Resource Sharing headers to responses.
  */
+export type NextFunction = () => Response | void;
+
 export function CorsMiddleware(
-    request: Request,
+    request: globalThis.Request,
     next: NextFunction,
-    response: Response
+    response: globalThis.Response
 ): Response | void {
     // TODO: Implement CORS headers
     // response.headers.set('Access-Control-Allow-Origin', '*');
