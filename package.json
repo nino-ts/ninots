@@ -10,7 +10,15 @@
         "nino": "bun run src/nino.ts"
     },
     "dependencies": {
-        "@ninots/framework": "workspace:*"
+        "@ninots/framework": "workspace:*",
+        "@ninots/console": "workspace:*",
+        "@ninots/container": "workspace:*",
+        "@ninots/foundation": "workspace:*",
+        "@ninots/http": "workspace:*",
+        "@ninots/orm": "workspace:*",
+        "@ninots/routing": "workspace:*",
+        "@ninots/validation": "workspace:*",
+        "@ninots/websocket": "workspace:*"
     },
     "devDependencies": {
         "@types/bun": "latest",
