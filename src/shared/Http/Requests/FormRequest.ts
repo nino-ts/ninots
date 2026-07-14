@@ -1,5 +1,3 @@
-import { FormRequest } from '@ninots/validation';
-
 /**
  * Base form request.
  *

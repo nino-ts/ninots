@@ -1,23 +1,24 @@
-import type { Application } from '@ninots/foundation';
+import type { Application } from "@ninots/framework";
+import { ServiceProvider } from "@ninots/framework";
 
 /**
  * Cache service provider.
  *
  * Registers cache services.
  */
-export class CacheServiceProvider {
+export class CacheServiceProvider extends ServiceProvider {
     /**
-     * Create a new service provider instance.
-     *
-     * @param app - The application instance
+     * @param app - Application instance
      */
-    constructor(private app: Application) {}
+    constructor(app: Application) {
+        super(app.container);
+    }
 
     /**
      * Register services.
      */
     public register(): void {
-        // TODO: Register cache services
+        // TODO: Register cache services (Sprint 2+)
     }
 
     /**

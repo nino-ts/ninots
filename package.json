@@ -1,27 +1,26 @@
 {
     "name": "ninots-app",
-    "version": "1.0.0",
-    "private": true,
+    "version": "0.2.0",
+    "private": false,
     "type": "module",
     "scripts": {
         "dev": "bun run --hot src/nino.ts serve",
         "start": "bun run src/nino.ts serve --prod",
         "build": "bun build --compile --bytecode src/nino.ts --outfile ninots",
-        "nino": "bun run src/nino.ts"
+        "nino": "bun run src/nino.ts",
+        "docs:generate": "typedoc",
+        "format": "bunx biome format --write .",
+        "lint": "bunx biome check .",
+        "lint:fix": "bunx biome check --write .",
+        "lint:fix:unsafe": "bunx biome check --write --unsafe .",
+        "test": "bun test"
     },
     "dependencies": {
-        "@ninots/framework": "workspace:*",
-        "@ninots/console": "workspace:*",
-        "@ninots/container": "workspace:*",
-        "@ninots/foundation": "workspace:*",
-        "@ninots/http": "workspace:*",
-        "@ninots/orm": "workspace:*",
-        "@ninots/routing": "workspace:*",
-        "@ninots/validation": "workspace:*",
-        "@ninots/websocket": "workspace:*"
+        "@ninots/framework": "link:@ninots/framework"
     },
     "devDependencies": {
-        "@types/bun": "latest",
-        "typescript": "^5.8.0"
+        "@biomejs/biome": "2.4.14",
+        "@types/bun": "^1.3.13",
+        "typescript": "^6.0.3"
     }
 }

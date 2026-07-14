@@ -3,7 +3,7 @@ export default {
      * Default authentication guard
      */
     defaults: {
-        guard: 'session',
+        guard: "session",
     },
 
     /**
@@ -11,12 +11,12 @@ export default {
      */
     guards: {
         session: {
-            driver: 'session',
-            provider: 'users',
+            driver: "session",
+            provider: "users",
         },
         token: {
-            driver: 'token',
-            provider: 'users',
+            driver: "token",
+            provider: "users",
         },
     },
 
@@ -25,8 +25,8 @@ export default {
      */
     providers: {
         users: {
-            driver: 'eloquent',
-            model: 'User',
+            driver: "eloquent",
+            model: "User",
         },
     },
 
@@ -35,8 +35,8 @@ export default {
      */
     passwords: {
         users: {
-            provider: 'users',
-            table: 'password_reset_tokens',
+            provider: "users",
+            table: "password_reset_tokens",
             expire: 60,
             throttle: 60,
         },

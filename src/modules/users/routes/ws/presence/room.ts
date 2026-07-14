@@ -1,4 +1,4 @@
-import type { WSRoom, WSMessage, WSClient } from '@ninots/websocket';
+import type { WSClient, WSMessage, WSRoom } from "@ninots/websocket";
 
 /**
  * User presence WebSocket handlers.
@@ -14,7 +14,7 @@ export const userPresenceWS = {
      */
     async open(room: WSRoom, client: WSClient): Promise<void> {
         room.broadcast({
-            type: 'user_online',
+            type: "user_online",
             userId: client.data?.userId,
             timestamp: Date.now(),
         });
@@ -27,11 +27,11 @@ export const userPresenceWS = {
      * @param client - The client that sent the message
      * @param message - The received message
      */
-    async message(room: WSRoom, client: WSClient, message: WSMessage): Promise<void> {
+    async message(_room: WSRoom, client: WSClient, message: WSMessage): Promise<void> {
         const { action } = message as Record<string, string>;
 
-        if (action === 'ping') {
-            client.send({ type: 'pong', timestamp: Date.now() });
+        if (action === "ping") {
+            client.send({ type: "pong", timestamp: Date.now() });
         }
     },
 
@@ -43,7 +43,7 @@ export const userPresenceWS = {
      */
     async close(room: WSRoom, client: WSClient): Promise<void> {
         room.broadcast({
-            type: 'user_offline',
+            type: "user_offline",
             userId: client.data?.userId,
             timestamp: Date.now(),
         });
@@ -54,5 +54,5 @@ export const userPresenceWS = {
  * Export handlers for WebSocket routing.
  */
 export const userWSHandlers = {
-    '/users/presence': userPresenceWS,
+    "/users/presence": userPresenceWS,
 };

@@ -1,4 +1,4 @@
-import { Post } from '@/modules/posts/models/Post';
+import { Post } from "@/modules/posts/models/Post";
 
 /**
  * Post service.
@@ -22,7 +22,7 @@ export class PostService {
      * @returns The post or null if not found
      */
     public async findBySlug(slug: string): Promise<Post | null> {
-        return Post.where('slug', slug).first();
+        return Post.where("slug", slug).first();
     }
 
     /**

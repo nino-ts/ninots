@@ -1,8 +1,8 @@
-import type { NextRequest, RouteContext } from '@ninots/http';
-import { NextResponse } from '@ninots/http';
-import { UserService } from '@/modules/users/services/UserService';
-import { Validate } from '@ninots/validation';
-import { UpdateUserRequest } from '@/modules/users/requests/UpdateUserRequest';
+import type { NextRequest, RouteContext } from "@ninots/http";
+import { NextResponse } from "@ninots/http";
+import { Validate } from "@ninots/validation";
+import { UpdateUserRequest } from "@/modules/users/requests/UpdateUserRequest";
+import { UserService } from "@/modules/users/services/UserService";
 
 /**
  * Update a specific user.
@@ -14,10 +14,7 @@ import { UpdateUserRequest } from '@/modules/users/requests/UpdateUserRequest';
  * @returns JSON response with updated user
  */
 @Validate(UpdateUserRequest)
-export async function PUT(
-    _req: NextRequest,
-    ctx: RouteContext<'/users/[id]'>
-): Promise<typeof NextResponse> {
+export async function PUT(_req: NextRequest, ctx: RouteContext<"/users/[id]">): Promise<typeof NextResponse> {
     const { id } = await ctx.params;
     const usersService = new UserService();
     const data = await _req.json();

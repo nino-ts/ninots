@@ -12,14 +12,11 @@ export class SendVerificationEmailJob {
      */
     constructor(
         public readonly userId: number,
-        public readonly email: string
+        public readonly email: string,
     ) {}
 
     /**
      * Execute the job.
      */
-    public async handle(): Promise<void> {
-        // TODO: Send verification email
-        console.log(`Sending verification email to ${this.email}`);
-    }
+    public async handle(): Promise<void> {}
 }

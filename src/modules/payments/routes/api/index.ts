@@ -1,13 +1,13 @@
-import type { NextRequest } from '@ninots/http';
-import { NextResponse } from '@ninots/http';
-import { PaymentService } from '@/modules/payments/services/PaymentService';
+import type { NextRequest } from "@ninots/http";
+import { NextResponse } from "@ninots/http";
+import { PaymentService } from "@/modules/payments/services/PaymentService";
 
 /**
  * Payment module API routes.
  */
 export const paymentRoutes = {
-    '/payments': {
-        GET: async (req: NextRequest) => {
+    "/payments": {
+        GET: async (_req: NextRequest) => {
             const service = new PaymentService();
             return NextResponse.json(await service.all());
         },

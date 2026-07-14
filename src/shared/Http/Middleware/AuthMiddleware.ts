@@ -1,15 +1,11 @@
-import type { Request, NextFunction, Response } from '@ninots/http';
+import type { NextFunction, Request, Response } from "@ninots/http";
 
 /**
  * Authentication middleware.
  *
  * Ensures requests are authenticated.
  */
-export function AuthMiddleware(
-    request: Request,
-    next: NextFunction,
-    response: Response
-): Response | void {
+export function AuthMiddleware(_request: Request, next: NextFunction, _response: Response): Response | undefined {
     // TODO: Implement authentication check
     // const token = request.headers.get('Authorization');
     // if (!token || !isValidToken(token)) {

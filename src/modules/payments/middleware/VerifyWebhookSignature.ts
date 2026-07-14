@@ -1,5 +1,4 @@
-import type { Request } from '@ninots/http';
-import { Response } from '@ninots/http';
+import type { Request, Response } from "@ninots/http";
 
 /**
  * Verify webhook signature middleware.
@@ -7,10 +6,10 @@ import { Response } from '@ninots/http';
  * Validates payment webhook signatures.
  */
 export function VerifyWebhookSignature(
-    request: Request,
+    _request: Request,
     next: () => Response | Promise<Response>,
-    response: Response
-): Response | void {
+    _response: Response,
+): Response | undefined {
     // TODO: Implement webhook signature verification
     // const signature = request.headers.get('x-webhook-signature');
     // if (!isValidSignature(signature)) {

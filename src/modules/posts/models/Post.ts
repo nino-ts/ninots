@@ -1,11 +1,11 @@
-import { Model, Table, Column } from '@ninots/orm';
+import { Column, Model, Table } from "@ninots/orm";
 
 /**
  * Post model.
  *
  * Represents a blog post or article.
  */
-@Table('posts')
+@Table("posts")
 export class Post extends Model {
     @Column({ primary: true, autoIncrement: true })
     public id: number;
@@ -16,7 +16,7 @@ export class Post extends Model {
     @Column({ unique: true })
     public slug: string;
 
-    @Column({ type: 'text' })
+    @Column({ type: "text" })
     public content: string;
 
     @Column({ nullable: true })
@@ -25,16 +25,9 @@ export class Post extends Model {
     @Column()
     public authorId: number;
 
-    @Column({ default: 'draft' })
+    @Column({ default: "draft" })
     public status: string;
 
     @Column({ nullable: true })
     public publishedAt: Date;
-
-    /**
-     * Create a new post instance.
-     */
-    constructor() {
-        super();
-    }
 }

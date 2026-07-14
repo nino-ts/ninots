@@ -2,22 +2,22 @@ export default {
     /**
      * Allowed HTTP methods
      */
-    allowedMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 
     /**
      * Allowed headers
      */
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
 
     /**
      * Allowed origins
      */
-    allowedOrigins: ['http://localhost:3000'],
+    allowedOrigins: ["http://localhost:3000"],
 
     /**
      * Exposed headers
      */
-    exposedHeaders: ['X-Request-Id'],
+    exposedHeaders: ["X-Request-Id"],
 
     /**
      * Max age for preflight cache

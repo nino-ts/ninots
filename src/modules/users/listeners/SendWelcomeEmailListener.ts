@@ -1,4 +1,4 @@
-import { UserCreatedEvent } from '@/modules/users/events/UserCreatedEvent';
+import type { UserCreatedEvent } from "@/modules/users/events/UserCreatedEvent";
 
 /**
  * Send welcome email listener.
@@ -11,8 +11,5 @@ export class SendWelcomeEmailListener {
      *
      * @param event - The user created event
      */
-    public async handle(event: UserCreatedEvent): Promise<void> {
-        // TODO: Send welcome email
-        console.log(`Sending welcome email to ${event.email}`);
-    }
+    public async handle(_event: UserCreatedEvent): Promise<void> {}
 }

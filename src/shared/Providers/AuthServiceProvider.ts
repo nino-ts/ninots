@@ -1,23 +1,24 @@
-import type { Application } from '@ninots/foundation';
+import type { Application } from "@ninots/framework";
+import { ServiceProvider } from "@ninots/framework";
 
 /**
  * Auth service provider.
  *
  * Registers authentication services.
  */
-export class AuthServiceProvider {
+export class AuthServiceProvider extends ServiceProvider {
     /**
-     * Create a new service provider instance.
-     *
-     * @param app - The application instance
+     * @param app - Application instance
      */
-    constructor(private app: Application) {}
+    constructor(app: Application) {
+        super(app.container);
+    }
 
     /**
      * Register services.
      */
     public register(): void {
-        // TODO: Register auth services
+        // TODO: Register auth services (Sprint 2+)
     }
 
     /**

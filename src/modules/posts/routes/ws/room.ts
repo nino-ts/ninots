@@ -1,18 +1,12 @@
-import type { WSRoom, WSMessage, WSClient } from '@ninots/websocket';
+import type { WSClient, WSMessage, WSRoom } from "@ninots/websocket";
 
 /**
  * Post module WebSocket handlers.
  */
 export const postWSHandlers = {
-    '/posts': {
-        async open(room: WSRoom, client: WSClient): Promise<void> {
-            console.log(`Client connected to posts room: ${client.id}`);
-        },
-        async message(room: WSRoom, client: WSClient, message: WSMessage): Promise<void> {
-            console.log(`Message in posts room: ${message}`);
-        },
-        async close(room: WSRoom, client: WSClient): Promise<void> {
-            console.log(`Client disconnected from posts room: ${client.id}`);
-        },
+    "/posts": {
+        async open(_room: WSRoom, _client: WSClient): Promise<void> {},
+        async message(_room: WSRoom, _client: WSClient, _message: WSMessage): Promise<void> {},
+        async close(_room: WSRoom, _client: WSClient): Promise<void> {},
     },
 };

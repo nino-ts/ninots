@@ -1,29 +1,30 @@
-import type { Application } from '@ninots/foundation';
+import type { Application } from "@ninots/framework";
+import { ServiceProvider } from "@ninots/framework";
 
 /**
  * Application service provider.
  *
  * Registers core application services.
  */
-export class AppServiceProvider {
+export class AppServiceProvider extends ServiceProvider {
     /**
-     * Create a new service provider instance.
-     *
-     * @param app - The application instance
+     * @param app - Application instance
      */
-    constructor(private app: Application) {}
+    constructor(app: Application) {
+        super(app.container);
+    }
 
     /**
      * Register services.
      */
     public register(): void {
-        // TODO: Register core services
+        // Core services are wired via wireCoreServices() during bootstrap.
     }
 
     /**
      * Boot services.
      */
     public boot(): void {
-        // TODO: Boot core services
+        // Reserved for app-level boot hooks.
     }
 }
