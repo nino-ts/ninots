@@ -1,5 +1,4 @@
-import { Inject } from "@ninots/container";
-import type { Post } from "@/modules/posts/models/Post";
+import { Post } from "@/modules/posts/models/Post";
 
 /**
  * Post service.
@@ -7,16 +6,13 @@ import type { Post } from "@/modules/posts/models/Post";
  * Handles business logic for post operations.
  */
 export class PostService {
-    @Inject()
-    private post: typeof Post;
-
     /**
      * Get all posts.
      *
      * @returns Array of posts
      */
     public async all(): Promise<Post[]> {
-        return this.post.all();
+        return Post.all();
     }
 
     /**
@@ -26,7 +22,7 @@ export class PostService {
      * @returns The post or null if not found
      */
     public async findBySlug(slug: string): Promise<Post | null> {
-        return this.post.where("slug", slug).first();
+        return Post.where("slug", slug).first();
     }
 
     /**
@@ -36,7 +32,7 @@ export class PostService {
      * @returns The created post
      */
     public async create(data: Record<string, unknown>): Promise<Post> {
-        const post = new this.post();
+        const post = new Post();
         post.fill(data);
         await post.save();
         return post;

@@ -1,5 +1,4 @@
-import { Inject } from "@ninots/container";
-import type { User } from "@/modules/users/models/User";
+import { User } from "@/modules/users/models/User";
 
 /**
  * User service.
@@ -7,16 +6,13 @@ import type { User } from "@/modules/users/models/User";
  * Handles business logic for user operations.
  */
 export class UserService {
-    @Inject()
-    private user: typeof User;
-
     /**
      * Get all users.
      *
      * @returns Array of users
      */
     public async all(): Promise<User[]> {
-        return this.user.all();
+        return User.all();
     }
 
     /**
@@ -26,7 +22,7 @@ export class UserService {
      * @returns The user or null if not found
      */
     public async find(id: number): Promise<User | null> {
-        return this.user.find(id);
+        return User.find(id);
     }
 
     /**
@@ -36,7 +32,7 @@ export class UserService {
      * @returns The created user
      */
     public async create(data: Record<string, unknown>): Promise<User> {
-        const user = new this.user();
+        const user = new User();
         user.fill(data);
         await user.save();
         return user;
