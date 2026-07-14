@@ -1,4 +1,4 @@
-import type { Application } from "@ninots/foundation";
+import type { Application } from "@ninots/framework";
 import { AppServiceProvider } from "@/shared/Providers/AppServiceProvider";
 import { AuthServiceProvider } from "@/shared/Providers/AuthServiceProvider";
 import { CacheServiceProvider } from "@/shared/Providers/CacheServiceProvider";

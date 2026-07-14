@@ -16,7 +16,7 @@
         "test": "bun test"
     },
     "dependencies": {
-        "@ninots/framework": "^0.2.0"
+        "@ninots/framework": "link:@ninots/framework"
     },
     "devDependencies": {
         "@biomejs/biome": "2.4.14",

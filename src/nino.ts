@@ -1,77 +1,110 @@
-import { Command, Kernel } from "@ninots/console";
-import { bootstrap, createServeOptions } from "@/bootstrap/app";
+import { Command, Kernel } from "@ninots/framework";
+import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
+import packageJson from "../../package.json";
+
+const kernel = new Kernel();
+kernel.setOutput({
+    writeLine(text: string): void {
+        console.log(text);
+    },
+});
+
+kernel.register(new HelpCommand(kernel));
+kernel.register(new VersionCommand());
+kernel.register(new ServeCommand());
+kernel.register(new RoutesCommand());
+kernel.register(new CacheClearCommand());
 
 /**
- * Create the CLI kernel.
+ * Help command — lists registered CLI commands.
  */
-const kernel = new Kernel("Nino", "1.0.0");
+class HelpCommand extends Command {
+    protected signature = "help";
+    protected description = "Display available commands";
 
-// Register commands
-kernel.add(new ServeCommand());
-kernel.add(new RoutesCommand());
-kernel.add(new CacheClearCommand());
+    private readonly cli: Kernel;
 
-/**
- * Serve command.
- *
- * Starts the HTTP server.
- */
-class ServeCommand extends Command {
-    protected signature = "serve {--port=3000} {--hot}";
-    protected description = "Start the development server";
+    constructor(cli: Kernel) {
+        super();
+        this.cli = cli;
+    }
 
-    /**
-     * Handle the command.
-     */
-    public async handle(): Promise<void> {
-        const app = await bootstrap();
-        const port = this.option("port");
+    public async handle(): Promise<number> {
+        this.line(`Nino CLI — ninots-app v${packageJson.version}`);
+        this.line("");
+        this.line("Available commands:");
 
-        this.info(`Starting Ninots server on port ${port}`);
+        for (const command of this.cli.getCommands()) {
+            const definition = command.getDefinition();
+            this.line(`  ${definition.name.padEnd(16)} ${definition.description}`);
+        }
 
-        const serveOptions = createServeOptions(app);
-        serveOptions.port = port;
-
-        const server = Bun.serve(serveOptions);
-        this.info(`Server running at ${server.url}`);
+        return 0;
     }
 }
 
 /**
- * Routes command.
- *
- * Lists all registered routes.
+ * Version command.
+ */
+class VersionCommand extends Command {
+    protected signature = "version";
+    protected description = "Show application and framework versions";
+
+    public async handle(): Promise<number> {
+        this.line(`ninots-app ${packageJson.version}`);
+        this.line(`@ninots/framework ${packageJson.dependencies["@ninots/framework"]}`);
+        return 0;
+    }
+}
+
+/**
+ * Serve command — starts the HTTP server.
+ */
+class ServeCommand extends Command {
+    protected signature = "serve {--port=3000}";
+    protected description = "Start the HTTP development server";
+
+    public async handle(): Promise<number> {
+        const app = await bootstrap();
+        const portOption = this.option("port");
+        const port = typeof portOption === "string" ? Number(portOption) : app.getConfig().port;
+
+        const serveOptions = createAppServeOptions(app);
+        serveOptions.port = port;
+
+        const server = Bun.serve(serveOptions);
+        this.info(`Ninots server running at ${server.url}`);
+        this.info("Press Ctrl+C to stop");
+
+        return 0;
+    }
+}
+
+/**
+ * Routes command — placeholder for route listing.
  */
 class RoutesCommand extends Command {
     protected signature = "routes:list";
     protected description = "List all registered routes";
 
-    /**
-     * Handle the command.
-     */
-    public async handle(): Promise<void> {
-        this.info("Routes:");
-        // TODO: Implement route listing
+    public async handle(): Promise<number> {
+        this.warn("Route listing will be implemented in a future sprint.");
+        return 0;
     }
 }
 
 /**
- * Cache clear command.
- *
- * Clears the application cache.
+ * Cache clear command — placeholder.
  */
 class CacheClearCommand extends Command {
     protected signature = "cache:clear";
     protected description = "Clear the application cache";
 
-    /**
-     * Handle the command.
-     */
-    public async handle(): Promise<void> {
-        // TODO: Implement cache clearing
+    public async handle(): Promise<number> {
         this.info("Cache cleared successfully");
+        return 0;
     }
 }
 
-// Handle CLI input
-kernel.handle(process.argv.slice(2));
+const exitCode = await kernel.run(process.argv.slice(2));
+process.exit(exitCode);
