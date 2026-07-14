@@ -1,19 +1,6 @@
 import { Command, Kernel } from "@ninots/framework";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
-import packageJson from "../../package.json";
-
-const kernel = new Kernel();
-kernel.setOutput({
-    writeLine(text: string): void {
-        console.log(text);
-    },
-});
-
-kernel.register(new HelpCommand(kernel));
-kernel.register(new VersionCommand());
-kernel.register(new ServeCommand());
-kernel.register(new RoutesCommand());
-kernel.register(new CacheClearCommand());
+import packageJson from "../package.json";
 
 /**
  * Help command — lists registered CLI commands.
@@ -76,6 +63,17 @@ class ServeCommand extends Command {
         this.info(`Ninots server running at ${server.url}`);
         this.info("Press Ctrl+C to stop");
 
+        // Keep the event loop alive until the process is interrupted.
+        // Without this, kernel.run returns and process.exit() kills Bun.serve.
+        await new Promise<void>((resolve) => {
+            const stop = (): void => {
+                server.stop(true);
+                resolve();
+            };
+            process.once("SIGINT", stop);
+            process.once("SIGTERM", stop);
+        });
+
         return 0;
     }
 }
@@ -105,6 +103,19 @@ class CacheClearCommand extends Command {
         return 0;
     }
 }
+
+const kernel = new Kernel();
+kernel.setOutput({
+    writeLine(text: string): void {
+        console.log(text);
+    },
+});
+
+kernel.register(new HelpCommand(kernel));
+kernel.register(new VersionCommand());
+kernel.register(new ServeCommand());
+kernel.register(new RoutesCommand());
+kernel.register(new CacheClearCommand());
 
 const exitCode = await kernel.run(process.argv.slice(2));
 process.exit(exitCode);
