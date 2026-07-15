@@ -9,7 +9,8 @@ export class UserService {
     constructor(private readonly events: EventDispatcher) {}
 
     public async all(): Promise<User[]> {
-        return User.all();
+        const users = await User.all();
+        return users.all();
     }
 
     public async find(id: number): Promise<User | null> {
@@ -20,7 +21,9 @@ export class UserService {
         const user = new User();
         user.fill(data);
         await user.save();
-        await this.events.dispatch(new UserCreatedEvent(user.id, user.email));
+        const userId = Number(user.getAttribute("id"));
+        const email = String(user.getAttribute("email") ?? "");
+        await this.events.dispatch(new UserCreatedEvent(userId, email));
         return user;
     }
 
