@@ -8,8 +8,11 @@ import { registerWebRoutes } from "@/routes/web";
  * Route service provider — single source of truth for HTTP routes.
  */
 export class RouteServiceProvider extends ServiceProvider {
+    private readonly application: Application;
+
     constructor(app: Application) {
         super(app.container);
+        this.application = app;
     }
 
     public override register(): void {
@@ -27,6 +30,6 @@ export class RouteServiceProvider extends ServiceProvider {
         );
 
         registerWebRoutes(router);
-        registerApiRoutes(router, this.app);
+        registerApiRoutes(router, this.application);
     }
 }
