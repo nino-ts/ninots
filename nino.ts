@@ -1,7 +1,21 @@
-import { Command, Kernel, ROUTER_KEY } from "@ninots/framework";
+import path from "node:path";
+import {
+    Command,
+    DbSeedCommand,
+    Kernel,
+    MigrateCommand,
+    Migrator,
+    ROUTER_KEY,
+    SeederRunner,
+} from "@ninots/framework";
 import type { Router } from "@ninots/framework";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
+import { getDatabaseManager } from "@/bootstrap/database";
+import databaseConfig from "@/config/database";
+import { DatabaseSeeder } from "@/database/seeders/DatabaseSeeder";
 import packageJson from "./package.json";
+
+const migrationsPath = path.join(process.cwd(), databaseConfig.migrations.directory);
 
 class HelpCommand extends Command {
     protected signature = "help";
@@ -106,6 +120,26 @@ kernel.register(new VersionCommand());
 kernel.register(new ServeCommand());
 kernel.register(new RoutesCommand());
 kernel.register(new CacheClearCommand());
+kernel.register(
+    new MigrateCommand({
+        resolveMigrator: () => {
+            getDatabaseManager();
+            return new Migrator({
+                database: getDatabaseManager(),
+                path: migrationsPath,
+                table: databaseConfig.migrations.table,
+            });
+        },
+    }),
+);
+kernel.register(
+    new DbSeedCommand({
+        resolveSeederRunner: () => {
+            getDatabaseManager();
+            return new SeederRunner(DatabaseSeeder);
+        },
+    }),
+);
 
 const exitCode = await kernel.run(process.argv.slice(2));
 process.exit(exitCode);

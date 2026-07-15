@@ -10,7 +10,7 @@ export default {
     connections: {
         sqlite: {
             driver: "sqlite",
-            database: "storage/database.sqlite",
+            filename: "storage/database.sqlite",
             foreignKeys: true,
         },
         postgres: {

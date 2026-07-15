@@ -1,6 +1,7 @@
 import { Application, Container, createServeOptions, wireCoreServices } from "@ninots/framework";
 import type { Serve } from "bun";
 import appConfig from "@/config/app";
+import { getDatabaseManager } from "./database";
 import { registerProviders } from "./providers";
 
 export { createServeOptions };
@@ -22,6 +23,7 @@ export async function bootstrap(): Promise<Application> {
     );
 
     wireCoreServices(app);
+    getDatabaseManager();
     await registerProviders(app);
     await app.boot();
 
