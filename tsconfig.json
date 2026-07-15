@@ -6,6 +6,7 @@
         "module": "ESNext",
         "moduleDetection": "force",
         "jsx": "react-jsx",
+        "jsxImportSource": "@ninots/view",
         "allowJs": false,
         "types": ["bun"],
         // Bundler mode
