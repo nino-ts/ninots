@@ -72,11 +72,79 @@ body {
     color: var(--accent);
 }
 
+.welcome a {
+    color: var(--accent);
+}
+
 .site-footer {
     padding: 1.5rem 0 2rem;
     border-top: 1px solid var(--border);
     color: var(--muted);
     font-size: 0.95rem;
+}
+
+.stack-form {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.field {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.field-label {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.field textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 70%, var(--surface));
+    color: var(--text);
+    font: inherit;
+    resize: vertical;
+}
+
+.field textarea:focus {
+    outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    border-color: var(--accent);
+}
+
+.button-primary {
+    justify-self: start;
+    padding: 0.65rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, var(--accent), #0ea5e9);
+    color: #0f172a;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.button-primary:hover {
+    filter: brightness(1.05);
+}
+
+.success-note {
+    color: #86efac;
+    font-weight: 600;
+}
+
+.message-preview {
+    margin: 1rem 0 0;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--accent);
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    color: var(--text);
+}
+
+.contact-form a {
+    color: var(--accent);
 }
 `;
 
