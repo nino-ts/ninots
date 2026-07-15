@@ -8,6 +8,8 @@
         "jsx": "react-jsx",
         "jsxImportSource": "@ninots/view",
         "allowJs": false,
+        "baseUrl": ".",
+        "ignoreDeprecations": "6.0",
         "types": ["bun"],
         // Bundler mode
         "moduleResolution": "bundler",
