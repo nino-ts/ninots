@@ -1,5 +1,5 @@
 import { withLayout } from "@ninots/view";
-import { AppLayout } from "@/resources/views/layouts/app.tsx";
+import { AppLayout } from "@/resources/views/layouts/app";
 
 export interface WelcomeProps {
     subtitle?: string;

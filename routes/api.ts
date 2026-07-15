@@ -9,9 +9,9 @@ export function registerApiRoutes(router: Router, app: Application): void {
 
     router.group({ prefix: "/api" }, () => {
         router.get("/users", () => users.list());
-        router.post("/users", (request) => users.create(request));
-        router.get("/users/:id", (request, params?: RouteParams) => users.show(request, params));
-        router.put("/users/:id", (request, params?: RouteParams) => users.update(request, params));
-        router.delete("/users/:id", (request, params?: RouteParams) => users.destroy(request, params));
+        router.post("/users", (request: Request) => users.create(request));
+        router.get("/users/:id", (request: Request, params?: RouteParams) => users.show(request, params));
+        router.put("/users/:id", (request: Request, params?: RouteParams) => users.update(request, params));
+        router.delete("/users/:id", (request: Request, params?: RouteParams) => users.destroy(request, params));
     });
 }

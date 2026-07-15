@@ -13,7 +13,7 @@ export class CreateUserRequest extends FormRequest {
         };
     }
 
-    public messages(): Record<string, string> {
+    public override messages(): Record<string, string> {
         return {
             "email.required": "The email is required",
             "email.email": "The email must be valid",
