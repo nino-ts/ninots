@@ -18,8 +18,8 @@ import packageJson from "./package.json";
 const migrationsPath = path.join(process.cwd(), databaseConfig.migrations.directory);
 
 class HelpCommand extends Command {
-    protected signature = "help";
-    protected description = "Display available commands";
+    protected override signature = "help";
+    protected override description = "Display available commands";
 
     constructor(private readonly cli: Kernel) {
         super();
@@ -40,8 +40,8 @@ class HelpCommand extends Command {
 }
 
 class VersionCommand extends Command {
-    protected signature = "version";
-    protected description = "Show application and framework versions";
+    protected override signature = "version";
+    protected override description = "Show application and framework versions";
 
     public async handle(): Promise<number> {
         this.line(`ninots-app ${packageJson.version}`);
@@ -51,8 +51,8 @@ class VersionCommand extends Command {
 }
 
 class ServeCommand extends Command {
-    protected signature = "serve {--port=3000}";
-    protected description = "Start the HTTP development server";
+    protected override signature = "serve {--port=3000}";
+    protected override description = "Start the HTTP development server";
 
     public async handle(): Promise<number> {
         const app = await bootstrap();
@@ -80,8 +80,8 @@ class ServeCommand extends Command {
 }
 
 class RoutesCommand extends Command {
-    protected signature = "routes:list";
-    protected description = "List all registered routes";
+    protected override signature = "routes:list";
+    protected override description = "List all registered routes";
 
     public async handle(): Promise<number> {
         const app = await bootstrap();
@@ -99,8 +99,8 @@ class RoutesCommand extends Command {
 }
 
 class CacheClearCommand extends Command {
-    protected signature = "cache:clear";
-    protected description = "Clear the application cache";
+    protected override signature = "cache:clear";
+    protected override description = "Clear the application cache";
 
     public async handle(): Promise<number> {
         this.info("Cache cleared successfully");

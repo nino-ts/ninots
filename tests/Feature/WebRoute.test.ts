@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { render } from "@ninots/view";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
-import { Welcome } from "@/resources/views/welcome.tsx";
+import { Welcome } from "@/resources/views/welcome";
 
 describe("Web routes", () => {
     test("GET / returns rendered HTML welcome page", async () => {

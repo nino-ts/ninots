@@ -12,11 +12,11 @@ export class RouteServiceProvider extends ServiceProvider {
         super(app.container);
     }
 
-    public register(): void {
+    public override register(): void {
         // Routes are registered during boot once the router is available.
     }
 
-    public boot(): void {
+    public override boot(): void {
         const router = this.app.make<Router>(ROUTER_KEY);
 
         router.get("/health", () =>

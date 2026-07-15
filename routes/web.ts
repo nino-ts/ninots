@@ -1,6 +1,6 @@
 import { render } from "@ninots/view";
 import type { Router } from "@ninots/framework";
-import { Welcome } from "@/resources/views/welcome.tsx";
+import { Welcome } from "@/resources/views/welcome";
 
 /**
  * Web routes (HTML pages rendered via @ninots/view).

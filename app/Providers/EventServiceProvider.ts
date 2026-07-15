@@ -12,7 +12,7 @@ export class EventServiceProvider extends ServiceProvider {
         super(app.container);
     }
 
-    public register(): void {
+    public override register(): void {
         const dispatcher = this.app.make<EventDispatcher>(EVENT_DISPATCHER_KEY);
         const bus = this.app.make<SyncBus>(SYNC_BUS_KEY);
         const listener = new SendWelcomeEmailListener(bus);

@@ -4,6 +4,8 @@ import appConfig from "@/config/app";
 import { getDatabaseManager } from "./database";
 import { registerProviders } from "./providers";
 
+type AppServeOptions = Serve.Options<undefined> & { unix?: undefined };
+
 export { createServeOptions };
 
 /**
@@ -36,11 +38,11 @@ export async function bootstrap(): Promise<Application> {
  * @param app - Booted application instance
  * @returns Bun.serve configuration
  */
-export function createAppServeOptions(app: Application): Serve.Options<undefined> {
+export function createAppServeOptions(app: Application): AppServeOptions {
     return createServeOptions(app, {
         error(_error: Error): Response {
             return new Response("Internal Server Error", { status: 500 });
         },
         idleTimeout: 30,
-    });
+    }) as AppServeOptions;
 }

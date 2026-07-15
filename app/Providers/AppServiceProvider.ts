@@ -12,7 +12,7 @@ export class AppServiceProvider extends ServiceProvider {
         super(app.container);
     }
 
-    public register(): void {
+    public override register(): void {
         const events = this.app.make<EventDispatcher>(EVENT_DISPATCHER_KEY);
 
         this.app.singleton(UserService.name, () => new UserService(events));

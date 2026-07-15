@@ -8,6 +8,7 @@
         "start": "bun run nino.ts serve --prod",
         "build": "bun build --compile --bytecode nino.ts --outfile ninots",
         "nino": "bun run nino.ts",
+        "type-check": "tsc --noEmit",
         "docs:generate": "typedoc",
         "format": "bunx biome format --write .",
         "lint": "bunx biome check .",
