@@ -7,6 +7,7 @@ import {
     MakeControllerCommand,
     MakeMigrationCommand,
     MakeModelCommand,
+    MakeModuleCommand,
     MakeViewCommand,
     MigrateCommand,
     MigrateRefreshCommand,
@@ -169,6 +170,7 @@ kernel.register(new MakeControllerCommand({ paths: generatorPaths }));
 kernel.register(new MakeModelCommand({ paths: generatorPaths }));
 kernel.register(new MakeMigrationCommand({ paths: generatorPaths }));
 kernel.register(new MakeViewCommand({ paths: generatorPaths }));
+kernel.register(new MakeModuleCommand({ paths: generatorPaths }));
 
 const exitCode = await kernel.run(process.argv.slice(2));
 process.exit(exitCode);
