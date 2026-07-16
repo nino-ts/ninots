@@ -1,5 +1,11 @@
 import type { Application } from "@ninots/framework";
-import { EVENT_DISPATCHER_KEY, MIDDLEWARE_STACK_KEY, ServiceProvider, verifyCsrf } from "@ninots/framework";
+import {
+    EVENT_DISPATCHER_KEY,
+    MIDDLEWARE_STACK_KEY,
+    ServiceProvider,
+    verifyCsrf,
+    wideEventMiddleware,
+} from "@ninots/framework";
 import type { EventDispatcher, MiddlewareStack } from "@ninots/framework";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 import { UserService } from "@/app/Services/UserService";
@@ -23,6 +29,8 @@ export class AppServiceProvider extends ServiceProvider {
     public override boot(): void {
         const stack = this.app.make<MiddlewareStack>(MIDDLEWARE_STACK_KEY);
 
+        // Outermost: accumulate request lifecycle → emit one canonical line in finally
+        stack.add("wideEvent", wideEventMiddleware());
         stack.add(
             "csrf",
             verifyCsrf({
@@ -31,6 +39,6 @@ export class AppServiceProvider extends ServiceProvider {
                 tokenFieldName: csrfConfig.tokenField,
             }),
         );
-        stack.alias("web", ["csrf"]);
+        stack.alias("web", ["wideEvent", "csrf"]);
     }
 }
