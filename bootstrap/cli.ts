@@ -4,6 +4,10 @@ import {
     Command,
     DbSeedCommand,
     Kernel,
+    MakeControllerCommand,
+    MakeMigrationCommand,
+    MakeModelCommand,
+    MakeViewCommand,
     MigrateCommand,
     Migrator,
     ROUTER_KEY,
@@ -141,6 +145,13 @@ kernel.register(
         },
     }),
 );
+
+const generatorPaths = { basePath: process.cwd() };
+
+kernel.register(new MakeControllerCommand({ paths: generatorPaths }));
+kernel.register(new MakeModelCommand({ paths: generatorPaths }));
+kernel.register(new MakeMigrationCommand({ paths: generatorPaths }));
+kernel.register(new MakeViewCommand({ paths: generatorPaths }));
 
 const exitCode = await kernel.run(process.argv.slice(2));
 process.exit(exitCode);

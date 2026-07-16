@@ -25,7 +25,9 @@ function getCsrfConfig() {
  * Web routes (HTML pages rendered via @ninots/view).
  */
 export function registerWebRoutes(router: Router): void {
+    // -- nino:web-imports --
     router.group({ middleware: ["web"] }, () => {
+        // -- nino:web-bindings --
         router.get("/", () =>
             render(Welcome, {
                 subtitle: "Laravel-like DX on Bun.",
@@ -47,5 +49,7 @@ export function registerWebRoutes(router: Router): void {
 
             return render(ContactThanks, { message: message || "(empty message)" });
         });
+
+        // -- nino:web-routes --
     });
 }
