@@ -11,6 +11,8 @@ import { ContactForm } from "@/resources/views/contact";
 import { ContactThanks } from "@/resources/views/contact-thanks";
 import csrfConfig from "@/config/csrf";
 
+// -- nino:web-imports --
+
 const csrfOptions = {
     secret: csrfConfig.secret,
     sessionCookieName: csrfConfig.sessionCookie,
@@ -25,7 +27,6 @@ function getCsrfConfig() {
  * Web routes (HTML pages rendered via @ninots/view).
  */
 export function registerWebRoutes(router: Router): void {
-    // -- nino:web-imports --
     router.group({ middleware: ["web"] }, () => {
         // -- nino:web-bindings --
         router.get("/", () =>

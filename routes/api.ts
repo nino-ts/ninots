@@ -1,13 +1,14 @@
 import type { Application, Router, RouteParams } from "@ninots/framework";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 
+// -- nino:api-imports --
+
 /**
  * API routes.
  */
 export function registerApiRoutes(router: Router, app: Application): void {
     // -- nino:api-bindings --
     const users = app.make<UsersController>(UsersController.name);
-    // -- nino:api-imports --
 
     router.group({ prefix: "/api" }, () => {
         router.get("/users", () => users.list());
