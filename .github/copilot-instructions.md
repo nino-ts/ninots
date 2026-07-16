@@ -13,7 +13,7 @@
 
 ## High-level architecture
 
-- **Runtime shape:** This is a Bun + Ninots app. Entry point is `src/nino.ts`, which defines CLI commands through `@ninots/console` (`serve`, `routes:list`, `cache:clear`).
+- **Runtime shape:** This is a Bun + Ninots app. Entry point is `nino` (wrapper → `bootstrap/cli.ts`), which defines CLI commands through `@ninots/console` (`serve`, `routes:list`, `cache:clear`).
 - **Boot flow:** `serve` calls `bootstrap()` from `src/bootstrap/app.ts`:
   1. create DI container (`createContainer`)
   2. create `Application`
