@@ -9,6 +9,8 @@ import {
     MakeModelCommand,
     MakeViewCommand,
     MigrateCommand,
+    MigrateRefreshCommand,
+    MigrateRollbackCommand,
     Migrator,
     ROUTER_KEY,
     SeederRunner,
@@ -21,6 +23,20 @@ import { DatabaseSeeder } from "@/database/seeders/DatabaseSeeder";
 import packageJson from "../package.json";
 
 const migrationsPath = path.join(process.cwd(), databaseConfig.migrations.directory);
+
+function resolveMigrator(): Migrator {
+    getDatabaseManager();
+    return new Migrator({
+        database: getDatabaseManager(),
+        path: migrationsPath,
+        table: databaseConfig.migrations.table,
+    });
+}
+
+function resolveSeederRunner(): SeederRunner {
+    getDatabaseManager();
+    return new SeederRunner(DatabaseSeeder);
+}
 
 class HelpCommand extends Command {
     protected override signature = "help";
@@ -37,7 +53,7 @@ class HelpCommand extends Command {
 
         for (const command of this.cli.getCommands()) {
             const definition = command.getDefinition();
-            this.line(`  ${definition.name.padEnd(16)} ${definition.description}`);
+            this.line(`  ${definition.name.padEnd(20)} ${definition.description}`);
         }
 
         return 0;
@@ -127,22 +143,23 @@ kernel.register(new RoutesCommand());
 kernel.register(new CacheClearCommand());
 kernel.register(
     new MigrateCommand({
-        resolveMigrator: () => {
-            getDatabaseManager();
-            return new Migrator({
-                database: getDatabaseManager(),
-                path: migrationsPath,
-                table: databaseConfig.migrations.table,
-            });
-        },
+        resolveMigrator,
+    }),
+);
+kernel.register(
+    new MigrateRollbackCommand({
+        resolveMigrator,
+    }),
+);
+kernel.register(
+    new MigrateRefreshCommand({
+        resolveMigrator,
+        resolveSeederRunner,
     }),
 );
 kernel.register(
     new DbSeedCommand({
-        resolveSeederRunner: () => {
-            getDatabaseManager();
-            return new SeederRunner(DatabaseSeeder);
-        },
+        resolveSeederRunner,
     }),
 );
 
