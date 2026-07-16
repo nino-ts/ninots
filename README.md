@@ -49,7 +49,7 @@ bun run nino --help
 
 | Command | Description |
 | --- | --- |
-| `bun run dev` | Runs `src/nino.ts serve` with hot reload |
+| `bun run dev` | Runs `nino serve` with hot reload |
 | `bun run start` | Starts server in production mode |
 | `bun run build` | Builds a compiled binary (`ninots`) |
 | `bun run nino --help` | Lists CLI commands |
@@ -59,7 +59,7 @@ bun run nino --help
 
 ### Boot Flow
 
-`src/nino.ts` is the CLI entrypoint. The `serve` command:
+`nino` (wrapper → `bootstrap/cli.ts`) is the CLI entrypoint. The `serve` command:
 
 1. Calls `bootstrap()` from `src/bootstrap/app.ts`
 2. Creates container + application instance
@@ -99,7 +99,7 @@ src/
   modules/        # domain modules (users, posts, payments, notifications, ...)
   routes/         # route groups: (api), (web), (ws)
   shared/         # shared providers and HTTP middleware
-  nino.ts         # CLI entrypoint
+  nino            # CLI entrypoint (→ bootstrap/cli.ts)
 tests/
   setup.ts        # Bun test preload setup
 ```

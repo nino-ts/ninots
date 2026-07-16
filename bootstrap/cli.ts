@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 import path from "node:path";
 import {
     Command,
@@ -13,7 +14,7 @@ import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 import { getDatabaseManager } from "@/bootstrap/database";
 import databaseConfig from "@/config/database";
 import { DatabaseSeeder } from "@/database/seeders/DatabaseSeeder";
-import packageJson from "./package.json";
+import packageJson from "../package.json";
 
 const migrationsPath = path.join(process.cwd(), databaseConfig.migrations.directory);
 

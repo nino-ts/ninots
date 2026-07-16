@@ -3,11 +3,14 @@
     "version": "0.4.0",
     "private": true,
     "type": "module",
+    "bin": {
+        "nino": "./nino"
+    },
     "scripts": {
-        "dev": "bun run --hot nino.ts serve",
-        "start": "bun run nino.ts serve --prod",
-        "build": "bun build --compile --bytecode nino.ts --outfile ninots",
-        "nino": "bun run nino.ts",
+        "dev": "bun --hot ./nino serve",
+        "start": "bun ./nino serve --prod",
+        "build": "bun build --compile --bytecode ./nino --outfile ninots",
+        "nino": "bun ./nino",
         "type-check": "tsc --noEmit",
         "docs:generate": "typedoc",
         "format": "bunx biome format --write .",
