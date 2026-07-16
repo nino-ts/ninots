@@ -156,6 +156,7 @@ export function registerWebRoutes(router: Router): void {
         expect(result.stdout).toContain("make:model");
         expect(result.stdout).toContain("make:migration");
         expect(result.stdout).toContain("make:view");
+        expect(result.stdout).toContain("make:module");
     });
 });
 
