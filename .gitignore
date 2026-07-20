@@ -1,12 +1,20 @@
+# Dependencies
 node_modules
+.deps
+
+# Build / runtime artifacts
 storage/logs/*.log
 storage/database.sqlite
 storage/framework/cache/**
 storage/sessions/**
+dist
+*.jsc
+
+# Env (keep .env.example)
 .env
 .env.local
 .env.*.local
-dist
-*.jsc
+
+# OS
 .DS_Store
 Thumbs.db
