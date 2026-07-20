@@ -11,111 +11,122 @@ Nino focuses on developer experience inspired by Laravel and Next.js, while rema
 - **Starter kit (this repository):** `nino-ts/ninots`
 - **Framework meta-package:** `nino-ts/framework`
 
-The framework is modular and monorepo-based (multiple internal packages with clear boundaries, such as HTTP, routing, ORM, container, foundation, etc.).  
-`ninots` consumes those capabilities as an application template.
-
-## Core Principles
-
-- **Bun-native runtime:** built for Bun APIs first
-- **Strict TypeScript:** strongly typed project structure
-- **Modular architecture:** domain modules can be reused across projects
-- **Pragmatic wrappers:** use native Bun resources whenever possible, with lightweight abstractions where they improve DX
-- **Scalable structure:** suitable for small apps and large modular systems
-
 ## Requirements
 
 - [Bun](https://bun.sh/) (latest stable recommended)
+- Optional: [Docker Desktop](https://www.docker.com/products/docker-desktop/) for `docker compose up`
 
-## Quickstart
+## Quickstart (local Bun)
 
 ```bash
-# 1) Install dependencies
+# 1) Resolve @ninots/view (file dep via .deps/) + install
+bun run deps:fetch
 bun install
 
-# 2) Start development server (hot reload)
+# 2) Copy env
+cp .env.example .env
+
+# 3) Dev server (hot reload)
 bun run dev
 
-# 3) Start production mode
-bun run start
-
-# 4) Build binary
-bun run build
-
-# 5) Explore CLI commands
+# 4) Explore CLI
 bun run nino --help
 ```
+
+Hub developers (local `framework/` sibling) can optionally override with `bun link` after install.
+
+### Typed routes
+
+```bash
+bun run nino routes:compile   # writes types/routes.d.ts
+bun run verify:route-types    # fail-fixture checks
+```
+
+Named routes use `.name("recurso.ação")`; typed URLs via `route(name, params?)`.
+
+## Docker (compose)
+
+Default stack: **app + SQLite volume** (no extra DB container).
+
+```bash
+cp .env.example .env
+docker compose up --build -d
+# smoke: curl -sf http://localhost:3000/  → HTTP 200
+docker compose down
+```
+
+Optional **Postgres** profile:
+
+```bash
+docker compose --profile postgres up --build -d
+# app-postgres uses DB_CONNECTION=postgres → host `postgres`
+docker compose --profile postgres down
+```
+
+Entry command: `./nino serve --port 3000` (wrapper → `bootstrap/cli.ts`).
 
 ## Available Commands
 
 | Command | Description |
 | --- | --- |
-| `bun run dev` | Runs `nino serve` with hot reload |
-| `bun run start` | Starts server in production mode |
-| `bun run build` | Builds a compiled binary (`ninots`) |
-| `bun run nino --help` | Lists CLI commands |
-| `bun test` | Runs all tests |
+| `bun run deps:fetch` | Ensure `.deps/ninots-framework` (hub link or git clone) |
+| `bun run dev` | `nino serve` with hot reload |
+| `bun run start` | Production-style serve |
+| `bun run build` | Compiled binary (`ninots`) |
+| `bun run nino --help` | CLI help |
+| `bun test` | All tests |
+| `bun run type-check` | `tsc --noEmit` |
+| `bun run lint` | Biome check |
+| `docker compose up --build` | Containerized app (SQLite volume) |
 
 ## Architecture
 
-### Boot Flow
+### Boot flow
 
 `nino` (wrapper → `bootstrap/cli.ts`) is the CLI entrypoint. The `serve` command:
 
-1. Calls `bootstrap()` from `src/bootstrap/app.ts`
+1. Calls `bootstrap()` from `bootstrap/app.ts`
 2. Creates container + application instance
-3. Registers providers from `src/bootstrap/providers.ts`
+3. Registers providers from `bootstrap/providers.ts`
 4. Boots the app
 5. Starts `Bun.serve(...)` with generated options
 
-### Routing Model
+### Routing
 
-Routes are grouped by layout under `src/routes/`:
+Fluent registration under `routes/web.ts` and `routes/api.ts` (Laravel-like). File-based `loadRoutes` exists in `@ninots/routing` but is **not** wired in this starter.
 
-- `(api)` for HTTP API routes (with `/api` prefix and middleware)
-- `(web)` for web routes
-- `(ws)` for WebSocket routes (with `/ws` prefix and middleware)
-
-Route aggregates compose module routes (users, posts, payments, notifications).
-
-### Domain Modules
-
-Application features live in `src/modules/<domain>/` and usually contain:
-
-- `routes/`
-- `services/`
-- `models/` (when applicable)
-- optional domain concerns (`middleware`, `events`, `jobs`, `listeners`, `requests`, `tests`)
-
-### TypeScript Aliases
-
-This project uses `@/* -> src/*` path mapping.
-
-## Project Structure (High Level)
+### Layout
 
 ```text
-src/
-  bootstrap/      # app/container bootstrapping and provider registration
-  config/         # runtime configuration
-  modules/        # domain modules (users, posts, payments, notifications, ...)
-  routes/         # route groups: (api), (web), (ws)
-  shared/         # shared providers and HTTP middleware
-  nino            # CLI entrypoint (→ bootstrap/cli.ts)
-tests/
-  setup.ts        # Bun test preload setup
+app/              # Http, Models, Providers, …
+bootstrap/        # app.ts, cli.ts, providers
+config/           # runtime configuration
+routes/           # web, api, console
+resources/views/  # TSX views (@ninots/view)
+database/         # migrations, seeders
+types/            # routes.d.ts (compile artifact)
+nino              # CLI wrapper → bootstrap/cli.ts
+Dockerfile        # Bun official image
+compose.yaml      # SQLite default; postgres profile
 ```
+
+Path alias: `@/*` → project root.
 
 ## Development and Testing
 
 ```bash
-# Run all tests
 bun test
-
-# Run a single test file
-bun test src/modules/users/tests/Unit/UserService.test.ts
-
-# Run a test by name
-bun test src/modules/users/tests/Unit/UserService.test.ts -t "should create a new user"
+bun run type-check
+bun run verify:route-types
+bun run lint
 ```
+
+## CEO gates (contributions)
+
+- Zero `any` (explicit or implicit)
+- Zero suppressions (`biome-ignore`, `@ts-ignore`, `@ts-expect-error`, `eslint-disable`)
+- Zero new runtime deps outside `@ninots/*`
+- See `AGENTS.md` for agent-oriented notes
 
 ## Maintainers
 
