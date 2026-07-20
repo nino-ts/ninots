@@ -1,0 +1,71 @@
+# Ninots starter — default SQLite volume; optional Postgres via profile `postgres`
+# Docs: README.md → Docker section
+name: ninots
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      APP_NAME: ${APP_NAME:-Ninots App}
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+      DB_CONNECTION: ${DB_CONNECTION:-sqlite}
+      DB_HOST: ${DB_HOST:-127.0.0.1}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_DATABASE: ${DB_DATABASE:-ninots}
+      DB_USERNAME: ${DB_USERNAME:-ninots}
+      DB_PASSWORD: ${DB_PASSWORD:-ninots}
+      CACHE_STORE: ${CACHE_STORE:-array}
+      SESSION_DRIVER: ${SESSION_DRIVER:-file}
+      CSRF_SECRET: ${CSRF_SECRET:-change-me-in-production}
+      QUEUE_CONNECTION: ${QUEUE_CONNECTION:-sync}
+    volumes:
+      - ninots-sqlite:/usr/src/app/storage
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "bun",
+          "-e",
+          "const r = await fetch('http://127.0.0.1:3000/'); if (!r.ok) process.exit(1)",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    depends_on:
+      postgres:
+        condition: service_healthy
+        required: false
+
+  # Optional: DB_CONNECTION=postgres DB_HOST=postgres docker compose --profile postgres up --build
+  postgres:
+    image: postgres:16-alpine
+    profiles: ["postgres"]
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-ninots}
+      POSTGRES_USER: ${DB_USERNAME:-ninots}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-ninots}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - ninots-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  ninots-sqlite:
+  ninots-postgres:

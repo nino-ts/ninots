@@ -8,7 +8,16 @@
     },
     "files": {
         "ignoreUnknown": true,
-        "includes": ["**/*.ts", "**/*.tsx", "**/*.json", "!**/node_modules", "!**/dist", "!**/build", "!**/docs"]
+        "includes": [
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.json",
+            "!**/node_modules",
+            "!**/dist",
+            "!**/build",
+            "!**/docs",
+            "!**/.deps"
+        ]
     },
     "formatter": {
         "enabled": true,

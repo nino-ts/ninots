@@ -7,6 +7,7 @@
         "nino": "./nino"
     },
     "scripts": {
+        "deps:fetch": "bun run scripts/ensure-framework-deps.ts",
         "dev": "bun --hot ./nino serve",
         "start": "bun ./nino serve --prod",
         "build": "bun build --compile --bytecode ./nino --outfile ninots",
@@ -21,8 +22,8 @@
         "test": "bun test"
     },
     "dependencies": {
-        "@ninots/framework": "link:@ninots/framework",
-        "@ninots/view": "link:@ninots/view"
+        "@ninots/framework": "^0.10.1",
+        "@ninots/view": "file:.deps/ninots-framework/packages/view"
     },
     "devDependencies": {
         "@biomejs/biome": "2.4.14",

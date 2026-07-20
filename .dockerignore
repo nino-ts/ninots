@@ -1,0 +1,17 @@
+# Dependencies to ignore rebuild context noise
+node_modules
+.deps
+.git
+.env
+.env.local
+.env.*.local
+storage/logs
+storage/database.sqlite
+storage/framework/cache
+storage/sessions
+dist
+*.md
+!README.md
+.github
+tests
+docs
