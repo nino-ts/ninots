@@ -5,7 +5,7 @@
     "": {
       "name": "ninots-app",
       "dependencies": {
-        "@ninots/framework": "^0.10.1",
+        "@ninots/framework": "^0.11.0",
         "@ninots/view": "file:.deps/ninots-framework/packages/view",
       },
       "devDependencies": {
@@ -34,7 +34,7 @@
 
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@2.5.4", "", { "os": "win32", "cpu": "x64" }, "sha512-U1jaluLw1qQc2Tx7/CeSoL9N5XcqIH+GWjpUAy1ouB5nVjSCMNO+NNHdY3RAs8zxNurLWAdj6pehQdCA2zyU+Q=="],
 
-    "@ninots/framework": ["@ninots/framework@0.10.1", "", { "peerDependencies": { "typescript": "catalog:" }, "bin": { "nino": "nino" } }, "sha512-XXY+2vDBqIRjCwHExejhoH9/S5wBQ0suQX53E/huA9VRrtEUSMv5C4cP3DMT0ftnF+oRAJKs3x1deC0U9PKSmg=="],
+    "@ninots/framework": ["@ninots/framework@0.11.0", "", { "peerDependencies": { "typescript": "catalog:" }, "bin": { "nino": "nino" } }, "sha512-r59RT+itnlT+nLBiFaYprimPjsQCapCb4wt8YqljLNAaQXZyfTZh8w6SNGxUleuR3OyLIGCfuc/tg2FygY7sSw=="],
 
     "@ninots/view": ["@ninots/view@file:.deps/ninots-framework/packages/view", { "devDependencies": { "@types/bun": "latest" }, "peerDependencies": { "typescript": "^6.0.0" } }],
 
