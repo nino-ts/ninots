@@ -13,7 +13,7 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } fr
 import { join, resolve } from "node:path";
 import { $ } from "bun";
 
-const FRAMEWORK_REF = "v0.10.1";
+const FRAMEWORK_REF = "v0.11.0";
 const DEPS_DIR = resolve(import.meta.dir, "..", ".deps");
 const FRAMEWORK_DIR = join(DEPS_DIR, "ninots-framework");
 const VIEW_DIR = join(FRAMEWORK_DIR, "packages", "view");
