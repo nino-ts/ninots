@@ -13,8 +13,15 @@ Nino focuses on developer experience inspired by Laravel and Next.js, while rema
 
 ## Requirements
 
-- [Bun](https://bun.sh/) (latest stable recommended)
-- Optional: [Docker Desktop](https://www.docker.com/products/docker-desktop/) for `docker compose up`
+**Official support: Bun only.**
+
+| Supported | Unsupported |
+| --- | --- |
+| [Bun](https://bun.sh/) (runtime + package manager) | npm client, Node.js, yarn, pnpm |
+
+This starter is **TypeScript + Bun**: sources stay `.ts` / `.tsx` executed by Bun. Type-check uses `tsc --noEmit` — there is no “emit JS then run” DX, and we do not add app `.js` sources for that purpose.
+
+- Optional: [Docker Desktop](https://www.docker.com/products/docker-desktop/) for `docker compose up` (image still runs Bun)
 
 ## Quickstart (local Bun)
 
@@ -136,6 +143,18 @@ bun run lint
 ## Contributing
 
 Issues and pull requests are welcome in the [nino-ts organization](https://github.com/nino-ts).
+
+### Same-repo PRs (CI gate)
+
+Open pull requests **from a branch on `nino-ts/ninots`**, not from a personal fork.
+
+```bash
+git remote add upstream https://github.com/nino-ts/ninots.git   # if needed
+git push -u upstream HEAD:patch/your-branch
+# then open the PR head = nino-ts/ninots:patch/your-branch → base main
+```
+
+Cross-fork PRs may not receive GitHub Actions check-runs (see [#40](https://github.com/nino-ts/ninots/issues/40)). Use **regular merge** only (never squash or rebase).
 
 ## License
 
