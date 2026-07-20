@@ -16,7 +16,8 @@
             "!**/dist",
             "!**/build",
             "!**/docs",
-            "!**/.deps"
+            "!**/.deps",
+            "!**/types/routes.d.ts"
         ]
     },
     "formatter": {

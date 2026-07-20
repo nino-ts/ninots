@@ -3,7 +3,7 @@ declare module "@ninots/routing" {
     interface RouteRegistry {
         "contact.create": Record<never, never>;
         "contact.store": Record<never, never>;
-        home: Record<never, never>;
+        "home": Record<never, never>;
         "users.destroy": { id: string };
         "users.index": Record<never, never>;
         "users.show": { id: string };
