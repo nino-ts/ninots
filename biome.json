@@ -1,5 +1,5 @@
 {
-    "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
+    "$schema": "https://biomejs.dev/schemas/2.5.4/schema.json",
     "root": true,
     "vcs": {
         "enabled": true,
@@ -16,7 +16,8 @@
             "!**/dist",
             "!**/build",
             "!**/docs",
-            "!**/.deps"
+            "!**/.deps",
+            "!**/types/routes.d.ts"
         ]
     },
     "formatter": {
@@ -29,13 +30,16 @@
     "assist": {
         "enabled": true,
         "actions": {
-            "recommended": true
+            "preset": "recommended",
+            "source": {
+                "organizeImports": "off"
+            }
         }
     },
     "linter": {
         "enabled": true,
         "rules": {
-            "recommended": true,
+            "preset": "recommended",
             "complexity": {
                 "noForEach": "error",
                 "useArrowFunction": "error",

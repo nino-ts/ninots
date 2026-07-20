@@ -7,15 +7,7 @@
 import { afterEach, describe, expect, spyOn, test } from "bun:test";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 
-const MINIMAL_FIELDS = [
-    "request_id",
-    "timestamp",
-    "method",
-    "path",
-    "status_code",
-    "duration_ms",
-    "outcome",
-] as const;
+const MINIMAL_FIELDS = ["request_id", "timestamp", "method", "path", "status_code", "duration_ms", "outcome"] as const;
 
 function parseCanonicalLine(writeSpy: ReturnType<typeof spyOn>, index: number): Record<string, unknown> {
     const args = writeSpy.mock.calls[index] as unknown[];

@@ -27,9 +27,7 @@ describe("UserFactory", () => {
     });
 
     test("state() overrides attributes without hardcoded fixtures", async () => {
-        const user = await User.factory()
-            .state({ name: "Seeded Nova" })
-            .create();
+        const user = await User.factory().state({ name: "Seeded Nova" }).create();
 
         expect(user.name).toBe("Seeded Nova");
     });

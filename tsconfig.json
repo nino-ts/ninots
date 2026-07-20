@@ -22,8 +22,7 @@
         "noUncheckedIndexedAccess": true,
         "noImplicitOverride": true,
         "paths": {
-            "@/*": ["./*"],
-            "@ninots/routing": ["./node_modules/@ninots/framework/node_modules/@ninots/routing/index.ts"]
+            "@/*": ["./*"]
         },
         // Some stricter flags (disabled by default)
         "noUnusedLocals": false,

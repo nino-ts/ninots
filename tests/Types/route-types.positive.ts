@@ -10,9 +10,7 @@ import type { Equal, Expect } from "./expect";
 type _home = Expect<Equal<RouteRegistry["home"], Record<never, never>>>;
 type _show = Expect<Equal<RouteRegistry["users.show"], { id: string }>>;
 
-type HasRequiredParams<Name extends keyof RouteRegistry> = [keyof RouteRegistry[Name]] extends [never]
-    ? false
-    : true;
+type HasRequiredParams<Name extends keyof RouteRegistry> = [keyof RouteRegistry[Name]] extends [never] ? false : true;
 
 type _homeOptional = Expect<Equal<HasRequiredParams<"home">, false>>;
 type _showRequired = Expect<Equal<HasRequiredParams<"users.show">, true>>;

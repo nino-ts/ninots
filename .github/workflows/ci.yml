@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Link workspace @ninots/* for type-check
+        run: bun run deps:link
+
       - name: Type-check
         run: bun run type-check
 
