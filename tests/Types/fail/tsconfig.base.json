@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "noImplicitAny": true,
+        "noEmit": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "target": "ESNext",
+        "types": ["bun"],
+        "skipLibCheck": true,
+        "verbatimModuleSyntax": true,
+        "ignoreDeprecations": "6.0",
+        "baseUrl": ".",
+        "paths": {
+            "@ninots/routing": ["../../../../framework/packages/routing/index.ts"]
+        }
+    }
+}

@@ -70,6 +70,7 @@ describe("nino make:* generators", () => {
 
         const routes = await readFile(join(root, "routes/web.ts"), "utf8");
         expect(routes).toContain('router.post("/articles"');
+        expect(routes).toContain('.name("articles.store")');
         expect(routes).toContain('middleware: ["web"]');
 
         const importLine = routes

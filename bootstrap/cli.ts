@@ -14,6 +14,7 @@ import {
     MigrateRollbackCommand,
     Migrator,
     ROUTER_KEY,
+    RoutesCompileCommand,
     SeederRunner,
 } from "@ninots/framework";
 import type { Router } from "@ninots/framework";
@@ -111,9 +112,11 @@ class RoutesCommand extends Command {
 
         this.info("Registered routes:");
         this.line("");
+        this.line(`${"METHOD".padEnd(7)} ${"URI".padEnd(40)} NAME`);
 
         for (const route of router.getRoutes()) {
-            this.line(`${route.getMethod().padEnd(7)} ${route.getPath()}`);
+            const name = route.getName() ?? "-";
+            this.line(`${route.getMethod().padEnd(7)} ${route.getPath().padEnd(40)} ${name}`);
         }
 
         return 0;
@@ -142,6 +145,14 @@ kernel.register(new VersionCommand());
 kernel.register(new ServeCommand());
 kernel.register(new RoutesCommand());
 kernel.register(new CacheClearCommand());
+kernel.register(
+    new RoutesCompileCommand({
+        async resolveRouter() {
+            const app = await bootstrap();
+            return app.make<Router>(ROUTER_KEY);
+        },
+    }),
+);
 kernel.register(
     new MigrateCommand({
         resolveMigrator,

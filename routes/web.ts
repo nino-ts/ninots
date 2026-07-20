@@ -2,6 +2,7 @@ import {
     generateCsrfToken,
     resolveCsrfConfig,
     resolveSessionId,
+    route,
     withSessionCookie,
 } from "@ninots/framework";
 import { render } from "@ninots/view";
@@ -29,27 +30,37 @@ function getCsrfConfig() {
 export function registerWebRoutes(router: Router): void {
     router.group({ middleware: ["web"] }, () => {
         // -- nino:web-bindings --
-        router.get("/", () =>
-            render(Welcome, {
-                subtitle: "Laravel-like DX on Bun.",
-            }),
-        );
+        router
+            .get("/", () =>
+                render(Welcome, {
+                    contactHref: route("contact.create"),
+                    subtitle: "Laravel-like DX on Bun.",
+                }),
+            )
+            .name("home");
 
-        router.get("/contact", async (request) => {
-            const config = getCsrfConfig();
-            const session = resolveSessionId(request, config.sessionCookieName);
-            const token = generateCsrfToken(session.sessionId, config);
-            const response = await render(ContactForm, { csrfToken: token });
+        router
+            .get("/contact", async (request: Request) => {
+                const config = getCsrfConfig();
+                const session = resolveSessionId(request, config.sessionCookieName);
+                const token = generateCsrfToken(session.sessionId, config);
+                const response = await render(ContactForm, {
+                    csrfToken: token,
+                    formAction: route("contact.store"),
+                });
 
-            return withSessionCookie(response, session, config.sessionCookieName);
-        });
+                return withSessionCookie(response, session, config.sessionCookieName);
+            })
+            .name("contact.create");
 
-        router.post("/contact", async (request) => {
-            const formData = await request.formData();
-            const message = String(formData.get("message") ?? "").trim();
+        router
+            .post("/contact", async (request: Request) => {
+                const formData = await request.formData();
+                const message = String(formData.get("message") ?? "").trim();
 
-            return render(ContactThanks, { message: message || "(empty message)" });
-        });
+                return render(ContactThanks, { message: message || "(empty message)" });
+            })
+            .name("contact.store");
 
         // -- nino:web-routes --
     });
