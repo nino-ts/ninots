@@ -1,10 +1,4 @@
-import {
-    generateCsrfToken,
-    resolveCsrfConfig,
-    resolveSessionId,
-    route,
-    withSessionCookie,
-} from "@ninots/framework";
+import { generateCsrfToken, resolveCsrfConfig, resolveSessionId, route, withSessionCookie } from "@ninots/framework";
 import { render } from "@ninots/view";
 import type { Router } from "@ninots/framework";
 import { Welcome } from "@/resources/views/welcome";

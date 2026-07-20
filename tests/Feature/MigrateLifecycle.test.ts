@@ -1,12 +1,6 @@
 import { afterEach, describe, expect, test } from "bun:test";
 import path from "node:path";
-import {
-    Kernel,
-    MigrateCommand,
-    MigrateRefreshCommand,
-    MigrateRollbackCommand,
-    Migrator,
-} from "@ninots/framework";
+import { Kernel, MigrateCommand, MigrateRefreshCommand, MigrateRollbackCommand, Migrator } from "@ninots/framework";
 import databaseConfig from "@/config/database";
 import { setupTestDatabase, teardownTestDatabase } from "@/tests/support/database";
 
@@ -78,9 +72,9 @@ describe("migrate lifecycle (rollback + refresh)", () => {
 
     test("migrate:refresh restores a clean post-migrate schema", async () => {
         const database = await setupTestDatabase();
-        await database.connection().run(
-            "INSERT INTO users (email, name, password) VALUES ('stale@ninots.test', 'Stale', 'secret')",
-        );
+        await database
+            .connection()
+            .run("INSERT INTO users (email, name, password) VALUES ('stale@ninots.test', 'Stale', 'secret')");
 
         const migrator = new Migrator({
             database,

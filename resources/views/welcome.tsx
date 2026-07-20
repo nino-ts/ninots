@@ -14,8 +14,8 @@ function WelcomePage({
         <section className="welcome">
             <h1>Welcome to Ninots</h1>
             <p>
-                {subtitle} Explore <strong>api</strong>, <strong>web</strong>, and <strong>websocket</strong> surfaces. Try the{" "}
-                <a href={contactHref}>contact form</a>.
+                {subtitle} Explore <strong>api</strong>, <strong>web</strong>, and <strong>websocket</strong> surfaces.
+                Try the <a href={contactHref}>contact form</a>.
             </p>
         </section>
     );

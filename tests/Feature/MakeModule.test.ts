@@ -65,9 +65,7 @@ describe("nino make:module", () => {
         const exitCode = await kernel.run(["make:module", "Billing"]);
 
         expect(exitCode).toBe(0);
-        expect(existsSync(join(root, "app/Modules/Billing/Providers/BillingServiceProvider.ts"))).toBe(
-            true,
-        );
+        expect(existsSync(join(root, "app/Modules/Billing/Providers/BillingServiceProvider.ts"))).toBe(true);
         expect(existsSync(join(root, "app/Modules/Billing/routes.ts"))).toBe(true);
         expect(existsSync(join(root, "src"))).toBe(false);
 
@@ -83,9 +81,7 @@ describe("nino make:module", () => {
         const exitCode = await kernel.run(["make:module", "Catalog", "--all"]);
 
         expect(exitCode).toBe(0);
-        expect(
-            existsSync(join(root, "app/Modules/Catalog/Http/Controllers/CatalogController.ts")),
-        ).toBe(true);
+        expect(existsSync(join(root, "app/Modules/Catalog/Http/Controllers/CatalogController.ts"))).toBe(true);
         expect(existsSync(join(root, "app/Modules/Catalog/Models/Catalog.ts"))).toBe(true);
         expect(existsSync(join(root, "src"))).toBe(false);
 

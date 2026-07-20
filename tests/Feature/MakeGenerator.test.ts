@@ -3,12 +3,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { existsSync } from "node:fs";
-import {
-    Kernel,
-    MakeControllerCommand,
-    Router,
-    ROUTER_KEY,
-} from "@ninots/framework";
+import { Kernel, MakeControllerCommand, type Router, ROUTER_KEY } from "@ninots/framework";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 
 const SESSION_COOKIE = "ninots_session";
