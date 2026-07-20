@@ -12,6 +12,7 @@
         "build": "bun build --compile --bytecode ./nino --outfile ninots",
         "nino": "bun ./nino",
         "type-check": "tsc --noEmit",
+        "verify:route-types": "bun run scripts/verify-route-types.ts",
         "docs:generate": "typedoc",
         "format": "bunx biome format --write .",
         "lint": "bunx biome check .",

@@ -22,12 +22,13 @@
         "noUncheckedIndexedAccess": true,
         "noImplicitOverride": true,
         "paths": {
-            "@/*": ["./*"]
+            "@/*": ["./*"],
+            "@ninots/routing": ["./node_modules/@ninots/framework/node_modules/@ninots/routing/index.ts"]
         },
         // Some stricter flags (disabled by default)
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noPropertyAccessFromIndexSignature": false
     },
-    "exclude": ["dist", "node_modules"]
+    "exclude": ["dist", "node_modules", "tests/Types/fail"]
 }

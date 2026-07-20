@@ -1,0 +1,4 @@
+{
+    "extends": "./tsconfig.base.json",
+    "files": ["./registry.d.ts", "./extra-key.ts"]
+}

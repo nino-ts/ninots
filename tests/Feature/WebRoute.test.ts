@@ -21,7 +21,7 @@ describe("Web routes", () => {
             const html = await response.text();
             expect(html).toContain("Welcome to Ninots");
             expect(html).toContain("<title>Ninots</title>");
-            expect(html).toContain("Laravel-like starter on Bun");
+            expect(html).toContain("Laravel-like DX on Bun");
         } finally {
             server.stop();
         }

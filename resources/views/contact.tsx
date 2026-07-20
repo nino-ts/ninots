@@ -3,14 +3,15 @@ import { AppLayout } from "@/resources/views/layouts/app";
 
 export interface ContactFormProps {
     csrfToken?: string;
+    formAction?: string;
 }
 
-function ContactFormPage({ csrfToken = "" }: ContactFormProps) {
+function ContactFormPage({ csrfToken = "", formAction = "/contact" }: ContactFormProps) {
     return (
         <section className="welcome contact-form">
             <h1>Contact</h1>
             <p>Send us a message — protected by CSRF middleware.</p>
-            <form method="post" action="/contact" className="stack-form">
+            <form method="post" action={formAction} className="stack-form">
                 <div dangerouslySetInnerHTML={{ __html: csrfField(csrfToken) }} />
                 <label className="field">
                     <span className="field-label">Message</span>
