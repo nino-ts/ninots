@@ -29,7 +29,10 @@
     "assist": {
         "enabled": true,
         "actions": {
-            "preset": "recommended"
+            "preset": "recommended",
+            "source": {
+                "organizeImports": "off"
+            }
         }
     },
     "linter": {

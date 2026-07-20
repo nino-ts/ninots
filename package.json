@@ -12,6 +12,7 @@
     },
     "scripts": {
         "deps:fetch": "bun run scripts/ensure-framework-deps.ts",
+        "deps:link": "bun run scripts/link-framework-workspace.ts",
         "dev": "bun --hot ./nino serve",
         "start": "bun ./nino serve --prod",
         "build": "bun build --compile --bytecode ./nino --outfile ninots",

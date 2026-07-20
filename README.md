@@ -26,9 +26,10 @@ This starter is **TypeScript + Bun**: sources stay `.ts` / `.tsx` executed by Bu
 ## Quickstart (local Bun)
 
 ```bash
-# 1) Resolve @ninots/view (file dep via .deps/) + install
+# 1) Resolve @ninots/view (file dep via .deps/) + install + link workspace packages for tsc
 bun run deps:fetch
 bun install
+bun run deps:link
 
 # 2) Copy env
 cp .env.example .env
@@ -76,7 +77,8 @@ Entry command: `./nino serve --port 3000` (wrapper → `bootstrap/cli.ts`).
 
 | Command | Description |
 | --- | --- |
-| `bun run deps:fetch` | Ensure `.deps/ninots-framework` (hub link or git clone) |
+| `bun run deps:fetch` | Ensure `.deps/ninots-framework` (hub copy or git clone) |
+| `bun run deps:link` | Symlink workspace `@ninots/*` into `node_modules` for `tsc` |
 | `bun run dev` | `nino serve` with hot reload |
 | `bun run start` | Production-style serve |
 | `bun run build` | Compiled binary (`ninots`) |
