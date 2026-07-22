@@ -13,14 +13,13 @@ import {
     MigrateRefreshCommand,
     MigrateRollbackCommand,
     Migrator,
-    ROUTER_KEY,
     RoutesCompileCommand,
     SeederRunner,
     startRoutesAutoHook,
 } from "@ninots/framework";
-import type { Router } from "@ninots/framework";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 import { getDatabaseManager } from "@/bootstrap/database";
+import { resolveFreshRouter } from "@/bootstrap/resolveFreshRouter";
 import databaseConfig from "@/config/database";
 import { DatabaseSeeder } from "@/database/seeders/DatabaseSeeder";
 import packageJson from "../package.json";
@@ -94,7 +93,8 @@ class ServeCommand extends Command {
         if (app.getConfig().development) {
             startRoutesAutoHook({
                 routesDirs: ["routes", "app/Modules"],
-                resolveRouter: () => app.make<Router>(ROUTER_KEY),
+                // Isolated bootstrap — never the long-lived serve app (Fixes #45 / Consilium Desacordo 4).
+                resolveRouter: resolveFreshRouter,
                 signal: abortController.signal,
                 onWarn: (message: string) => {
                     this.warn(message);
@@ -127,8 +127,7 @@ class RoutesCommand extends Command {
     protected override description = "List all registered routes";
 
     public async handle(): Promise<number> {
-        const app = await bootstrap();
-        const router = app.make<Router>(ROUTER_KEY);
+        const router = await resolveFreshRouter();
 
         this.info("Registered routes:");
         this.line("");
@@ -167,10 +166,7 @@ kernel.register(new RoutesCommand());
 kernel.register(new CacheClearCommand());
 kernel.register(
     new RoutesCompileCommand({
-        async resolveRouter() {
-            const app = await bootstrap();
-            return app.make<Router>(ROUTER_KEY);
-        },
+        resolveRouter: resolveFreshRouter,
     }),
 );
 kernel.register(

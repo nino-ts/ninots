@@ -103,7 +103,7 @@ Entry command: `./nino serve --port 3000` (wrapper → `bootstrap/cli.ts`).
 3. Registers providers from `bootstrap/providers.ts`
 4. Boots the app
 5. Starts `Bun.serve(...)` with generated options
-6. In development, starts `startRoutesAutoHook` (watch → debounce → `types/routes.d.ts`)
+6. In development, starts `startRoutesAutoHook` (watch → debounce → isolated `bootstrap()` → `types/routes.d.ts`)
 
 ### Routing
 
