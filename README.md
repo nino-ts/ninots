@@ -45,8 +45,12 @@ Hub developers (local `framework/` sibling) can optionally override with `bun li
 
 ### Typed routes
 
+In development (`bun run dev` / `nino serve` with `APP_DEBUG=true`), Ninots watches `routes/` and `app/Modules/` and rebuilds `types/routes.d.ts` automatically (debounce + same emitter as `routes:compile`).
+
+For CI and production builds, keep the explicit compile:
+
 ```bash
-bun run nino routes:compile   # writes types/routes.d.ts
+bun run nino routes:compile   # writes types/routes.d.ts (CI / manual)
 bun run verify:route-types    # fail-fixture checks
 ```
 
@@ -79,7 +83,7 @@ Entry command: `./nino serve --port 3000` (wrapper → `bootstrap/cli.ts`).
 | --- | --- |
 | `bun run deps:fetch` | Ensure `.deps/ninots-framework` (hub copy or git clone) |
 | `bun run deps:link` | Symlink workspace `@ninots/*` into `node_modules` for `tsc` |
-| `bun run dev` | `nino serve` with hot reload |
+| `bun run dev` | `nino serve` with hot reload; auto-rebuilds `types/routes.d.ts` in development |
 | `bun run start` | Production-style serve |
 | `bun run build` | Compiled binary (`ninots`) |
 | `bun run nino --help` | CLI help |
@@ -99,10 +103,11 @@ Entry command: `./nino serve --port 3000` (wrapper → `bootstrap/cli.ts`).
 3. Registers providers from `bootstrap/providers.ts`
 4. Boots the app
 5. Starts `Bun.serve(...)` with generated options
+6. In development, starts `startRoutesAutoHook` (watch → debounce → `types/routes.d.ts`)
 
 ### Routing
 
-Fluent registration under `routes/web.ts` and `routes/api.ts` (Laravel-like). File-based `loadRoutes` exists in `@ninots/routing` but is **not** wired in this starter.
+Fluent registration under `routes/web.ts` and `routes/api.ts` (Laravel-like). File-based `loadRoutes` exists in `@ninots/routing` but is **not** wired in this starter. Dev auto-hook rebuilds `types/routes.d.ts` when those files change; CI still runs `nino routes:compile` explicitly.
 
 ### Layout
 

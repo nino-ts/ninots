@@ -16,6 +16,7 @@ import {
     ROUTER_KEY,
     RoutesCompileCommand,
     SeederRunner,
+    startRoutesAutoHook,
 } from "@ninots/framework";
 import type { Router } from "@ninots/framework";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
@@ -85,12 +86,31 @@ class ServeCommand extends Command {
         const serveOptions = createAppServeOptions(app);
         serveOptions.port = port;
 
+        const abortController = new AbortController();
         const server = Bun.serve(serveOptions);
         this.info(`Ninots server running at ${server.url}`);
         this.info("Press Ctrl+C to stop");
 
+        if (app.getConfig().development) {
+            startRoutesAutoHook({
+                routesDirs: ["routes", "app/Modules"],
+                resolveRouter: () => app.make<Router>(ROUTER_KEY),
+                signal: abortController.signal,
+                onWarn: (message) => {
+                    this.warn(message);
+                },
+                onWritten: (outRel) => {
+                    this.info(`✓ ${outRel} updated`);
+                },
+            }).catch((error: unknown) => {
+                const msg = error instanceof Error ? error.message : String(error);
+                this.warn(`routes auto-hook stopped: ${msg}`);
+            });
+        }
+
         await new Promise<void>((resolve) => {
             const stop = (): void => {
+                abortController.abort();
                 server.stop(true);
                 resolve();
             };
