@@ -27,7 +27,7 @@
         "test": "bun test"
     },
     "dependencies": {
-        "@ninots/framework": "^0.11.0",
+        "@ninots/framework": "^0.12.0",
         "@ninots/view": "file:.deps/ninots-framework/packages/view"
     },
     "devDependencies": {

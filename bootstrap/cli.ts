@@ -96,10 +96,10 @@ class ServeCommand extends Command {
                 routesDirs: ["routes", "app/Modules"],
                 resolveRouter: () => app.make<Router>(ROUTER_KEY),
                 signal: abortController.signal,
-                onWarn: (message) => {
+                onWarn: (message: string) => {
                     this.warn(message);
                 },
-                onWritten: (outRel) => {
+                onWritten: (outRel: string) => {
                     this.info(`✓ ${outRel} updated`);
                 },
             }).catch((error: unknown) => {
