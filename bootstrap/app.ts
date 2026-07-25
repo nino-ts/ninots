@@ -1,6 +1,7 @@
 import { Application, Container, createServeOptions, wireCoreServices } from "@ninots/framework";
 import type { Serve } from "bun";
 import appConfig from "@/config/app";
+import hmrDemoPage from "@/resources/hmr-demo/hmr-demo.html";
 import { getDatabaseManager } from "./database";
 import { registerProviders } from "./providers";
 
@@ -35,14 +36,30 @@ export async function bootstrap(): Promise<Application> {
 /**
  * Create Bun.serve options from a booted application.
  *
+ * Enables Bun fullstack `development` HMR and a dedicated HTML-import demo at
+ * `/hmr-demo`. The typed Router remains the source of truth for named routes;
+ * HTML routes are additive and do not regenerate `RouteRegistry`.
+ *
+ * After `@ninots/framework@0.13.0` is published, prefer passing `development`
+ * and `routes` through {@link createServeOptions} overrides (same fields).
+ * Setting them on the returned options keeps the demo working on 0.12.x runtimes
+ * whose helper ignored unknown keys.
+ *
  * @param app - Booted application instance
  * @returns Bun.serve configuration
  */
 export function createAppServeOptions(app: Application): AppServeOptions {
-    return createServeOptions(app, {
+    const options = createServeOptions(app, {
         error(_error: Error): Response {
             return new Response("Internal Server Error", { status: 500 });
         },
         idleTimeout: 30,
     }) as AppServeOptions;
+
+    options.development = app.getConfig().development;
+    options.routes = {
+        "/hmr-demo": hmrDemoPage,
+    };
+
+    return options;
 }
