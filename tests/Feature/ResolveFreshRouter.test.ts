@@ -39,7 +39,7 @@ describe("resolveFreshRouter (isolated bootstrap)", () => {
         expect(closedOver()).not.toBe(await resolveFreshRouter());
     });
 
-    test("ServeCommand auto-hook wires resolveFreshRouter, not closed-over app.make", async () => {
+    test("ServeCommand auto-hook wires compileArtifact spawn + resolveFreshRouter", async () => {
         const cli = await readFile(join(starterRoot, "bootstrap/cli.ts"), "utf8");
         const callStart = cli.indexOf("startRoutesAutoHook({");
         expect(callStart).toBeGreaterThan(-1);
@@ -47,6 +47,8 @@ describe("resolveFreshRouter (isolated bootstrap)", () => {
         const hookBlock = cli.slice(callStart, cli.indexOf("}).catch", callStart));
 
         expect(hookBlock).toContain("resolveRouter: resolveFreshRouter");
+        expect(hookBlock).toContain("compileArtifact:");
+        expect(hookBlock).toContain('Bun.spawn(["bun", "./nino", "routes:compile"]');
         expect(hookBlock).not.toMatch(/resolveRouter:\s*\(\)\s*=>\s*app\.make/);
     });
 });
