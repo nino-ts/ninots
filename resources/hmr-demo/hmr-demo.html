@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ninots · HMR demo</title>
+  <link rel="stylesheet" href="./hmr-demo.css" />
+</head>
+<body>
+  <main class="hmr-demo">
+    <p class="hmr-demo__brand">Ninots</p>
+    <h1 class="hmr-demo__title">Client HMR</h1>
+    <p class="hmr-demo__lead">
+      Edit <code>resources/hmr-demo/hmr-demo.client.ts</code> — the label below
+      updates without a full page reload when <code>development</code> HMR is on.
+    </p>
+    <p id="hmr-label" class="hmr-demo__label" data-hmr-label>boot</p>
+  </main>
+  <script type="module" src="./hmr-demo.client.ts"></script>
+</body>
+</html>

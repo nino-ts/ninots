@@ -1,0 +1,106 @@
+:root {
+    --hmr-bg-top: #1a2332;
+    --hmr-bg-bottom: #0e141c;
+    --hmr-ink: #e8eef6;
+    --hmr-muted: #9aabbf;
+    --hmr-accent: #3d9cfd;
+    --hmr-label: #7dffc0;
+    --hmr-font-display: "Segoe UI", "Helvetica Neue", sans-serif;
+    --hmr-font-mono: ui-monospace, "Cascadia Code", "Consolas", monospace;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hmr-demo__label {
+        animation: hmr-label-in 420ms ease-out both;
+    }
+
+    .hmr-demo__brand {
+        animation: hmr-brand-in 560ms ease-out both;
+    }
+}
+
+@keyframes hmr-label-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.35rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hmr-brand-in {
+    from {
+        letter-spacing: 0.35em;
+        opacity: 0;
+    }
+    to {
+        letter-spacing: 0.18em;
+        opacity: 1;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    color: var(--hmr-ink);
+    font-family: var(--hmr-font-display);
+    background:
+        radial-gradient(120% 80% at 10% -10%, rgb(61 156 253 / 0.22), transparent 55%),
+        linear-gradient(165deg, var(--hmr-bg-top), var(--hmr-bg-bottom));
+}
+
+.hmr-demo {
+    margin: 0 auto;
+    max-width: 36rem;
+    padding: 18vh 1.5rem 4rem;
+}
+
+.hmr-demo__brand {
+    margin: 0 0 1.25rem;
+    color: var(--hmr-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.hmr-demo__title {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.hmr-demo__lead {
+    margin: 0 0 2rem;
+    color: var(--hmr-muted);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.hmr-demo__lead code {
+    color: var(--hmr-ink);
+    font-family: var(--hmr-font-mono);
+    font-size: 0.88em;
+}
+
+.hmr-demo__label {
+    margin: 0;
+    color: var(--hmr-label);
+    font-family: var(--hmr-font-mono);
+    font-size: 1.35rem;
+    font-weight: 600;
+}

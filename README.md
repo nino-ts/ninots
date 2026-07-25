@@ -56,6 +56,16 @@ bun run verify:route-types    # fail-fixture checks
 
 Named routes use `.name("recurso.ação")`; typed URLs via `route(name, params?)`.
 
+### Three “hot” mechanisms (do not confuse them)
+
+| Mechanism | What it updates | How you get it |
+| --- | --- | --- |
+| `bun --hot` (server) | Soft-reloads the **server** process / handlers | `bun run dev` → `bun --hot ./nino serve` |
+| Bun fullstack HMR (client) | Updates **browser** modules without a full page reload (`import.meta.hot`) | `Bun.serve({ development: true, routes: { … HTML imports } })` — try [`/hmr-demo`](http://localhost:3000/hmr-demo) |
+| Routes auto-hook | Rebuilds **`types/routes.d.ts`** (typed `route()`) | Watch → debounce → cold `nino routes:compile` (`compileArtifact`; see ninots#47) |
+
+Editing `resources/hmr-demo/hmr-demo.client.ts` exercises client HMR. Editing `routes/web.ts` exercises the auto-hook — not the browser HMR path. HTML demo routes are additive; the typed Router stays the source of truth for named routes.
+
 ## Docker (compose)
 
 Default stack: **app + SQLite volume** (no extra DB container).
@@ -117,6 +127,7 @@ bootstrap/        # app.ts, cli.ts, providers
 config/           # runtime configuration
 routes/           # web, api, console
 resources/views/  # TSX views (@ninots/view)
+resources/hmr-demo/ # Bun HTML-import client HMR demo (`/hmr-demo`)
 database/         # migrations, seeders
 types/            # routes.d.ts (compile artifact)
 nino              # CLI wrapper → bootstrap/cli.ts

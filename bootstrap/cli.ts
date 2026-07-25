@@ -91,6 +91,8 @@ class ServeCommand extends Command {
         this.info("Press Ctrl+C to stop");
 
         if (app.getConfig().development) {
+            this.info(`Client HMR demo: ${new URL("/hmr-demo", server.url).href}`);
+
             const routesArtifactRel = "types/routes.d.ts";
             const routesArtifactPath = path.join(process.cwd(), routesArtifactRel);
 
