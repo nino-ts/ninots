@@ -91,10 +91,40 @@ class ServeCommand extends Command {
         this.info("Press Ctrl+C to stop");
 
         if (app.getConfig().development) {
+            const routesArtifactRel = "types/routes.d.ts";
+            const routesArtifactPath = path.join(process.cwd(), routesArtifactRel);
+
             startRoutesAutoHook({
                 routesDirs: ["routes", "app/Modules"],
-                // Isolated bootstrap — never the long-lived serve app (Fixes #45 / Consilium Desacordo 4).
+                // Isolated bootstrap kept for type + fallback; debounce uses cold subprocess
+                // so Bun module cache cannot stale the registry (Fixes #47).
                 resolveRouter: resolveFreshRouter,
+                compileArtifact: async (): Promise<"written" | "unchanged"> => {
+                    const artifact = Bun.file(routesArtifactPath);
+                    const before = (await artifact.exists()) ? await artifact.text() : "";
+
+                    const proc = Bun.spawn(["bun", "./nino", "routes:compile"], {
+                        cwd: process.cwd(),
+                        stdout: "pipe",
+                        stderr: "pipe",
+                    });
+                    const [exitCode, stdout, stderr] = await Promise.all([
+                        proc.exited,
+                        new Response(proc.stdout).text(),
+                        new Response(proc.stderr).text(),
+                    ]);
+                    if (exitCode !== 0) {
+                        const detail = stderr.trim().length > 0 ? stderr.trim() : stdout.trim();
+                        throw new Error(
+                            detail.length > 0
+                                ? `routes:compile exited ${exitCode}: ${detail}`
+                                : `routes:compile exited ${exitCode}`,
+                        );
+                    }
+
+                    const after = await Bun.file(routesArtifactPath).text();
+                    return before === after ? "unchanged" : "written";
+                },
                 signal: abortController.signal,
                 onWarn: (message: string) => {
                     this.warn(message);
