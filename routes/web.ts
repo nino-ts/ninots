@@ -1,6 +1,7 @@
 import { generateCsrfToken, resolveCsrfConfig, resolveSessionId, withSessionCookie } from "@ninots/middleware";
 import { route } from "@ninots/routing";
-import { render } from "@ninots/view";import type { Router } from "@ninots/routing";
+import { render } from "@ninots/view";
+import type { Router } from "@ninots/routing";
 import { Welcome } from "@/resources/views/welcome";
 import { ContactForm } from "@/resources/views/contact";
 import { ContactThanks } from "@/resources/views/contact-thanks";

@@ -3,7 +3,8 @@ import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";import { Kernel, MakeModuleCommand } from "@ninots/console";
+import { join } from "node:path";
+import { Kernel, MakeModuleCommand } from "@ninots/console";
 const starterRoot = join(import.meta.dir, "../..");
 
 async function createModuleWorkspace(): Promise<string> {
