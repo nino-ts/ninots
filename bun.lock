@@ -5,24 +5,24 @@
     "": {
       "name": "ninots-app",
       "dependencies": {
-        "@ninots/auth": "^0.0.1",
-        "@ninots/cache": "^0.0.1",
-        "@ninots/config": "^0.0.1",
-        "@ninots/console": "^0.0.1",
-        "@ninots/container": "^0.0.1",
-        "@ninots/events": "^0.0.1",
-        "@ninots/filesystem": "^0.0.1",
-        "@ninots/foundation": "^0.0.1",
-        "@ninots/http": "^0.0.1",
-        "@ninots/logger": "^0.0.1",
-        "@ninots/middleware": "^0.0.1",
-        "@ninots/orm": "^0.0.1",
-        "@ninots/routing": "^0.0.1",
-        "@ninots/session": "^0.0.1",
-        "@ninots/support": "^0.0.1",
-        "@ninots/validation": "^0.0.1",
-        "@ninots/view": "^0.0.1",
-        "@ninots/websocket": "^0.0.1",
+        "@ninots/auth": "^0.0.2",
+        "@ninots/cache": "^0.0.2",
+        "@ninots/config": "^0.0.2",
+        "@ninots/console": "^0.0.2",
+        "@ninots/container": "^0.0.2",
+        "@ninots/events": "^0.0.2",
+        "@ninots/filesystem": "^0.0.2",
+        "@ninots/foundation": "^0.0.2",
+        "@ninots/http": "^0.0.2",
+        "@ninots/logger": "^0.0.2",
+        "@ninots/middleware": "^0.0.2",
+        "@ninots/orm": "^0.0.2",
+        "@ninots/routing": "^0.0.2",
+        "@ninots/session": "^0.0.2",
+        "@ninots/support": "^0.0.2",
+        "@ninots/validation": "^0.0.2",
+        "@ninots/view": "^0.0.2",
+        "@ninots/websocket": "^0.0.2",
       },
       "devDependencies": {
         "@biomejs/biome": "2.5.4",
@@ -50,41 +50,41 @@
 
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@2.5.4", "", { "os": "win32", "cpu": "x64" }, "sha512-U1jaluLw1qQc2Tx7/CeSoL9N5XcqIH+GWjpUAy1ouB5nVjSCMNO+NNHdY3RAs8zxNurLWAdj6pehQdCA2zyU+Q=="],
 
-    "@ninots/auth": ["@ninots/auth@0.0.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-ecoNpVE3NZJDZkcWctQFRc0ibQBoJqdPugZtI7vIB8rVlrScU40LQUMJfotTbcWXxynOGlsR0v5aAK4+Ls/3QQ=="],
+    "@ninots/auth": ["@ninots/auth@0.0.2", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-X7mtwWXDQHSxcTsmDuWvHOSjYOORBE8LouOQbId6bjI04xnIQFpV/nt32zAdxjZMjpBAE6hazmbITNyk3K/rbw=="],
 
-    "@ninots/cache": ["@ninots/cache@0.0.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-4NwbVFtBlgzriWrp7lznX4SYVbUH8ciCSehyLmyHEcPHpEF8jb6dm6oXSbb9c1cWIgC/VgyLX8PjIZ6Z5JB1NQ=="],
+    "@ninots/cache": ["@ninots/cache@0.0.2", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-SoTN0dsm/b/6h/FsSfhKx0T4rIgaz4d63VMirzTDsjxowg0i2lngZEAG2UWRUmWLfXitrQ3eFiFmnsgEMt9Y+g=="],
 
-    "@ninots/config": ["@ninots/config@0.0.1", "", { "dependencies": { "yaml": "^2.8.0" }, "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-uXiEh2nMv2HFVHZ8cWrCLc5xMotG1ex8KMEc7/r0sy4duki+4HZQn3sTp2dgaSphW+YVuqdwhKddempYcFHP9w=="],
+    "@ninots/config": ["@ninots/config@0.0.2", "", { "dependencies": { "yaml": "^2.8.0" }, "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-L2vyN74ABze3gi2Ma5hLrGgyZF2AXf9r1yUpSzcypbod9pxTkJbCAms2OEAn5SBVGx9LiAMeZzE4QH8oUbnaig=="],
 
-    "@ninots/console": ["@ninots/console@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-xVa3NnQ/aPgxMBabzM/myp1bD2c2r3vW+Gt15ISwC2n6acaWzQhV366iHzLOhiiHHtdZQRgGEFlt1fQ2n27EGQ=="],
+    "@ninots/console": ["@ninots/console@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-H72nQbqdRU0KwMltnjs/fsYt9xkCgES3jWoeHau5vwurb1Fh0l1RlpC0zAtEwlmExceiCH+zM6CE4lK3rrFqpw=="],
 
-    "@ninots/container": ["@ninots/container@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-gYwYz2Ha8b/XQThIPeFCNkkjb+vG2WD8Oy/+q/6vFTBSR80m2S+dRlsw3q15zq8WWkowE/kLM3smx8DK4GYyWw=="],
+    "@ninots/container": ["@ninots/container@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-K7Fe01tZ4UjpItMbph9LK/J67f38pe2JIUpdj6Vk0AN9wu4DwJzWG5m+7KAvQ9fofVPteU6ivTEGWMv0WUhE4g=="],
 
-    "@ninots/events": ["@ninots/events@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-tQtaEAtuO4iQPFWBwusAwrLrcyY/5nsCmHMO/ZblM2M27YbkFm+oib6Gul7y04A1V4W8eHDNElV3usx4ZdSvxg=="],
+    "@ninots/events": ["@ninots/events@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-rgRb9MVICStSv3AqEA4OR8hV6Zz/oKwWlnX3AaAI1nPqjQnM0BIe5pTCbsTs15JSlk6oJBP8lA2PGbdaLTIyUQ=="],
 
-    "@ninots/filesystem": ["@ninots/filesystem@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-klWCo7mDP+nGtYms9R4j9mvnqiEZVDhd8940OeS2qEKDQevYNxj2KPL+XxIMD8sZ6p8ICiCpCLzzc9W3G5sb0Q=="],
+    "@ninots/filesystem": ["@ninots/filesystem@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-b/5x/1xh//657cdFT21sL7KoJlNwPC2B7+e/uWzgP5yrQ+tnN4Mtv3wtPPIWNr56hSd3aj0OoKQYx4CT3vcW9A=="],
 
-    "@ninots/foundation": ["@ninots/foundation@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-/8XwxyQZd+PAZ7kgWVRes+RyKTiLC7OQTDTt7XvorEmVrU0ENc8hRAOZoQtDRN9VA4ql0Rn2BcIpvFq4OHC8Zw=="],
+    "@ninots/foundation": ["@ninots/foundation@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-1aU4tucPyT70Pbc5tMQN41yPvoZXcWrKXqTqM1UNUmOWPyoNNeOdC0o3Qt9AvQri5q1oPqVteXD1mUHZIu4u2w=="],
 
-    "@ninots/http": ["@ninots/http@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-/s+H4CeeFrVFxtM63/KyEX4bXdQgGobMcDvbSXnZTtY5LUGDrrxdnO7hs3TK2W7+dU/Xa7w4uCSu/bF3w5qCJw=="],
+    "@ninots/http": ["@ninots/http@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-WZ8opnF1zsW01LrwcHbnlgUomdxqfMdDb7fbSgexjyHQkUVtv0nomRuUfCHzckNvVW4XpB0FmxWGea1FcRf0hQ=="],
 
-    "@ninots/logger": ["@ninots/logger@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-Q9Aga20iA/zrZCPIk7+M1hRWFXhkl/ot6ivz6KwR8GMfZiBk39rx+fMGfzGLwvpFRRvuPhrSYG0mezqZ/gmeHw=="],
+    "@ninots/logger": ["@ninots/logger@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-y+Lqwj9QYwGeIgcKBU9o9PdqgKjt8yWu2VAd6mCnXBr3CNr3vpuUAWz4taskzDFkT4OeLXfxqYGs9dH5IoQ/zw=="],
 
-    "@ninots/middleware": ["@ninots/middleware@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-fwEokVsRTVEYDU8GDyfA+jfirVadI33FPQ/nYnrM1np5uxcgXwRzC+0OyhWdmd/yk9cnXk0OBBJ4BT/VKcZ55g=="],
+    "@ninots/middleware": ["@ninots/middleware@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-aRPcuVIC0Q5JLsqJ1ANlB792mWczeJ6/IBo17lAqEkOoXDHHwBZHKuXjjgBi8RVAyIRAWwHrTDrtleJdSOFkdg=="],
 
-    "@ninots/orm": ["@ninots/orm@0.0.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-WvygnZVUkp1IBGTiXENgDBHlA4zH2qZZgFyv7n3HnTQ5UVTCAHexJq7ztA59yfFCIodbNkY9CzTJFjByZ8S+XA=="],
+    "@ninots/orm": ["@ninots/orm@0.0.2", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-xQ71VhVv0WISCMsC93EAppwsEQzDMDyafedBEstMF0Z5FCgOAyGbdP/e6QX1gdFw4bsj4UPN00OvZb3Jn09/Vw=="],
 
-    "@ninots/routing": ["@ninots/routing@0.0.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-8p9KJoJGJK2ntSIKg7Uqo6f2PLpjP2pMaO/OLcNxUVOz0wWHT1bXywB0/HzVO2LJqSJzLCZkAIGcvPMwtdwquA=="],
+    "@ninots/routing": ["@ninots/routing@0.0.2", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^6.0.3" } }, "sha512-TaXAFtDtZOAzO8F4NNQZtenjjq0YPDfLPqEVf5XIDNIpuSJgDTP4mWZzlUikM7/zB0M65qyaAomnJh4j6a6RZA=="],
 
-    "@ninots/session": ["@ninots/session@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-3dZMhni5dK4CE81dj3EB3oM1pcss8xqSFX3Bj8UGVv+Ps2KkDJePU0HN/vMdo97x14Wv42LrhdaDP4MTEmVoYA=="],
+    "@ninots/session": ["@ninots/session@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-5wbxmby/N5sLyjWYZ4NZBvIkbXFVlE9sBSgjV/8khNjRnod2PQyOM/T6cWFuLkVi0Q5KbS2R63c+g0fRPZKX8A=="],
 
-    "@ninots/support": ["@ninots/support@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-exOzveb13MvGAUz7aXvNlenWs+iBH3Qr/4mQ0DcJR8/IjEB6YGHUyE2o5Pw2ziOjgyf16rz4uF1or+3A2iZ1YA=="],
+    "@ninots/support": ["@ninots/support@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-iGLTME3OHjtr0xWIoFzKHt7ATCHt/H3dbpAdWmqT1el7D6YRcnUEVNHnDLBK4JrNGooODz5ivFnlC7besAUiJA=="],
 
-    "@ninots/validation": ["@ninots/validation@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-QGSw9oNWHZH+6U0fVpV8cOV0I342nw3mm5W7QrGFK3CX1fq47rGmcoF5iTVMcD2Vi+yCFX6rTsAtzAq7WoTkkg=="],
+    "@ninots/validation": ["@ninots/validation@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-MKl58/l+vYbjogUq1tIfSJJFKJLGEaHn+uQ04w4hv2WpueLLXXbiOiQHtCSLR+7TSnr4iDxz6/RAXq4UiRXPeQ=="],
 
-    "@ninots/view": ["@ninots/view@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-iT8cdjyLGIj5W4Xwf7cz1y5QfF4xcWqgijpQ3ldi+KCCiLcaw2u9AoFYkHinHaayRSJ1sarwCmiU/+NPiKXwFQ=="],
+    "@ninots/view": ["@ninots/view@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-KjvgGVggJErIGW2o9cDCgVuqk5f90UlkExhyRsjNy2aFn6etUSmnRduiDV/slBHcFgDGS/0S4l//TQQi27PVyg=="],
 
-    "@ninots/websocket": ["@ninots/websocket@0.0.1", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-2BFiJHssaUIGLhHp2Ue2VRo0PrVXCGHGserzASgqgdwRyUahcHd/b+m6WxoCwlL3+lGbJZBwIjD6KrShk+aLZg=="],
+    "@ninots/websocket": ["@ninots/websocket@0.0.2", "", { "peerDependencies": { "typescript": "^6.0.3" } }, "sha512-LkIWa6rX/yubS5k5ZWSqW+3jAnQdNNaJBsIc6NBVKiNqpshrK5DrHg+tAMkv6alKtD2aPElcqJLNLkdLlU2BBw=="],
 
     "@oven/bun-darwin-aarch64": ["@oven/bun-darwin-aarch64@1.3.14", "", { "os": "darwin", "cpu": "arm64" }, "sha512-Omj20SuiHBOUjUBIyqtkNjSUIjOtEOJwmbix/ZyFH4BaQ6OZTaaRWIR4TjHVz0yadHgli6lLTiAh1uarnvD49A=="],
 
