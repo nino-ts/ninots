@@ -3,19 +3,11 @@ FROM oven/bun:1 AS base
 WORKDIR /usr/src/app
 
 FROM base AS deps
-# oven/bun is Debian-based; git is required to fetch @ninots/view (not on npm yet)
-USER root
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
 COPY package.json bun.lock ./
-COPY scripts/ensure-framework-deps.ts ./scripts/ensure-framework-deps.ts
-RUN bun run scripts/ensure-framework-deps.ts \
-    && bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production
 
 FROM base AS release
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=deps /usr/src/app/.deps ./.deps
 COPY package.json bun.lock ./
 COPY nino ./nino
 COPY bootstrap ./bootstrap

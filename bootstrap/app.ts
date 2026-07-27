@@ -1,4 +1,9 @@
-import { Application, Container, createServeOptions, wireCoreServices } from "@ninots/framework";
+import { Application, createServeOptions, wireCoreServices } from "@ninots/foundation";
+import type { WireCoreServicesDeps } from "@ninots/foundation";
+import { Container } from "@ninots/container";
+import { EventDispatcher, SyncBus } from "@ninots/events";
+import { MiddlewareStack, Pipeline } from "@ninots/middleware";
+import { Router, setRouteResolver } from "@ninots/routing";
 import type { Serve } from "bun";
 import appConfig from "@/config/app";
 import hmrDemoPage from "@/resources/hmr-demo/hmr-demo.html";
@@ -25,7 +30,17 @@ export async function bootstrap(): Promise<Application> {
         container,
     );
 
-    wireCoreServices(app);
+    const deps: WireCoreServicesDeps = {
+        router: new Router(),
+        middlewareStack: new MiddlewareStack(),
+        eventDispatcher: new EventDispatcher(),
+        syncBus: new SyncBus("sync"),
+        setRouteResolver: (router) => {
+            setRouteResolver(router as Parameters<typeof setRouteResolver>[0]);
+        },
+        createPipeline: () => Pipeline.create() as ReturnType<WireCoreServicesDeps["createPipeline"]>,
+    };
+    wireCoreServices(app, deps);
     getDatabaseManager();
     await registerProviders(app);
     await app.boot();
@@ -39,11 +54,6 @@ export async function bootstrap(): Promise<Application> {
  * Enables Bun fullstack `development` HMR and a dedicated HTML-import demo at
  * `/hmr-demo`. The typed Router remains the source of truth for named routes;
  * HTML routes are additive and do not regenerate `RouteRegistry`.
- *
- * After `@ninots/framework@0.13.0` is published, prefer passing `development`
- * and `routes` through {@link createServeOptions} overrides (same fields).
- * Setting them on the returned options keeps the demo working on 0.12.x runtimes
- * whose helper ignored unknown keys.
  *
  * @param app - Booted application instance
  * @returns Bun.serve configuration

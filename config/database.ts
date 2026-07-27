@@ -1,5 +1,4 @@
-import type { ConnectionConfig, DatabaseDriver } from "@ninots/framework";
-
+import type { ConnectionConfig, DatabaseDriver } from "@ninots/orm";
 type DatabaseConnections = Record<string, ConnectionConfig>;
 
 const connections = {

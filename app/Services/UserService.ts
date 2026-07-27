@@ -1,4 +1,4 @@
-import type { EventDispatcher } from "@ninots/framework";
+import type { EventDispatcher } from "@ninots/events";
 import { UserCreatedEvent } from "@/app/Events/UserCreatedEvent";
 import { User } from "@/app/Models/User";
 

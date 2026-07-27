@@ -12,11 +12,10 @@ import {
     MigrateCommand,
     MigrateRefreshCommand,
     MigrateRollbackCommand,
-    Migrator,
     RoutesCompileCommand,
-    SeederRunner,
-    startRoutesAutoHook,
-} from "@ninots/framework";
+} from "@ninots/console";
+import { Migrator, SeederRunner } from "@ninots/orm";
+import { emitRouteRegistry, startRoutesAutoHook } from "@ninots/routing";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 import { getDatabaseManager } from "@/bootstrap/database";
 import { resolveFreshRouter } from "@/bootstrap/resolveFreshRouter";
@@ -68,7 +67,7 @@ class VersionCommand extends Command {
 
     public async handle(): Promise<number> {
         this.line(`ninots-app ${packageJson.version}`);
-        this.line(`@ninots/framework ${packageJson.dependencies["@ninots/framework"]}`);
+        this.line(`@ninots/* direct packages (Sprint 14)`);
         return 0;
     }
 }
@@ -199,6 +198,7 @@ kernel.register(new CacheClearCommand());
 kernel.register(
     new RoutesCompileCommand({
         resolveRouter: resolveFreshRouter,
+        emitRouteRegistry: emitRouteRegistry as (routes: unknown[]) => string,
     }),
 );
 kernel.register(

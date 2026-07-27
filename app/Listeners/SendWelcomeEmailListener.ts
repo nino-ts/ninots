@@ -1,4 +1,4 @@
-import type { SyncBus } from "@ninots/framework";
+import type { SyncBus } from "@ninots/events";
 import type { UserCreatedEvent } from "@/app/Events/UserCreatedEvent";
 import { SendVerificationEmailJob } from "@/app/Jobs/SendVerificationEmailJob";
 

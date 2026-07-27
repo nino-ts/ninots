@@ -1,8 +1,9 @@
 import { describe, expect, test } from "bun:test";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { ROUTER_KEY, Route } from "@ninots/framework";
-import type { Router } from "@ninots/framework";
+import { ROUTER_KEY } from "@ninots/foundation";
+import { Route } from "@ninots/routing";
+import type { Router } from "@ninots/routing";
 import { bootstrap } from "@/bootstrap/app";
 import { resolveFreshRouter } from "@/bootstrap/resolveFreshRouter";
 

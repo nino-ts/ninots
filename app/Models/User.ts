@@ -1,5 +1,4 @@
-import { Model, Table } from "@ninots/framework";
-
+import { Model, Table } from "@ninots/orm";
 /**
  * User model.
  */

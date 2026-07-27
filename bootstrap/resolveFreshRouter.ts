@@ -1,5 +1,5 @@
-import { ROUTER_KEY } from "@ninots/framework";
-import type { Router } from "@ninots/framework";
+import { ROUTER_KEY } from "@ninots/foundation";
+import type { Router } from "@ninots/routing";
 import { bootstrap } from "@/bootstrap/app";
 
 /**

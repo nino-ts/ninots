@@ -1,6 +1,6 @@
 # Ninots
 
-`ninots` is the official **starter kit** for the Nino ecosystem. It provides a production-ready project structure on top of **Bun** and **TypeScript** using `@ninots/framework`.
+`ninots` is the official **starter kit** for the Nino ecosystem. It provides a production-ready project structure on top of **Bun** and **TypeScript** using published `@ninots/*` packages directly (no umbrella `@ninots/framework` in the consumer).
 
 Nino focuses on developer experience inspired by Laravel and Next.js, while remaining its own framework and API design (not a compatibility layer for either).
 
@@ -9,7 +9,7 @@ Nino focuses on developer experience inspired by Laravel and Next.js, while rema
 - **Organization:** [nino-ts](https://github.com/nino-ts)
 - **Maintainer organization:** [pandowLABS](https://github.com/pandowlabs)
 - **Starter kit (this repository):** `nino-ts/ninots`
-- **Framework meta-package:** `nino-ts/framework`
+- **Packages:** `@ninots/*` on npm + JSR (`nino-ts/<name>`), e.g. `@ninots/foundation`, `@ninots/routing`, `@ninots/view`
 
 ## Requirements
 
@@ -26,10 +26,8 @@ This starter is **TypeScript + Bun**: sources stay `.ts` / `.tsx` executed by Bu
 ## Quickstart (local Bun)
 
 ```bash
-# 1) Resolve @ninots/view (file dep via .deps/) + install + link workspace packages for tsc
-bun run deps:fetch
+# 1) Install published @ninots/* from npm
 bun install
-bun run deps:link
 
 # 2) Copy env
 cp .env.example .env
@@ -41,7 +39,7 @@ bun run dev
 bun run nino --help
 ```
 
-Hub developers (local `framework/` sibling) can optionally override with `bun link` after install.
+Hub developers can optionally override a package with `bun link @ninots/<name>` against a local `packages/<name>/` clone.
 
 ### Typed routes
 
@@ -91,8 +89,6 @@ Entry command: `./nino serve --port 3000` (wrapper → `bootstrap/cli.ts`).
 
 | Command | Description |
 | --- | --- |
-| `bun run deps:fetch` | Ensure `.deps/ninots-framework` (hub copy or git clone) |
-| `bun run deps:link` | Symlink workspace `@ninots/*` into `node_modules` for `tsc` |
 | `bun run dev` | `nino serve` with hot reload; auto-rebuilds `types/routes.d.ts` in development |
 | `bun run start` | Production-style serve |
 | `bun run build` | Compiled binary (`ninots`) |

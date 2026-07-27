@@ -4,8 +4,7 @@ import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { Kernel, MakeModuleCommand } from "@ninots/framework";
-
+import { Kernel, MakeModuleCommand } from "@ninots/console";
 const starterRoot = join(import.meta.dir, "../..");
 
 async function createModuleWorkspace(): Promise<string> {
@@ -16,7 +15,7 @@ async function createModuleWorkspace(): Promise<string> {
 
     await writeFile(
         join(root, "bootstrap/providers.ts"),
-        `import type { Application } from "@ninots/framework";
+        `import type { Application } from "@ninots/foundation";
 import { AppServiceProvider } from "@/app/Providers/AppServiceProvider";
 import { RouteServiceProvider } from "@/app/Providers/RouteServiceProvider";
 // -- nino:provider-imports --

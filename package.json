@@ -11,8 +11,6 @@
         "nino": "./nino"
     },
     "scripts": {
-        "deps:fetch": "bun run scripts/ensure-framework-deps.ts",
-        "deps:link": "bun run scripts/link-framework-workspace.ts",
         "dev": "bun --hot ./nino serve",
         "start": "bun ./nino serve --prod",
         "build": "bun build --compile --bytecode ./nino --outfile ninots",
@@ -27,8 +25,24 @@
         "test": "bun test"
     },
     "dependencies": {
-        "@ninots/framework": "^0.13.0",
-        "@ninots/view": "file:.deps/ninots-framework/packages/view"
+        "@ninots/auth": "^0.0.2",
+        "@ninots/cache": "^0.0.2",
+        "@ninots/config": "^0.0.2",
+        "@ninots/console": "^0.0.2",
+        "@ninots/container": "^0.0.2",
+        "@ninots/events": "^0.0.2",
+        "@ninots/filesystem": "^0.0.2",
+        "@ninots/foundation": "^0.0.2",
+        "@ninots/http": "^0.0.2",
+        "@ninots/logger": "^0.0.2",
+        "@ninots/middleware": "^0.0.2",
+        "@ninots/orm": "^0.0.2",
+        "@ninots/routing": "^0.0.2",
+        "@ninots/session": "^0.0.2",
+        "@ninots/support": "^0.0.2",
+        "@ninots/validation": "^0.0.2",
+        "@ninots/view": "^0.0.2",
+        "@ninots/websocket": "^0.0.2"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.4",

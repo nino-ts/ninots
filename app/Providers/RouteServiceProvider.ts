@@ -1,6 +1,7 @@
-import type { Application } from "@ninots/framework";
-import { ROUTER_KEY, ServiceProvider } from "@ninots/framework";
-import type { Router } from "@ninots/framework";
+import type { Application } from "@ninots/foundation";
+import { ROUTER_KEY } from "@ninots/foundation";
+import { ServiceProvider } from "@ninots/container";
+import type { Router } from "@ninots/routing";
 import { registerApiRoutes } from "@/routes/api";
 import { registerWebRoutes } from "@/routes/web";
 

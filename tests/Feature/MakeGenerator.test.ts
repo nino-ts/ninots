@@ -3,7 +3,9 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { existsSync } from "node:fs";
-import { Kernel, MakeControllerCommand, type Router, ROUTER_KEY } from "@ninots/framework";
+import { Kernel, MakeControllerCommand } from "@ninots/console";
+import type { Router } from "@ninots/routing";
+import { ROUTER_KEY } from "@ninots/foundation";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 
 const SESSION_COOKIE = "ninots_session";
@@ -17,7 +19,7 @@ async function createGeneratorWorkspace(): Promise<string> {
 
     await writeFile(
         join(root, "routes/web.ts"),
-        `import type { Router } from "@ninots/framework";
+        `import type { Router } from "@ninots/routing";
 
 // -- nino:web-imports --
 
@@ -80,7 +82,7 @@ describe("nino make:* generators", () => {
     test("make:controller --resource keeps import top-level with legacy indented marker", async () => {
         await writeFile(
             join(root, "routes/web.ts"),
-            `import type { Router } from "@ninots/framework";
+            `import type { Router } from "@ninots/routing";
 
 export function registerWebRoutes(router: Router): void {
     // -- nino:web-imports --

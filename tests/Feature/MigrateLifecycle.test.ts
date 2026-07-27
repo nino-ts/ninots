@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, test } from "bun:test";
 import path from "node:path";
-import { Kernel, MigrateCommand, MigrateRefreshCommand, MigrateRollbackCommand, Migrator } from "@ninots/framework";
+import { Kernel, MigrateCommand, MigrateRefreshCommand, MigrateRollbackCommand } from "@ninots/console";
+import { Migrator } from "@ninots/orm";
 import databaseConfig from "@/config/database";
 import { setupTestDatabase, teardownTestDatabase } from "@/tests/support/database";
 

@@ -1,12 +1,9 @@
-import type { Application } from "@ninots/framework";
-import {
-    EVENT_DISPATCHER_KEY,
-    MIDDLEWARE_STACK_KEY,
-    ServiceProvider,
-    verifyCsrf,
-    wideEventMiddleware,
-} from "@ninots/framework";
-import type { EventDispatcher, MiddlewareStack } from "@ninots/framework";
+import type { Application } from "@ninots/foundation";
+import { EVENT_DISPATCHER_KEY, MIDDLEWARE_STACK_KEY } from "@ninots/foundation";
+import { ServiceProvider } from "@ninots/container";
+import type { EventDispatcher } from "@ninots/events";
+import { createWideEvent, runWithContext } from "@ninots/logger";
+import { verifyCsrf, wideEventMiddleware, type MiddlewareStack } from "@ninots/middleware";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 import { UserService } from "@/app/Services/UserService";
 import csrfConfig from "@/config/csrf";
@@ -30,7 +27,13 @@ export class AppServiceProvider extends ServiceProvider {
         const stack = this.app.make<MiddlewareStack>(MIDDLEWARE_STACK_KEY);
 
         // Outermost: accumulate request lifecycle → emit one canonical line in finally
-        stack.add("wideEvent", wideEventMiddleware());
+        stack.add(
+            "wideEvent",
+            wideEventMiddleware({
+                createWideEvent,
+                runWithContext,
+            }),
+        );
         stack.add(
             "csrf",
             verifyCsrf({
