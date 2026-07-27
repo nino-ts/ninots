@@ -1,15 +1,18 @@
 {
     "compilerOptions": {
-        "lib": ["ESNext", "DOM"],
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
         "target": "ESNext",
         "module": "ESNext",
         "moduleDetection": "force",
         "jsx": "react-jsx",
         "jsxImportSource": "@ninots/view",
         "allowJs": false,
-        "types": ["bun"],
-        "baseUrl": ".",
-        "ignoreDeprecations": "6.0",
+        "types": [
+            "bun"
+        ],
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": false,
         "verbatimModuleSyntax": true,
@@ -21,11 +24,17 @@
         "noUncheckedIndexedAccess": true,
         "noImplicitOverride": true,
         "paths": {
-            "@/*": ["./*"]
+            "@/*": [
+                "./*"
+            ]
         },
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noPropertyAccessFromIndexSignature": false
     },
-    "exclude": ["dist", "node_modules", "tests/Types/fail"]
+    "exclude": [
+        "dist",
+        "node_modules",
+        "tests/Types/fail"
+    ]
 }
