@@ -8,8 +8,6 @@
         "jsxImportSource": "@ninots/view",
         "allowJs": false,
         "types": ["bun"],
-        "baseUrl": ".",
-        "ignoreDeprecations": "6.0",
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": false,
         "verbatimModuleSyntax": true,
