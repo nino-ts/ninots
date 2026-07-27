@@ -1,4 +1,5 @@
-import path from "node:path";import { DatabaseManager, Migrator, Model } from "@ninots/orm";
+import path from "node:path";
+import { DatabaseManager, Migrator, Model } from "@ninots/orm";
 import { resetDatabaseManager } from "@/bootstrap/database";
 import databaseConfig from "@/config/database";
 

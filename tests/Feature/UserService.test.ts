@@ -1,4 +1,6 @@
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";import { EVENT_DISPATCHER_KEY } from "@ninots/foundation";import type { EventDispatcher } from "@ninots/events";
+import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { EVENT_DISPATCHER_KEY } from "@ninots/foundation";
+import type { EventDispatcher } from "@ninots/events";
 import { UserService } from "@/app/Services/UserService";
 import { User } from "@/app/Models/User";
 import { bootstrap } from "@/bootstrap/app";

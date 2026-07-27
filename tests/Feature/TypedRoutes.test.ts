@@ -1,7 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";import { route } from "@ninots/routing";
+import { join } from "node:path";
+import { route } from "@ninots/routing";
 import { bootstrap } from "@/bootstrap/app";
 
 const starterRoot = join(import.meta.dir, "../..");
