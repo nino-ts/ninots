@@ -9,10 +9,6 @@
         "types": ["bun"],
         "skipLibCheck": true,
         "verbatimModuleSyntax": true,
-        "ignoreDeprecations": "6.0",
-        "baseUrl": ".",
-        "paths": {
-            "@ninots/routing": ["../../../../framework/packages/routing/index.ts"]
-        }
+        "ignoreDeprecations": "6.0"
     }
 }

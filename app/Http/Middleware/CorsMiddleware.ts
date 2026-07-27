@@ -1,5 +1,4 @@
-import type { Middleware } from "@ninots/framework";
-
+import type { Middleware } from "@ninots/middleware";
 type NextHandler = (request: Request) => Response | Promise<Response>;
 
 /**

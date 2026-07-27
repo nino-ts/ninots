@@ -1,4 +1,4 @@
-import { Seeder } from "@ninots/framework";
+import { Seeder } from "@ninots/orm";
 import { User } from "@/app/Models/User";
 
 /**

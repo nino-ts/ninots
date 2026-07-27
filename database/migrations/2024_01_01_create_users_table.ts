@@ -1,5 +1,4 @@
-import type { Connection, Migration } from "@ninots/framework";
-
+import type { Connection, Migration } from "@ninots/orm";
 /**
  * Create users table migration.
  */

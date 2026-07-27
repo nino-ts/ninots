@@ -1,4 +1,4 @@
-import { configureModelFactory, Factory, fake } from "@ninots/framework";
+import { configureModelFactory, Factory, fake } from "@ninots/orm";
 import { User } from "@/app/Models/User";
 
 export type UserFactoryAttributes = {

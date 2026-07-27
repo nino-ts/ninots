@@ -1,4 +1,4 @@
-import { DatabaseManager, Model } from "@ninots/framework";
+import { DatabaseManager, Model } from "@ninots/orm";
 import databaseConfig from "@/config/database";
 import "@/database/factories/UserFactory";
 

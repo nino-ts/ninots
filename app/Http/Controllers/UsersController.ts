@@ -1,4 +1,4 @@
-import type { RouteParams } from "@ninots/framework";
+import type { RouteParams } from "@ninots/routing";
 import type { UserService } from "@/app/Services/UserService";
 import { Controller } from "@/app/Http/Controllers/Controller";
 

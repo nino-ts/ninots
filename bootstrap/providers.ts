@@ -1,4 +1,4 @@
-import type { Application } from "@ninots/framework";
+import type { Application } from "@ninots/foundation";
 import { AppServiceProvider } from "@/app/Providers/AppServiceProvider";
 import { EventServiceProvider } from "@/app/Providers/EventServiceProvider";
 import { RouteServiceProvider } from "@/app/Providers/RouteServiceProvider";

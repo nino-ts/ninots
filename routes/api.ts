@@ -1,4 +1,5 @@
-import type { Application, Router, RouteParams } from "@ninots/framework";
+import type { Application } from "@ninots/foundation";
+import type { Router, RouteParams } from "@ninots/routing";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 
 // -- nino:api-imports --

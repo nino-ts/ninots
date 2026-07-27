@@ -1,6 +1,4 @@
-import { beforeEach, describe, expect, test } from "bun:test";
-import { EVENT_DISPATCHER_KEY, SYNC_BUS_KEY } from "@ninots/framework";
-import type { EventDispatcher, SyncBus } from "@ninots/framework";
+import { beforeEach, describe, expect, test } from "bun:test";import { EVENT_DISPATCHER_KEY, SYNC_BUS_KEY } from "@ninots/foundation";import type { EventDispatcher, SyncBus } from "@ninots/events";
 import { UserCreatedEvent } from "@/app/Events/UserCreatedEvent";
 import { SendVerificationEmailJob } from "@/app/Jobs/SendVerificationEmailJob";
 import { bootstrap } from "@/bootstrap/app";
