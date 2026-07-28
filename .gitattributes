@@ -1,3 +1,6 @@
 # Keep executable entrypoints LF so Linux containers can exec shebangs
 nino text eol=lf
 *.sh text eol=lf
+
+# Typed route registry must stay LF — Windows autocrlf must not rewrite compile artifact
+types/routes.d.ts text eol=lf
