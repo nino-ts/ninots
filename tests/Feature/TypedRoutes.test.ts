@@ -15,7 +15,7 @@ describe("typed route registry", () => {
         expect(route("contact.create")).toBe("/contact");
     });
 
-    test("routes:compile is idempotent", () => {
+    test("routes:compile is idempotent", async () => {
         const first = spawnSync("bun", ["./nino", "routes:compile"], {
             cwd: starterRoot,
             encoding: "utf8",
@@ -28,11 +28,16 @@ describe("typed route registry", () => {
         expect(first.status).toBe(0);
         expect(second.status).toBe(0);
 
-        const diff = spawnSync("git", ["diff", "--exit-code", "types/routes.d.ts"], {
+        // Compare semantic content (normalize CRLF) instead of fragile `git diff`
+        // which fails on Windows when core.autocrlf rewrote the committed artifact.
+        const before = (await readFile(join(starterRoot, "types/routes.d.ts"), "utf8")).replace(/\r\n/g, "\n");
+        const third = spawnSync("bun", ["./nino", "routes:compile"], {
             cwd: starterRoot,
             encoding: "utf8",
         });
-        expect(diff.status).toBe(0);
+        expect(third.status).toBe(0);
+        const after = (await readFile(join(starterRoot, "types/routes.d.ts"), "utf8")).replace(/\r\n/g, "\n");
+        expect(after).toBe(before);
     });
 
     test("committed types/routes.d.ts matches registry shape", async () => {
