@@ -7,11 +7,7 @@ import { createWideEvent, runWithContext } from "@ninots/logger";
 import { verifyCsrf, wideEventMiddleware, type MiddlewareStack } from "@ninots/middleware";
 import { mkdirSync } from "node:fs";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
-import {
-    AUTH_MANAGER_KEY,
-    createSessionManager,
-    SESSION_MANAGER_KEY,
-} from "@/app/Session/createSessionServices";
+import { AUTH_MANAGER_KEY, createSessionManager, SESSION_MANAGER_KEY } from "@/app/Session/createSessionServices";
 import { UserService } from "@/app/Services/UserService";
 import authConfig from "@/config/auth";
 import csrfConfig from "@/config/csrf";
@@ -36,10 +32,7 @@ export class AppServiceProvider extends ServiceProvider {
         }
 
         this.app.singleton(SESSION_MANAGER_KEY, () => createSessionManager());
-        this.app.singleton(
-            AUTH_MANAGER_KEY,
-            () => new AuthManager({ default: authConfig.defaults.guard }),
-        );
+        this.app.singleton(AUTH_MANAGER_KEY, () => new AuthManager({ default: authConfig.defaults.guard }));
     }
 
     public override boot(): void {

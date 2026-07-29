@@ -35,7 +35,7 @@ export function resolveSessionDriver(config: SessionConfig = buildSessionConfig(
             return new FileDriver(config.files);
         case "database":
             throw new Error(
-                "Session driver \"database\" requires injecting DatabaseDriver (SessionConnectionInterface). " +
+                'Session driver "database" requires injecting DatabaseDriver (SessionConnectionInterface). ' +
                     "Override the SessionManager binding in a service provider.",
             );
         default: {
@@ -60,8 +60,7 @@ export async function createAuthSessionStore(
     manager: SessionManager,
     sessionId?: string,
 ): Promise<SessionAuthStoreAdapter> {
-    const session =
-        sessionId !== undefined ? await manager.getOrCreate(sessionId) : await manager.create();
+    const session = sessionId !== undefined ? await manager.getOrCreate(sessionId) : await manager.create();
     return new SessionAuthStoreAdapter(session);
 }
 
