@@ -62,7 +62,7 @@
 
     "@ninots/events": ["@ninots/events@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-At7cKzrde3z76ysMabYQdH21d0/H2v5z7k8FvnzsJpfgHmQexAHE1DXm77JadNA55w6OAKjvsoEVRhV98KnYew=="],
 
-    "@ninots/filesystem": ["@ninots/filesystem@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-+jnet3mwHcuSp1mnHOiNtwyAQTAuUbJqbSSy391OmVh12RQBshbAC5ici4Lafh3s6JSEAOfJy0w3reQ5KiqLiQ=="],
+    "@ninots/filesystem": ["@ninots/filesystem@0.1.1", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-AQSzLjOEJmstw3Q09xcXHUS1nbSPD1SH/PTzfbeZsUHJ/xvC4/q5ykj7Dj6Ymd3cqkrLZT47Pt5zHPbJf8RetQ=="],
 
     "@ninots/foundation": ["@ninots/foundation@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-580aIRVZPGJp3Y4MFNfbhitBbD2p4tgsHt98iHerakA0fjnxPsXYRoZeHpsaA1qZqHEBcFCLXZhaqPA3wvpirg=="],
 
@@ -74,7 +74,7 @@
 
     "@ninots/orm": ["@ninots/orm@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-ATUEPLgbjJzWRdQg01Zhx1hSZBW+2KNXbJoYCgr1MGhaO5sZSIY6ZZML9T+ZC9pcvJyqJ3ZPqE6GFN9Ww3mAcA=="],
 
-    "@ninots/routing": ["@ninots/routing@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-44WrsN2D45f+hLC/Yk7JLgJD3YlV+2+K+JOg/Hby4bke2CeT+99glCNYWeIOR1X16Q0H5bsF2JADOoxHSphtsA=="],
+    "@ninots/routing": ["@ninots/routing@0.1.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-/ExCi0n/ImDzZaROQkPob8FZcdE0C8lVJUgfreJ1iauA+Z25XNZLxuoNV4nnyBh+v8g5MV40UmG2o5+UaEWToA=="],
 
     "@ninots/session": ["@ninots/session@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-z0sOIJ7SOvrAEcgpBAYWoqYWaDr86JDimqiodpYSmE/MCzG6sAasMKU4a5uyJfdPjl+nIHnO8fmf7iICmH/qvg=="],
 
