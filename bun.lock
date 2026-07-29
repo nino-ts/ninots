@@ -5,7 +5,7 @@
     "": {
       "name": "ninots-app",
       "dependencies": {
-        "@ninots/auth": "^0.1.0",
+        "@ninots/auth": "^0.2.0",
         "@ninots/cache": "^0.1.0",
         "@ninots/config": "^0.1.0",
         "@ninots/console": "^0.1.0",
@@ -18,7 +18,7 @@
         "@ninots/middleware": "^0.1.0",
         "@ninots/orm": "^0.1.0",
         "@ninots/routing": "^0.1.0",
-        "@ninots/session": "^0.1.0",
+        "@ninots/session": "^0.2.0",
         "@ninots/support": "^0.1.0",
         "@ninots/validation": "^0.1.0",
         "@ninots/view": "^0.1.0",
@@ -50,7 +50,7 @@
 
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@2.5.4", "", { "os": "win32", "cpu": "x64" }, "sha512-U1jaluLw1qQc2Tx7/CeSoL9N5XcqIH+GWjpUAy1ouB5nVjSCMNO+NNHdY3RAs8zxNurLWAdj6pehQdCA2zyU+Q=="],
 
-    "@ninots/auth": ["@ninots/auth@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-M79UeCNA89PLtlqpqTu95YYWxOajKTYv7qvhxWS/kAUEi//0xa7tGFJsOpt9njMysCUqlka7C5AOfv3riabqfw=="],
+    "@ninots/auth": ["@ninots/auth@0.2.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-tn4J7zWAU9rn3LoR5XmTTk8qNaNpygAh6xhv+3OfwZmFhLJ5yRLVCdOjbYiPgL5nTLKAIdWvLnFXTPb+iGaVPg=="],
 
     "@ninots/cache": ["@ninots/cache@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-2MMOgEC75N0SZ0Rd5787hKke3+zWdoMd4qvc9+Ok/1whz6UQMdlqTpYDKGs/4tePs+4fY7AgkLR7EslM4/hCNg=="],
 
@@ -76,7 +76,7 @@
 
     "@ninots/routing": ["@ninots/routing@0.1.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-/ExCi0n/ImDzZaROQkPob8FZcdE0C8lVJUgfreJ1iauA+Z25XNZLxuoNV4nnyBh+v8g5MV40UmG2o5+UaEWToA=="],
 
-    "@ninots/session": ["@ninots/session@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-z0sOIJ7SOvrAEcgpBAYWoqYWaDr86JDimqiodpYSmE/MCzG6sAasMKU4a5uyJfdPjl+nIHnO8fmf7iICmH/qvg=="],
+    "@ninots/session": ["@ninots/session@0.2.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-Ik/Ao+Xx3S/cHAZY70/KTpb8KSK4rQ9nSLJQThf8+K5OWwHmMvDixSlg7yxDYLlECwttEu6Bj3WXLyoGpu/0Jw=="],
 
     "@ninots/support": ["@ninots/support@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-wHEvfqZkxwdhCNjl8UKcDFRDrMfbum2y4BXVhGRwDYVo5U+nGhLOAE/LZtN9UwRN507Bxg6HroWmxQEFVwyGsQ=="],
 

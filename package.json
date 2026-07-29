@@ -25,7 +25,7 @@
         "test": "bun test"
     },
     "dependencies": {
-        "@ninots/auth": "^0.1.0",
+        "@ninots/auth": "^0.2.0",
         "@ninots/cache": "^0.1.0",
         "@ninots/config": "^0.1.0",
         "@ninots/console": "^0.1.0",
@@ -38,7 +38,7 @@
         "@ninots/middleware": "^0.1.0",
         "@ninots/orm": "^0.1.0",
         "@ninots/routing": "^0.1.0",
-        "@ninots/session": "^0.1.0",
+        "@ninots/session": "^0.2.0",
         "@ninots/support": "^0.1.0",
         "@ninots/validation": "^0.1.0",
         "@ninots/view": "^0.1.0",
