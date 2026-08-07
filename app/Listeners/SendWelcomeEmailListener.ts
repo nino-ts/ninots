@@ -1,4 +1,4 @@
-import type { SyncBus } from "@ninots/events";
+import type { QueueManager } from "@ninots/queue";
 import type { UserCreatedEvent } from "@/app/Events/UserCreatedEvent";
 import { SendVerificationEmailJob } from "@/app/Jobs/SendVerificationEmailJob";
 
@@ -6,9 +6,9 @@ import { SendVerificationEmailJob } from "@/app/Jobs/SendVerificationEmailJob";
  * Sends a verification email job when a user is created.
  */
 export class SendWelcomeEmailListener {
-    constructor(private readonly bus: SyncBus) {}
+    constructor(private readonly queue: QueueManager) {}
 
     public async handle(event: UserCreatedEvent): Promise<void> {
-        await this.bus.dispatch(new SendVerificationEmailJob(event.userId, event.email));
+        await this.queue.push(new SendVerificationEmailJob(event.userId, event.email));
     }
 }

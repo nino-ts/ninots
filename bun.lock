@@ -17,8 +17,9 @@
         "@ninots/logger": "^0.1.0",
         "@ninots/middleware": "^0.1.0",
         "@ninots/orm": "^0.1.0",
+        "@ninots/queue": "^0.1.0",
         "@ninots/routing": "^0.1.0",
-        "@ninots/session": "^0.2.0",
+        "@ninots/session": "^0.3.0",
         "@ninots/social-auth": "^0.1.0",
         "@ninots/support": "^0.1.0",
         "@ninots/validation": "^0.1.0",
@@ -31,6 +32,9 @@
         "typescript": "^7.0.0",
       },
     },
+  },
+  "overrides": {
+    "@ninots/queue": "github:nino-ts/queue#v0.1.0",
   },
   "packages": {
     "@biomejs/biome": ["@biomejs/biome@2.5.4", "", { "optionalDependencies": { "@biomejs/cli-darwin-arm64": "2.5.4", "@biomejs/cli-darwin-x64": "2.5.4", "@biomejs/cli-linux-arm64": "2.5.4", "@biomejs/cli-linux-arm64-musl": "2.5.4", "@biomejs/cli-linux-x64": "2.5.4", "@biomejs/cli-linux-x64-musl": "2.5.4", "@biomejs/cli-win32-arm64": "2.5.4", "@biomejs/cli-win32-x64": "2.5.4" }, "bin": { "biome": "bin/biome" } }, "sha512-xy5FNE5kQJKyK5MR1gJy6ztXYx4WBAbYGlK04lMEgmyPRWKybY9NFwiG9yo0XdzOU8Xvhj41u034J1ywfoWfMw=="],
@@ -75,9 +79,11 @@
 
     "@ninots/orm": ["@ninots/orm@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-ATUEPLgbjJzWRdQg01Zhx1hSZBW+2KNXbJoYCgr1MGhaO5sZSIY6ZZML9T+ZC9pcvJyqJ3ZPqE6GFN9Ww3mAcA=="],
 
+    "@ninots/queue": ["@ninots/queue@github:nino-ts/queue#49390e1", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "nino-ts-queue-49390e1", "sha512-4+BrlhGliIUKTr5yVvq9gpEXZMRmuucLzEp3LWwwIvGgvZa88QnTo65XocGGAvoKK3hayyPqulYKdr4aS9lpEw=="],
+
     "@ninots/routing": ["@ninots/routing@0.1.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-/ExCi0n/ImDzZaROQkPob8FZcdE0C8lVJUgfreJ1iauA+Z25XNZLxuoNV4nnyBh+v8g5MV40UmG2o5+UaEWToA=="],
 
-    "@ninots/session": ["@ninots/session@0.2.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-Ik/Ao+Xx3S/cHAZY70/KTpb8KSK4rQ9nSLJQThf8+K5OWwHmMvDixSlg7yxDYLlECwttEu6Bj3WXLyoGpu/0Jw=="],
+    "@ninots/session": ["@ninots/session@0.3.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-0+a5xuFnXu8yw11NEK6rrI2Plz2/3zViLSppmx1JnUwd2pDM5TXyO9ccXZxpv2VwHYeQj1PCNbTgicaScFupkQ=="],
 
     "@ninots/social-auth": ["@ninots/social-auth@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-LtZENKp/tgWHVNsmpgOurncoXDAfeh+HIDUPkELj24pvJIQ/qT5z1d5FpuS46X3e+BMFPZvUpifeFmmLPmoviA=="],
 

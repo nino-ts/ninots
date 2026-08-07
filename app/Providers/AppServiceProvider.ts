@@ -8,6 +8,12 @@ import { verifyCsrf, wideEventMiddleware, type MiddlewareStack } from "@ninots/m
 import { mkdirSync } from "node:fs";
 import { createOAuthManager, OAUTH_MANAGER_KEY } from "@/app/Auth/createOAuthServices";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
+import {
+    createJobRegistry,
+    createQueueManager,
+    JOB_REGISTRY_KEY,
+    QUEUE_MANAGER_KEY,
+} from "@/app/Queue/createQueueServices";
 import { AUTH_MANAGER_KEY, createSessionManager, SESSION_MANAGER_KEY } from "@/app/Session/createSessionServices";
 import { UserService } from "@/app/Services/UserService";
 import authConfig from "@/config/auth";
@@ -34,6 +40,8 @@ export class AppServiceProvider extends ServiceProvider {
 
         this.app.singleton(SESSION_MANAGER_KEY, () => createSessionManager());
         this.app.singleton(AUTH_MANAGER_KEY, () => new AuthManager({ default: authConfig.defaults.guard }));
+        this.app.singleton(QUEUE_MANAGER_KEY, () => createQueueManager());
+        this.app.singleton(JOB_REGISTRY_KEY, () => createJobRegistry());
 
         const oauth = createOAuthManager();
         if (oauth) {

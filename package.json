@@ -37,13 +37,17 @@
         "@ninots/logger": "^0.1.0",
         "@ninots/middleware": "^0.1.0",
         "@ninots/orm": "^0.1.0",
+        "@ninots/queue": "^0.1.0",
         "@ninots/routing": "^0.1.0",
-        "@ninots/session": "^0.2.0",
+        "@ninots/session": "^0.3.0",
         "@ninots/social-auth": "^0.1.0",
         "@ninots/support": "^0.1.0",
         "@ninots/validation": "^0.1.0",
         "@ninots/view": "^0.1.0",
         "@ninots/websocket": "^0.1.0"
+    },
+    "overrides": {
+        "@ninots/queue": "github:nino-ts/queue#v0.1.0"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.4",

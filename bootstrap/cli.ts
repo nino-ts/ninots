@@ -15,7 +15,10 @@ import {
     RoutesCompileCommand,
 } from "@ninots/console";
 import { Migrator, SeederRunner } from "@ninots/orm";
+import type { JobRegistry, QueueManager } from "@ninots/queue";
+import { runQueueWork } from "@ninots/queue";
 import { emitRouteRegistry, startRoutesAutoHook } from "@ninots/routing";
+import { JOB_REGISTRY_KEY, QUEUE_MANAGER_KEY } from "@/app/Queue/createQueueServices";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 import { getDatabaseManager } from "@/bootstrap/database";
 import { resolveFreshRouter } from "@/bootstrap/resolveFreshRouter";
@@ -183,6 +186,46 @@ class CacheClearCommand extends Command {
     }
 }
 
+class QueueWorkCommand extends Command {
+    protected override signature = "queue:work {--queue=} {--sleep=1000}";
+    protected override description = "Process jobs on the queue";
+
+    public async handle(): Promise<number> {
+        const app = await bootstrap();
+        const manager = app.make<QueueManager>(QUEUE_MANAGER_KEY);
+        const registry = app.make<JobRegistry>(JOB_REGISTRY_KEY);
+        const queueOption = this.option("queue");
+        const sleepOption = this.option("sleep");
+        const sleepMs = typeof sleepOption === "string" && sleepOption.length > 0 ? Number(sleepOption) : 1000;
+        const queueName = typeof queueOption === "string" && queueOption.length > 0 ? queueOption : undefined;
+
+        const abortController = new AbortController();
+        const stop = (): void => {
+            abortController.abort();
+        };
+        process.once("SIGINT", stop);
+        process.once("SIGTERM", stop);
+
+        this.info(`Queue worker started (connection: ${manager.getDefaultConnection()})`);
+        this.info("Press Ctrl+C to stop");
+
+        await runQueueWork({
+            queue: manager.connection(),
+            registry,
+            queueName,
+            sleepMs: Number.isFinite(sleepMs) ? sleepMs : 1000,
+            signal: abortController.signal,
+            onError: (error, jobName) => {
+                const msg = error instanceof Error ? error.message : String(error);
+                this.warn(`Job [${jobName}] failed: ${msg}`);
+            },
+        });
+
+        this.info("Queue worker stopped");
+        return 0;
+    }
+}
+
 const kernel = new Kernel();
 kernel.setOutput({
     writeLine(text: string): void {
@@ -195,6 +238,7 @@ kernel.register(new VersionCommand());
 kernel.register(new ServeCommand());
 kernel.register(new RoutesCommand());
 kernel.register(new CacheClearCommand());
+kernel.register(new QueueWorkCommand());
 kernel.register(
     new RoutesCompileCommand({
         resolveRouter: resolveFreshRouter,
