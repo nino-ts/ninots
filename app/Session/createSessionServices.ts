@@ -1,5 +1,6 @@
-import type { SessionConfig, SessionDriver } from "@ninots/session";
-import { CookieDriver, FileDriver, SessionManager } from "@ninots/session";
+import type { SessionConfig, SessionDriver, SessionRedisClient } from "@ninots/session";
+import { CookieDriver, FileDriver, RedisDriver, SessionManager } from "@ninots/session";
+import { RedisClient } from "bun";
 import sessionConfig from "@/config/session";
 import { SessionAuthStoreAdapter } from "./SessionAuthStoreAdapter";
 
@@ -22,6 +23,40 @@ export function buildSessionConfig(): SessionConfig {
 }
 
 /**
+ * Resolve Redis client for the session driver (`Bun.redis` or `REDIS_URL`).
+ * Adapts Bun's `exists` (boolean) to {@link SessionRedisClient} (number).
+ */
+function resolveSessionRedisClient(): SessionRedisClient {
+    const url = Bun.env.REDIS_URL;
+    const client =
+        url !== undefined && url.length > 0
+            ? new RedisClient(url)
+            : ((Bun.redis as RedisClient | undefined) ?? new RedisClient());
+
+    return {
+        get: (key) => client.get(key),
+        setex: (key, seconds, value) => client.setex(key, seconds, value),
+        del: async (...keys) => {
+            let removed = 0;
+            for (const key of keys) {
+                removed += await client.del(key);
+            }
+            return removed;
+        },
+        exists: async (...keys) => {
+            let count = 0;
+            for (const key of keys) {
+                const result: boolean | number = await client.exists(key);
+                if (result === true || Number(result) > 0) {
+                    count += 1;
+                }
+            }
+            return count;
+        },
+    };
+}
+
+/**
  * Resolve the concrete session driver for the configured `driver` name.
  *
  * Database requires an app-injected {@link import("@ninots/session").DatabaseDriver}
@@ -38,6 +73,11 @@ export function resolveSessionDriver(config: SessionConfig = buildSessionConfig(
                 'Session driver "database" requires injecting DatabaseDriver (SessionConnectionInterface). ' +
                     "Override the SessionManager binding in a service provider.",
             );
+        case "redis":
+            return new RedisDriver(resolveSessionRedisClient(), {
+                lifetime: config.lifetime,
+                prefix: sessionConfig.redisPrefix,
+            });
         default: {
             const _exhaustive: never = config.driver;
             throw new Error(`Unknown session driver: ${String(_exhaustive)}`);

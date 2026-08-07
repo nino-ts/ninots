@@ -6,11 +6,11 @@
  */
 export default {
     /**
-     * Session driver: cookie | file | database
+     * Session driver: cookie | file | database | redis
      *
-     * @default 'file'
+     * @default 'file' (use `redis` with REDIS_URL / Docker profile `redis`)
      */
-    driver: (Bun.env.SESSION_DRIVER ?? "file") as "cookie" | "file" | "database",
+    driver: (Bun.env.SESSION_DRIVER ?? "file") as "cookie" | "file" | "database" | "redis",
 
     /**
      * Lifetime in minutes.
@@ -60,4 +60,9 @@ export default {
      * Database driver table name.
      */
     table: Bun.env.SESSION_TABLE ?? "sessions",
+
+    /**
+     * Redis key prefix (redis driver).
+     */
+    redisPrefix: Bun.env.SESSION_REDIS_PREFIX ?? "ninots_session:",
 };

@@ -1,4 +1,4 @@
-# Ninots starter — default SQLite volume; optional Postgres via profile `postgres`
+# Ninots starter — default SQLite volume; optional Postgres / Redis via profiles
 # Docs: README.md → Docker section
 name: ninots
 
@@ -29,6 +29,7 @@ services:
       SESSION_DRIVER: ${SESSION_DRIVER:-file}
       CSRF_SECRET: ${CSRF_SECRET:-change-me-in-production}
       QUEUE_CONNECTION: ${QUEUE_CONNECTION:-sync}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
     volumes:
       - ninots-sqlite:/usr/src/app/storage
     healthcheck:
@@ -45,6 +46,9 @@ services:
       start_period: 15s
     depends_on:
       postgres:
+        condition: service_healthy
+        required: false
+      redis:
         condition: service_healthy
         required: false
 
@@ -66,6 +70,21 @@ services:
       timeout: 5s
       retries: 10
 
+  # Optional: SESSION_DRIVER=redis QUEUE_CONNECTION=redis docker compose --profile redis up --build
+  redis:
+    image: redis:7-alpine
+    profiles: ["redis"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - ninots-redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
 volumes:
   ninots-sqlite:
   ninots-postgres:
+  ninots-redis:
