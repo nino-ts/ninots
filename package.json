@@ -1,4 +1,4 @@
-{
+﻿{
     "name": "ninots-app",
     "version": "0.4.1",
     "private": true,
@@ -45,9 +45,6 @@
         "@ninots/validation": "^0.1.0",
         "@ninots/view": "^0.1.0",
         "@ninots/websocket": "^0.1.0"
-    },
-    "overrides": {
-        "@ninots/queue": "github:nino-ts/queue#v0.1.0"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.4",
