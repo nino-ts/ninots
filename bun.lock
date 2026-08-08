@@ -33,9 +33,6 @@
       },
     },
   },
-  "overrides": {
-    "@ninots/queue": "github:nino-ts/queue#v0.1.0",
-  },
   "packages": {
     "@biomejs/biome": ["@biomejs/biome@2.5.4", "", { "optionalDependencies": { "@biomejs/cli-darwin-arm64": "2.5.4", "@biomejs/cli-darwin-x64": "2.5.4", "@biomejs/cli-linux-arm64": "2.5.4", "@biomejs/cli-linux-arm64-musl": "2.5.4", "@biomejs/cli-linux-x64": "2.5.4", "@biomejs/cli-linux-x64-musl": "2.5.4", "@biomejs/cli-win32-arm64": "2.5.4", "@biomejs/cli-win32-x64": "2.5.4" }, "bin": { "biome": "bin/biome" } }, "sha512-xy5FNE5kQJKyK5MR1gJy6ztXYx4WBAbYGlK04lMEgmyPRWKybY9NFwiG9yo0XdzOU8Xvhj41u034J1ywfoWfMw=="],
 
@@ -79,7 +76,7 @@
 
     "@ninots/orm": ["@ninots/orm@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-ATUEPLgbjJzWRdQg01Zhx1hSZBW+2KNXbJoYCgr1MGhaO5sZSIY6ZZML9T+ZC9pcvJyqJ3ZPqE6GFN9Ww3mAcA=="],
 
-    "@ninots/queue": ["@ninots/queue@github:nino-ts/queue#49390e1", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "nino-ts-queue-49390e1", "sha512-4+BrlhGliIUKTr5yVvq9gpEXZMRmuucLzEp3LWwwIvGgvZa88QnTo65XocGGAvoKK3hayyPqulYKdr4aS9lpEw=="],
+    "@ninots/queue": ["@ninots/queue@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-IbV7FlV8XR86Xk8AM1tKjXWPBh6anI5EHhleiEPVbARkJ7udwovUTA9gahgBoZVgSw/A6JaVecyXQIue8tz9VA=="],
 
     "@ninots/routing": ["@ninots/routing@0.1.1", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-/ExCi0n/ImDzZaROQkPob8FZcdE0C8lVJUgfreJ1iauA+Z25XNZLxuoNV4nnyBh+v8g5MV40UmG2o5+UaEWToA=="],
 
