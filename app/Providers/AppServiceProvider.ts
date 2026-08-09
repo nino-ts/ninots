@@ -10,10 +10,7 @@ import { mkdirSync } from "node:fs";
 import { createOAuthManager, OAUTH_MANAGER_KEY } from "@/app/Auth/createOAuthServices";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
-import {
-    createAppNotificationSender,
-    NOTIFICATION_SENDER_KEY,
-} from "@/app/Notifications/createNotificationServices";
+import { createAppNotificationSender, NOTIFICATION_SENDER_KEY } from "@/app/Notifications/createNotificationServices";
 import {
     createJobRegistry,
     createQueueManager,

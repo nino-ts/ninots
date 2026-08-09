@@ -8,10 +8,7 @@ import { describe, expect, test } from "bun:test";
 import { ArrayTransport, type MailManager } from "@ninots/mail";
 import { ArrayChannel, type NotificationSender } from "@ninots/notifications";
 import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
-import {
-    createAppNotificationSender,
-    NOTIFICATION_SENDER_KEY,
-} from "@/app/Notifications/createNotificationServices";
+import { createAppNotificationSender, NOTIFICATION_SENDER_KEY } from "@/app/Notifications/createNotificationServices";
 import { WelcomeNotification } from "@/app/Notifications/WelcomeNotification";
 import { bootstrap } from "@/bootstrap/app";
 
