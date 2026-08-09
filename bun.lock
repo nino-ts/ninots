@@ -15,6 +15,7 @@
         "@ninots/foundation": "^0.1.0",
         "@ninots/http": "^0.1.0",
         "@ninots/logger": "^0.1.0",
+        "@ninots/mail": "^0.1.0",
         "@ninots/middleware": "^0.1.0",
         "@ninots/orm": "^0.1.0",
         "@ninots/queue": "^0.1.0",
@@ -71,6 +72,8 @@
     "@ninots/http": ["@ninots/http@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-sz0RHiXLSiYjHjvqKRWYglQS6Au5BLC3N7ml8zkrJhum6sUGPbAn3R1LzxRrOggn4k9vbAsHtcUg1hsiqNJmgQ=="],
 
     "@ninots/logger": ["@ninots/logger@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-L+KUU8Ol5tlxYQhjcZ/S/eASoODKjaJIgUpm+ZUakFBTzHhTELlwB+vktMLkMd9eYgzqNLS9HxVsLSs1LJ2jBw=="],
+
+    "@ninots/mail": ["@ninots/mail@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-kNJTYAhhs/m9V66en8Jg3o1li6z8EJViJQzaQbfJ2LbWcyptBCrG9jj3M6TEn+ZK0OP2O+UHURHTcFOCk/jrIA=="],
 
     "@ninots/middleware": ["@ninots/middleware@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-6qBYnZeEt9X9P9+FfijTsoQ26O/d0lXyvQYkEn2oyTD2ORbeclUpqx9Yk1IffXT37wwYJrhPEkMTbAjtsW4KMA=="],
 

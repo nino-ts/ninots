@@ -35,6 +35,7 @@
         "@ninots/foundation": "^0.1.0",
         "@ninots/http": "^0.1.0",
         "@ninots/logger": "^0.1.0",
+        "@ninots/mail": "^0.1.0",
         "@ninots/middleware": "^0.1.0",
         "@ninots/orm": "^0.1.0",
         "@ninots/queue": "^0.1.0",
