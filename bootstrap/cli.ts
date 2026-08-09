@@ -227,9 +227,10 @@ class QueueWorkCommand extends Command {
 }
 
 const kernel = new Kernel();
+// Help/list MUST reach process.stdout — silent writers yield empty spawnSync capture (Sprint 22).
 kernel.setOutput({
     writeLine(text: string): void {
-        console.log(text);
+        process.stdout.write(`${text}\n`);
     },
 });
 
