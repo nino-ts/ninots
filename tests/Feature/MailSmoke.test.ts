@@ -1,9 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { ArrayTransport, type MailManager } from "@ninots/mail";
-import {
-    createMailManager,
-    MAIL_MANAGER_KEY,
-} from "@/app/Mail/createMailServices";
+import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
 import { bootstrap } from "@/bootstrap/app";
 
 describe("Mail smoke", () => {
