@@ -8,6 +8,7 @@ import { verifyCsrf, wideEventMiddleware, type MiddlewareStack } from "@ninots/m
 import { mkdirSync } from "node:fs";
 import { createOAuthManager, OAUTH_MANAGER_KEY } from "@/app/Auth/createOAuthServices";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
+import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
 import {
     createJobRegistry,
     createQueueManager,
@@ -42,6 +43,7 @@ export class AppServiceProvider extends ServiceProvider {
         this.app.singleton(AUTH_MANAGER_KEY, () => new AuthManager({ default: authConfig.defaults.guard }));
         this.app.singleton(QUEUE_MANAGER_KEY, () => createQueueManager());
         this.app.singleton(JOB_REGISTRY_KEY, () => createJobRegistry());
+        this.app.singleton(MAIL_MANAGER_KEY, () => createMailManager());
 
         const oauth = createOAuthManager();
         if (oauth) {
