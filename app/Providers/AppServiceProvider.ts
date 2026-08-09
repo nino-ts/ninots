@@ -3,6 +3,7 @@ import type { Application } from "@ninots/foundation";
 import { EVENT_DISPATCHER_KEY, MIDDLEWARE_STACK_KEY } from "@ninots/foundation";
 import { ServiceProvider } from "@ninots/container";
 import type { EventDispatcher } from "@ninots/events";
+import type { MailManager } from "@ninots/mail";
 import { createWideEvent, runWithContext } from "@ninots/logger";
 import { verifyCsrf, wideEventMiddleware, type MiddlewareStack } from "@ninots/middleware";
 import { mkdirSync } from "node:fs";
@@ -10,7 +11,7 @@ import { createOAuthManager, OAUTH_MANAGER_KEY } from "@/app/Auth/createOAuthSer
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
 import {
-    createNotificationSenderFromApp,
+    createAppNotificationSender,
     NOTIFICATION_SENDER_KEY,
 } from "@/app/Notifications/createNotificationServices";
 import {
@@ -48,7 +49,10 @@ export class AppServiceProvider extends ServiceProvider {
         this.app.singleton(QUEUE_MANAGER_KEY, () => createQueueManager());
         this.app.singleton(JOB_REGISTRY_KEY, () => createJobRegistry());
         this.app.singleton(MAIL_MANAGER_KEY, () => createMailManager());
-        this.app.singleton(NOTIFICATION_SENDER_KEY, () => createNotificationSenderFromApp(this.app));
+        this.app.singleton(NOTIFICATION_SENDER_KEY, () => {
+            const mail = this.app.make<MailManager>(MAIL_MANAGER_KEY);
+            return createAppNotificationSender(mail);
+        });
 
         const oauth = createOAuthManager();
         if (oauth) {
