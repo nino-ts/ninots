@@ -34,8 +34,8 @@ export class SendVerificationEmailJob implements QueueableJob {
     }
 
     public static fromData(data: Record<string, unknown>): SendVerificationEmailJob {
-        const userId = data["userId"];
-        const email = data["email"];
+        const userId = data.userId;
+        const email = data.email;
         if (typeof userId !== "number" || typeof email !== "string") {
             throw new Error("Invalid SendVerificationEmailJob payload");
         }

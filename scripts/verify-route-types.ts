@@ -14,7 +14,6 @@ const configs = (await readdir(failDir))
     .sort();
 
 if (configs.length === 0) {
-    console.error("[verify:route-types] no fail-fixture tsconfigs found");
     process.exit(1);
 }
 
@@ -26,14 +25,9 @@ for (const configName of configs) {
 
     if (result.exitCode === 0) {
         unexpectedPass += 1;
-        console.error(`[verify:route-types] FAIL: expected type error for ${configName}, but tsc exited 0`);
-    } else {
-        console.log(`[verify:route-types] ok: ${configName} (tsc exit ${result.exitCode})`);
     }
 }
 
 if (unexpectedPass > 0) {
     process.exit(1);
 }
-
-console.log(`[verify:route-types] ${configs.length} fail-fixture(s) rejected as expected`);
