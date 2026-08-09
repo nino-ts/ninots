@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/nino-ts/ninots/compare/v0.5.0...v0.6.0) (2026-08-09)
+
+
+### Features
+
+* wire @ninots/notifications (Sprint 23) ([3ea45a0](https://github.com/nino-ts/ninots/commit/3ea45a001b5234c7f9924695ccfd272fdf6baf47))
+* wire @ninots/notifications starter (Fixes [#71](https://github.com/nino-ts/ninots/issues/71)) ([3a1281b](https://github.com/nino-ts/ninots/commit/3a1281b994b42736ad2b32ce36c494837071e99d))
+
+
+### Bug Fixes
+
+* resolve NotificationSender from MailManager ([04eac27](https://github.com/nino-ts/ninots/commit/04eac277d58c0bd03b4b307ed677586eb1a26c46))
+
 ## [0.5.0](https://github.com/nino-ts/ninots/compare/v0.4.1...v0.5.0) (2026-08-09)
 
 
