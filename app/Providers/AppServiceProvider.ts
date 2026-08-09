@@ -10,6 +10,10 @@ import { createOAuthManager, OAUTH_MANAGER_KEY } from "@/app/Auth/createOAuthSer
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
 import {
+    createNotificationSenderFromApp,
+    NOTIFICATION_SENDER_KEY,
+} from "@/app/Notifications/createNotificationServices";
+import {
     createJobRegistry,
     createQueueManager,
     JOB_REGISTRY_KEY,
@@ -44,6 +48,7 @@ export class AppServiceProvider extends ServiceProvider {
         this.app.singleton(QUEUE_MANAGER_KEY, () => createQueueManager());
         this.app.singleton(JOB_REGISTRY_KEY, () => createJobRegistry());
         this.app.singleton(MAIL_MANAGER_KEY, () => createMailManager());
+        this.app.singleton(NOTIFICATION_SENDER_KEY, () => createNotificationSenderFromApp(this.app));
 
         const oauth = createOAuthManager();
         if (oauth) {
