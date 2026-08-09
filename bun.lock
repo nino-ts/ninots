@@ -17,7 +17,7 @@
         "@ninots/logger": "^0.1.0",
         "@ninots/mail": "^0.1.0",
         "@ninots/middleware": "^0.1.0",
-        "@ninots/notifications": "github:nino-ts/notifications#v0.1.0",
+        "@ninots/notifications": "^0.1.0",
         "@ninots/orm": "^0.1.0",
         "@ninots/queue": "^0.1.0",
         "@ninots/routing": "^0.1.0",
@@ -78,7 +78,7 @@
 
     "@ninots/middleware": ["@ninots/middleware@0.1.0", "", { "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-6qBYnZeEt9X9P9+FfijTsoQ26O/d0lXyvQYkEn2oyTD2ORbeclUpqx9Yk1IffXT37wwYJrhPEkMTbAjtsW4KMA=="],
 
-    "@ninots/notifications": ["@ninots/notifications@github:nino-ts/notifications#91f090b", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "nino-ts-notifications-91f090b", "sha512-vyKHNwA/4sysurB/SG5einUIY8qfnDCl7Wg0J5LLwezb3sz6319VyoOVaFAgYGY3JDHk5wYXmTF1Z9DQD08iVA=="],
+    "@ninots/notifications": ["@ninots/notifications@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-OajmlGoRcFBqiQJAEYO9vcrPr4NBu7hKM1RpOG9Mu+GqjHEuPkhaj8YGbjzyP0PM1ObAeI9sS/MlzJSTswl/CQ=="],
 
     "@ninots/orm": ["@ninots/orm@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-ATUEPLgbjJzWRdQg01Zhx1hSZBW+2KNXbJoYCgr1MGhaO5sZSIY6ZZML9T+ZC9pcvJyqJ3ZPqE6GFN9Ww3mAcA=="],
 
