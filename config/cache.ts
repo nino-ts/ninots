@@ -9,18 +9,23 @@ export default {
      */
     stores: {
         array: {
-            driver: "array",
+            driver: "array" as const,
             serialize: false,
         },
         file: {
-            driver: "file",
+            driver: "file" as const,
             path: "storage/framework/cache/data",
             lockPath: "storage/framework/cache/locks",
+        },
+        redis: {
+            driver: "redis" as const,
+            url: Bun.env.REDIS_URL,
+            prefix: Bun.env.CACHE_PREFIX ?? "ninots_cache_",
         },
     },
 
     /**
-     * Cache prefix
+     * Cache prefix (used by redis store when store-level prefix omitted)
      */
-    prefix: "ninots_cache_",
+    prefix: Bun.env.CACHE_PREFIX ?? "ninots_cache_",
 };

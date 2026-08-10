@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "@ninots/auth": "^0.3.0",
-        "@ninots/cache": "^0.1.0",
+        "@ninots/cache": "^0.2.0",
         "@ninots/config": "^0.1.0",
         "@ninots/console": "^0.1.0",
         "@ninots/container": "^0.1.0",

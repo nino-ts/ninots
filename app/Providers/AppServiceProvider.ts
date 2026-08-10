@@ -8,6 +8,7 @@ import { createWideEvent, runWithContext } from "@ninots/logger";
 import { verifyCsrf, wideEventMiddleware, type MiddlewareStack } from "@ninots/middleware";
 import { mkdirSync } from "node:fs";
 import { createOAuthManager, OAUTH_MANAGER_KEY } from "@/app/Auth/createOAuthServices";
+import { CACHE_MANAGER_KEY, createCacheManager } from "@/app/Cache/createCacheServices";
 import { UsersController } from "@/app/Http/Controllers/UsersController";
 import { createMailManager, MAIL_MANAGER_KEY } from "@/app/Mail/createMailServices";
 import { createAppNotificationSender, NOTIFICATION_SENDER_KEY } from "@/app/Notifications/createNotificationServices";
@@ -43,6 +44,7 @@ export class AppServiceProvider extends ServiceProvider {
 
         this.app.singleton(SESSION_MANAGER_KEY, () => createSessionManager());
         this.app.singleton(AUTH_MANAGER_KEY, () => new AuthManager({ default: authConfig.defaults.guard }));
+        this.app.singleton(CACHE_MANAGER_KEY, () => createCacheManager());
         this.app.singleton(QUEUE_MANAGER_KEY, () => createQueueManager());
         this.app.singleton(JOB_REGISTRY_KEY, () => createJobRegistry());
         this.app.singleton(MAIL_MANAGER_KEY, () => createMailManager());
