@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
+import { assertStatus, createTestApp, responseText } from "../support/http";
 
 const starterRoot = join(import.meta.dir, "../..");
 
@@ -16,24 +17,19 @@ describe("Bun fullstack HMR demo (/hmr-demo)", () => {
     });
 
     test("HTML demo coexists with typed Router fetch", async () => {
-        const app = await bootstrap();
-        const options = createAppServeOptions(app);
-        options.port = 0;
-        options.hostname = "127.0.0.1";
-
-        const server = Bun.serve(options);
+        const t = await createTestApp();
         try {
-            const home = await fetch(`http://127.0.0.1:${server.port}/`);
-            expect(home.status).toBe(200);
+            const home = await t.get("/");
+            assertStatus(home, 200);
 
-            const demo = await fetch(`http://127.0.0.1:${server.port}/hmr-demo`);
-            expect(demo.status).toBe(200);
-            const body = await demo.text();
+            const demo = await t.get("/hmr-demo");
+            assertStatus(demo, 200);
+            const body = await responseText(demo);
             expect(body).toContain("hmr-label");
             expect(body).toContain("Ninots");
             expect(body.toLowerCase()).toContain("<!doctype html>");
         } finally {
-            server.stop(true);
+            t.stop();
         }
     });
 
