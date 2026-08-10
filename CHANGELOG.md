@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/nino-ts/ninots/compare/v0.7.0...v0.8.0) (2026-08-10)
+
+
+### Features
+
+* HTTP Feature test helpers (Fixes [#78](https://github.com/nino-ts/ninots/issues/78)) ([f8435cb](https://github.com/nino-ts/ninots/commit/f8435cb8fa7b302d943c2a09e3cac4bab805819e))
+* starter HTTP Feature test helpers ([50a3c0c](https://github.com/nino-ts/ninots/commit/50a3c0c957fe737d78dd8c344121ecd6a6db24c5))
+
 ## [0.7.0](https://github.com/nino-ts/ninots/compare/v0.6.0...v0.7.0) (2026-08-10)
 
 
