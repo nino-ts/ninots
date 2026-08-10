@@ -142,6 +142,8 @@ bun run verify:route-types
 bun run lint
 ```
 
+Feature HTTP helpers live in [`tests/support/`](tests/support/) (`createTestApp`, `get`/`post`, asserts). See [`tests/support/README.md`](tests/support/README.md).
+
 ## CEO gates (contributions)
 
 - Zero `any` (explicit or implicit)

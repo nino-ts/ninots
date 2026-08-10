@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
+import { assertStatus, createTestApp, responseText } from "../support/http";
 
 const SESSION_COOKIE = "ninots_session";
 
@@ -19,39 +19,26 @@ function extractCsrfToken(html: string): string | undefined {
 
 describe("CSRF contact form", () => {
     test("GET /contact returns a form with CSRF hidden field", async () => {
-        const app = await bootstrap();
-        const server = Bun.serve({
-            ...createAppServeOptions(app),
-            port: 0,
-            hostname: "127.0.0.1",
-        });
-
+        const t = await createTestApp();
         try {
-            const response = await fetch(`http://127.0.0.1:${server.port}/contact`);
+            const response = await t.get("/contact");
 
-            expect(response.status).toBe(200);
+            assertStatus(response, 200);
             expect(response.headers.get("Content-Type")).toContain("text/html");
 
-            const html = await response.text();
+            const html = await responseText(response);
             expect(html).toContain('name="_token"');
             expect(html).toContain('method="post"');
             expect(html).toContain("Contact");
         } finally {
-            server.stop();
+            t.stop();
         }
     });
 
     test("POST /contact without CSRF token is rejected", async () => {
-        const app = await bootstrap();
-        const server = Bun.serve({
-            ...createAppServeOptions(app),
-            port: 0,
-            hostname: "127.0.0.1",
-        });
-
+        const t = await createTestApp();
         try {
-            const response = await fetch(`http://127.0.0.1:${server.port}/contact`, {
-                method: "POST",
+            const response = await t.post("/contact", {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     Cookie: `${SESSION_COOKIE}=test-session-without-token`,
@@ -59,24 +46,17 @@ describe("CSRF contact form", () => {
                 body: "message=hello",
             });
 
-            expect(response.status).toBe(419);
+            assertStatus(response, 419);
         } finally {
-            server.stop();
+            t.stop();
         }
     });
 
     test("POST /contact with valid CSRF token is accepted", async () => {
-        const app = await bootstrap();
-        const server = Bun.serve({
-            ...createAppServeOptions(app),
-            port: 0,
-            hostname: "127.0.0.1",
-        });
-
+        const t = await createTestApp();
         try {
-            const baseUrl = `http://127.0.0.1:${server.port}`;
-            const getResponse = await fetch(`${baseUrl}/contact`);
-            const html = await getResponse.text();
+            const getResponse = await t.get("/contact");
+            const html = await responseText(getResponse);
             const token = extractCsrfToken(html);
 
             expect(token).toBeDefined();
@@ -85,8 +65,7 @@ describe("CSRF contact form", () => {
             const sessionId = extractCookie(setCookie, SESSION_COOKIE);
             expect(sessionId).toBeDefined();
 
-            const postResponse = await fetch(`${baseUrl}/contact`, {
-                method: "POST",
+            const postResponse = await t.post("/contact", {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     Cookie: `${SESSION_COOKIE}=${encodeURIComponent(sessionId ?? "")}`,
@@ -94,13 +73,13 @@ describe("CSRF contact form", () => {
                 body: `_token=${encodeURIComponent(token ?? "")}&message=Hello+from+CSRF+test`,
             });
 
-            expect(postResponse.status).toBe(200);
+            assertStatus(postResponse, 200);
 
-            const thanksHtml = await postResponse.text();
+            const thanksHtml = await responseText(postResponse);
             expect(thanksHtml).toContain("Thanks!");
             expect(thanksHtml).toContain("Hello from CSRF test");
         } finally {
-            server.stop();
+            t.stop();
         }
     });
 });

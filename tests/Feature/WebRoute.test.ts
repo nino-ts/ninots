@@ -1,29 +1,23 @@
 import { describe, expect, test } from "bun:test";
 import { render } from "@ninots/view";
-import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 import { Welcome } from "@/resources/views/welcome";
+import { assertStatus, createTestApp, responseText } from "../support/http";
 
 describe("Web routes", () => {
     test("GET / returns rendered HTML welcome page", async () => {
-        const app = await bootstrap();
-        const server = Bun.serve({
-            ...createAppServeOptions(app),
-            port: 0,
-            hostname: "127.0.0.1",
-        });
-
+        const t = await createTestApp();
         try {
-            const response = await fetch(`http://127.0.0.1:${server.port}/`);
+            const response = await t.get("/");
 
-            expect(response.status).toBe(200);
+            assertStatus(response, 200);
             expect(response.headers.get("Content-Type")).toContain("text/html");
 
-            const html = await response.text();
+            const html = await responseText(response);
             expect(html).toContain("Welcome to Ninots");
             expect(html).toContain("<title>Ninots</title>");
             expect(html).toContain("Laravel-like DX on Bun");
         } finally {
-            server.stop();
+            t.stop();
         }
     });
 
