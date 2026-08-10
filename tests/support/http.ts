@@ -44,7 +44,8 @@ export async function createTestApp(): Promise<TestApp> {
     const baseUrl = `http://127.0.0.1:${server.port}`;
 
     const request = async (method: string, path: string, options: TestRequestOptions = {}): Promise<Response> => {
-        const url = path.startsWith("http://") || path.startsWith("https://") ? path : `${baseUrl}${normalizePath(path)}`;
+        const url =
+            path.startsWith("http://") || path.startsWith("https://") ? path : `${baseUrl}${normalizePath(path)}`;
         return fetch(url, {
             method,
             headers: options.headers,
