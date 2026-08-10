@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/nino-ts/ninots/compare/v0.6.0...v0.7.0) (2026-08-10)
+
+
+### Features
+
+* wire @ninots/cache Redis store (Fixes [#74](https://github.com/nino-ts/ninots/issues/74)) ([89861c8](https://github.com/nino-ts/ninots/commit/89861c8cd663754a2ba9af0142c320fb60aa392a))
+* wire @ninots/cache Redis store (Sprint 24) ([d528720](https://github.com/nino-ts/ninots/commit/d52872095242736ddadabd41236833cd092759ad))
+
 ## [0.6.0](https://github.com/nino-ts/ninots/compare/v0.5.0...v0.6.0) (2026-08-09)
 
 
