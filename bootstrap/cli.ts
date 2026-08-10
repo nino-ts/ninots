@@ -15,9 +15,11 @@ import {
     RoutesCompileCommand,
 } from "@ninots/console";
 import { Migrator, SeederRunner } from "@ninots/orm";
+import type { CacheManager } from "@ninots/cache";
 import type { JobRegistry, QueueManager } from "@ninots/queue";
 import { runQueueWork } from "@ninots/queue";
 import { emitRouteRegistry, startRoutesAutoHook } from "@ninots/routing";
+import { CACHE_MANAGER_KEY } from "@/app/Cache/createCacheServices";
 import { JOB_REGISTRY_KEY, QUEUE_MANAGER_KEY } from "@/app/Queue/createQueueServices";
 import { bootstrap, createAppServeOptions } from "@/bootstrap/app";
 import { getDatabaseManager } from "@/bootstrap/database";
@@ -181,6 +183,9 @@ class CacheClearCommand extends Command {
     protected override description = "Clear the application cache";
 
     public async handle(): Promise<number> {
+        const app = await bootstrap();
+        const cache = app.make<CacheManager>(CACHE_MANAGER_KEY);
+        await cache.flush();
         this.info("Cache cleared successfully");
         return 0;
     }

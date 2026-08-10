@@ -6,7 +6,7 @@
       "name": "ninots-app",
       "dependencies": {
         "@ninots/auth": "^0.3.0",
-        "@ninots/cache": "^0.1.0",
+        "@ninots/cache": "^0.2.0",
         "@ninots/config": "^0.1.0",
         "@ninots/console": "^0.1.0",
         "@ninots/container": "^0.1.0",
@@ -56,7 +56,7 @@
 
     "@ninots/auth": ["@ninots/auth@0.3.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-rQTf360auGUeJIY9dIXPA5it947polGyT6pBMDDFvheiOLtuZa81dd+xky3gj9mTYyv2+Fe4SCMyz90aJh2l6w=="],
 
-    "@ninots/cache": ["@ninots/cache@0.1.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-2MMOgEC75N0SZ0Rd5787hKke3+zWdoMd4qvc9+Ok/1whz6UQMdlqTpYDKGs/4tePs+4fY7AgkLR7EslM4/hCNg=="],
+    "@ninots/cache": ["@ninots/cache@0.2.0", "", { "peerDependencies": { "bun": ">=1.0.0", "typescript": "^7.0.0" } }, "sha512-I+oqX1eniqWA+6ULQT++018CjCv4DTxb9+Ox7BmmgIZQpxeLLNNHoN8rQL7SjfVRjqLB2WpfNTAvebEpKXgsUQ=="],
 
     "@ninots/config": ["@ninots/config@0.1.0", "", { "dependencies": { "yaml": "^2.8.0" }, "peerDependencies": { "typescript": "^7.0.0" } }, "sha512-gzDFZvTIr+X4WDyA6+CHjnzkIFrGsfai1IbURryvMiXRQ97Wtava1w3rG3ZcMhwKRkRYhsB1HHdHo8owb1XM5w=="],
 
