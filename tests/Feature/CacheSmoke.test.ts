@@ -5,12 +5,7 @@
  */
 
 import { describe, expect, test } from "bun:test";
-import {
-    ArrayStore,
-    CacheManager,
-    RedisStore,
-    type CacheRedisClient,
-} from "@ninots/cache";
+import { ArrayStore, CacheManager, RedisStore, type CacheRedisClient } from "@ninots/cache";
 import { CACHE_MANAGER_KEY, createCacheManager } from "@/app/Cache/createCacheServices";
 import { bootstrap } from "@/bootstrap/app";
 

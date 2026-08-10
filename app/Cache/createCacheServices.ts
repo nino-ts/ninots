@@ -6,13 +6,7 @@
  * @packageDocumentation
  */
 
-import {
-    ArrayStore,
-    CacheManager,
-    createDefaultCacheRedisClient,
-    FileStore,
-    RedisStore,
-} from "@ninots/cache";
+import { ArrayStore, CacheManager, createDefaultCacheRedisClient, FileStore, RedisStore } from "@ninots/cache";
 import { mkdirSync } from "node:fs";
 import cacheConfig from "@/config/cache";
 
@@ -37,10 +31,9 @@ export function createCacheManager(): CacheManager {
     manager.extend("redis", () => {
         const redis = cacheConfig.stores.redis;
         const url = redis.url;
-        return new RedisStore(
-            createDefaultCacheRedisClient(url !== undefined && url.length > 0 ? url : undefined),
-            { prefix: redis.prefix ?? prefix },
-        );
+        return new RedisStore(createDefaultCacheRedisClient(url !== undefined && url.length > 0 ? url : undefined), {
+            prefix: redis.prefix ?? prefix,
+        });
     });
 
     return manager;
